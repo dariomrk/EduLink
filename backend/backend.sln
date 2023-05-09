@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{37C05804-EA4A-4359-B3F6-29C233B3A6D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{37C05804-EA4A-4359-B3F6-29C233B3A6D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{AE6138BA-84DB-40D9-B2EF-8AA1FEFE07AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{AE6138BA-84DB-40D9-B2EF-8AA1FEFE07AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{974AA022-466C-467B-A7A9-1BD8E3B7E099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{974AA022-466C-467B-A7A9-1BD8E3B7E099}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
