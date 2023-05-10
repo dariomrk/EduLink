@@ -1,8 +1,9 @@
 ﻿namespace Application.Enums
 {
-    public enum UserSortProperties
+    public enum SortProperties
     {
         Rating,
         Name,
+        Distance,
     }
 }
