@@ -5,5 +5,6 @@
         Rating,
         Name,
         Distance,
+        CreatedAt,
     }
 }

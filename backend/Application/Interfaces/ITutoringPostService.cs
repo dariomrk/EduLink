@@ -19,7 +19,7 @@ namespace Application.Interfaces
             long id,
             CancellationToken cancellationToken = default);
 
-        public Task<(ServiceActionResult, TutoringPostDto?)> CreateTutoringPostAsync(
+        public Task<(ServiceActionResult Result, TutoringPostDto? Created)> CreateTutoringPostAsync(
            CreateDto post);
     }
 }

@@ -16,6 +16,7 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetStudentsAsync(
+            string myUsername,
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
@@ -29,6 +30,7 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetStudentAsync(
+            string myUsername,
             long id,
             CancellationToken cancellationToken = default);
     }
