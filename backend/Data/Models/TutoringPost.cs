@@ -1,4 +1,6 @@
-﻿namespace Data.Models
+﻿using Data.Enums;
+
+namespace Data.Models
 {
     public class TutoringPost : BaseModel
     {
