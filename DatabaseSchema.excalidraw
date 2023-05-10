@@ -1574,8 +1574,8 @@
     },
     {
       "type": "rectangle",
-      "version": 1269,
-      "versionNonce": 69944144,
+      "version": 1270,
+      "versionNonce": 1771941200,
       "isDeleted": false,
       "id": "vVWZBPughnmme9l_WbxsB",
       "fillStyle": "hachure",
@@ -1605,13 +1605,9 @@
         {
           "id": "oh_Nd7lnvNVZVbbe5UZbc",
           "type": "arrow"
-        },
-        {
-          "id": "C6vvPw0NvbFHFl0SN9vfR",
-          "type": "arrow"
         }
       ],
-      "updated": 1683709531475,
+      "updated": 1683710531855,
       "link": null,
       "locked": false
     },
@@ -3519,8 +3515,8 @@
     },
     {
       "type": "rectangle",
-      "version": 1259,
-      "versionNonce": 424236368,
+      "version": 1260,
+      "versionNonce": 368731568,
       "isDeleted": false,
       "id": "yGSHukC3V2YtB_f5BMTnq",
       "fillStyle": "hachure",
@@ -3542,13 +3538,9 @@
         {
           "type": "text",
           "id": "jg9HXgdscP7CQfdluy5cB"
-        },
-        {
-          "id": "C6vvPw0NvbFHFl0SN9vfR",
-          "type": "arrow"
         }
       ],
-      "updated": 1683709531476,
+      "updated": 1683710537376,
       "link": null,
       "locked": false
     },
@@ -3586,139 +3578,6 @@
       "originalText": "DateOfBirth DateOnly",
       "lineHeight": 1.25,
       "baseline": 31
-    },
-    {
-      "type": "arrow",
-      "version": 2753,
-      "versionNonce": 370289488,
-      "isDeleted": false,
-      "id": "C6vvPw0NvbFHFl0SN9vfR",
-      "fillStyle": "hachure",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": -7305.90162639685,
-      "y": 1988.448911144614,
-      "strokeColor": "#087f5b",
-      "backgroundColor": "transparent",
-      "width": 235.8667474215381,
-      "height": 55.47162093960492,
-      "seed": 496076324,
-      "groupIds": [
-        "6hCVkUBzxAVT55CseP2qz"
-      ],
-      "roundness": {
-        "type": 2
-      },
-      "boundElements": [],
-      "updated": 1683709531476,
-      "link": null,
-      "locked": false,
-      "startBinding": {
-        "elementId": "lGHmoiIWPWVg6G9on55fy",
-        "focus": -0.12525937526226755,
-        "gap": 9.022673621487456
-      },
-      "endBinding": {
-        "elementId": "vVWZBPughnmme9l_WbxsB",
-        "focus": -0.4081479242184524,
-        "gap": 3.9949034932542418
-      },
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "triangle",
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          -55.887442163622836,
-          -31.80016519196988
-        ],
-        [
-          -235.8667474215381,
-          -55.47162093960492
-        ]
-      ]
-    },
-    {
-      "type": "rectangle",
-      "version": 965,
-      "versionNonce": 737472944,
-      "isDeleted": false,
-      "id": "lGHmoiIWPWVg6G9on55fy",
-      "fillStyle": "hachure",
-      "strokeWidth": 4,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": -7337.172940686119,
-      "y": 1997.4715847661014,
-      "strokeColor": "#087f5b",
-      "backgroundColor": "#ced4da",
-      "width": 474,
-      "height": 162,
-      "seed": 1162158500,
-      "groupIds": [
-        "6hCVkUBzxAVT55CseP2qz"
-      ],
-      "roundness": {
-        "type": 3
-      },
-      "boundElements": [
-        {
-          "type": "text",
-          "id": "WZmUMy5zd-sQSL804s5Tl"
-        },
-        {
-          "id": "C6vvPw0NvbFHFl0SN9vfR",
-          "type": "arrow"
-        }
-      ],
-      "updated": 1683709531476,
-      "link": null,
-      "locked": false
-    },
-    {
-      "type": "text",
-      "version": 1043,
-      "versionNonce": 1867530576,
-      "isDeleted": false,
-      "id": "WZmUMy5zd-sQSL804s5Tl",
-      "fillStyle": "hachure",
-      "strokeWidth": 4,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": -7297.200879528892,
-      "y": 2033.4715847661014,
-      "strokeColor": "#087f5b",
-      "backgroundColor": "#ced4da",
-      "width": 394.0558776855469,
-      "height": 90,
-      "seed": 2063158564,
-      "groupIds": [
-        "6hCVkUBzxAVT55CseP2qz"
-      ],
-      "roundness": null,
-      "boundElements": [],
-      "updated": 1683709531476,
-      "link": null,
-      "locked": false,
-      "fontSize": 36,
-      "fontFamily": 1,
-      "text": "Configure to use only \nDate within Postgres",
-      "textAlign": "center",
-      "verticalAlign": "middle",
-      "containerId": "lGHmoiIWPWVg6G9on55fy",
-      "originalText": "Configure to use only Date within Postgres",
-      "lineHeight": 1.25,
-      "baseline": 76
     },
     {
       "type": "rectangle",
