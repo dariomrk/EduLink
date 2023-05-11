@@ -32,7 +32,7 @@ namespace Data.Models
         {
             var entity = modelBuilder.Entity<Appointment>();
 
-            modelBuilder.Entity<Appointment>()
+            entity
                 .ToTable(nameof(Appointment), table =>
                 {
                     table.HasCheckConstraint(

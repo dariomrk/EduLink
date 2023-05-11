@@ -12,7 +12,11 @@ namespace Data.Context
             modelBuilder.Ignore<BaseModel>();
 
             modelBuilder
-                .ConfigureAppointment();
+                .ConfigureAppointment()
+                .ConfigureAvailableTimeSpan()
+                .ConfigureCity()
+                .ConfigureCountry()
+                .ConfigureLoginTimestamp();
         }
     }
 }
