@@ -13,7 +13,7 @@ namespace Data.Models
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsPaidAd { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<AvailableTimeSpan> availableTimeSpans { get; set; } = new List<AvailableTimeSpan>();
+        public ICollection<AvailableTimeSpan> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpan>();
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     }
 

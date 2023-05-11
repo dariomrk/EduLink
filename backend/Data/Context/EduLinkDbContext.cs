@@ -25,7 +25,6 @@ namespace Data.Context
                 .ConfigureStudentsReview()
                 .ConfigureSubject()
                 .ConfigureTutoringPost()
-                .ConfigureTutoringPostAvailability()
                 .ConfigureTutoringPostField()
                 .ConfigureTutorsReview()
                 .ConfigureUser();
