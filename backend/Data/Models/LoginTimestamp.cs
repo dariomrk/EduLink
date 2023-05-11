@@ -27,6 +27,10 @@ namespace Data.Models
                 });
 
             entity
+                .Property(x => x.UserId)
+                .IsRequired();
+
+            entity
                 .Property(x => x.AttemptedAt)
                 .IsRequired()
                 .HasDefaultValueSql(RawSql.Timestamp);

@@ -1,4 +1,6 @@
-﻿using Data.Enums;
+﻿using Data.Constants;
+using Data.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Models
 {
@@ -10,5 +12,51 @@ namespace Data.Models
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsPaidAd { get; set; }
         public bool IsActive { get; set; }
+    }
+
+    public static partial class ModelConfigurations
+    {
+        public static ModelBuilder ConfigureTutoringPost(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<TutoringPost>();
+
+            entity
+                .ToTable(nameof(TutoringPost), table =>
+                {
+                    table.HasCheckConstraint(
+                        $"CK_\"{nameof(TutoringPost)}\"_\"{nameof(TutoringPost.PricePerHour)}\"",
+                        $"\"{nameof(TutoringPost.PricePerHour)}\" > 0");
+                });
+
+            entity
+                .Property(x => x.UserId)
+                .IsRequired();
+
+            entity
+                .Property(x => x.PricePerHour)
+                .IsRequired();
+
+            entity
+                .Property(x => x.Currency)
+                .IsRequired()
+                .HasDefaultValue(Currency.EUR);
+
+            entity
+                .Property(x => x.CreatedAt)
+                .IsRequired()
+                .HasDefaultValueSql(RawSql.Timestamp);
+
+            entity
+                .Property(x => x.IsPaidAd)
+                .IsRequired()
+                .HasDefaultValue(false);
+
+            entity
+                .Property(x => x.IsActive)
+                .IsRequired()
+                .HasDefaultValue(true);
+
+            return modelBuilder;
+        }
     }
 }

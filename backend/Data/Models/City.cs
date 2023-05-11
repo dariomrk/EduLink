@@ -7,6 +7,8 @@ namespace Data.Models
         public string Name { get; set; } = null!;
         public string ZipCode { get; set; } = null!;
         public long RegionId { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     }
 
     public partial class ModelConfigurations
@@ -25,6 +27,18 @@ namespace Data.Models
 
             entity
                 .Property(x => x.ZipCode)
+                .IsRequired();
+
+            entity
+                .Property(x => x.RegionId)
+                .IsRequired();
+
+            entity
+                .Property(x => x.Latitude)
+                .IsRequired();
+
+            entity
+                .Property(x => x.Longitude)
                 .IsRequired();
 
             return modelBuilder;

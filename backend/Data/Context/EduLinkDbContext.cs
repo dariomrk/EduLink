@@ -16,7 +16,17 @@ namespace Data.Context
                 .ConfigureAvailableTimeSpan()
                 .ConfigureCity()
                 .ConfigureCountry()
-                .ConfigureLoginTimestamp();
+                .ConfigureLoginTimestamp()
+                .ConfigureMessage()
+                .ConfigurePasswordHashingAlgorithm()
+                .ConfigureRegion()
+                .ConfigureStudentsReview()
+                .ConfigureSubject()
+                .ConfigureTutoringPost()
+                .ConfigureTutoringPostAvailability()
+                .ConfigureTutoringPostField()
+                .ConfigureTutorsReview()
+                .ConfigureUser();
         }
     }
 }

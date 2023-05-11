@@ -18,6 +18,10 @@ namespace Data.Models
                 .Property(x => x.Name)
                 .IsRequired();
 
+            entity
+                .Property(x => x.SubjectId)
+                .IsRequired();
+
             return modelBuilder;
         }
     }

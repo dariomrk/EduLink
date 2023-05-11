@@ -37,12 +37,16 @@ namespace Data.Models
                 {
                     table.HasCheckConstraint(
                         $"CK_{nameof(Appointment)}_{nameof(Appointment.DurationMinutes)}",
-                        $"\"{nameof(Appointment.DurationMinutes)}\" > 0 and \"{nameof(Appointment.DurationMinutes)}\" < 1440");
+                        $"\"{nameof(Appointment.DurationMinutes)}\" > 0 AND \"{nameof(Appointment.DurationMinutes)}\" < 1440");
 
                     table.HasCheckConstraint(
                         $"CK_{nameof(Appointment)}_{nameof(Appointment.Price)}",
                         $"\"{nameof(Appointment.Price)}\" >= 0");
                 });
+
+            entity
+                .Property(x => x.PostId)
+                .IsRequired();
 
             entity
                 .Property(x => x.CreatedAt)
@@ -58,6 +62,14 @@ namespace Data.Models
 
             entity
                 .Property(x => x.DurationMinutes)
+                .IsRequired();
+
+            entity
+                .Property(x => x.TutorId)
+                .IsRequired();
+
+            entity
+                .Property(x => x.StudentId)
                 .IsRequired();
 
             entity
