@@ -7,11 +7,14 @@ namespace Data.Models
     public class TutoringPost : BaseModel
     {
         public long UserId { get; set; }
+        public User User { get; set; } = null!;
         public decimal PricePerHour { get; set; }
         public Currency Currency { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsPaidAd { get; set; }
         public bool IsActive { get; set; }
+        public ICollection<AvailableTimeSpan> availableTimeSpans { get; set; } = new List<AvailableTimeSpan>();
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     }
 
     public static partial class ModelConfigurations

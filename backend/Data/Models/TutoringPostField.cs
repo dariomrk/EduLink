@@ -5,7 +5,9 @@ namespace Data.Models
     public class TutoringPostField
     {
         public long TutoringPostId { get; set; }
+        public TutoringPost TutoringPost { get; set; } = null!;
         public long FieldId { get; set; }
+        public Field Field { get; set; } = null!;
     }
 
     public static partial class ModelConfigurations

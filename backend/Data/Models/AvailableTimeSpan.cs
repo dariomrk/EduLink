@@ -4,6 +4,8 @@ namespace Data.Models
 {
     public class AvailableTimeSpan : BaseModel
     {
+        public long TutoringPostId { get; set; }
+        public TutoringPost TutoringPost { get; set; } = null!;
         public DateTimeOffset Start { get; set; }
         public DateTimeOffset End { get; set; }
     }
@@ -21,6 +23,14 @@ namespace Data.Models
                         $"CK_\"{nameof(AvailableTimeSpan)}\"_\"{nameof(AvailableTimeSpan.Start)}\"",
                         $"\"{nameof(AvailableTimeSpan.Start)}\" < \"{nameof(AvailableTimeSpan.End)}\"");
                 });
+
+            entity
+                .HasIndex(x => new { x.TutoringPostId, x.Start, x.End })
+                .IsUnique();
+
+            entity
+                .Property(x => x.TutoringPostId)
+                .IsRequired();
 
             entity
                 .Property(x => x.Start)

@@ -6,6 +6,7 @@ namespace Data.Models
     {
         public string Name { get; set; } = null!;
         public int MobileNumberPrefix { get; set; }
+        public ICollection<Region> Regions { get; set; } = new List<Region>();
     }
 
     public partial class ModelConfigurations

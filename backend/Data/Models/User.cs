@@ -5,7 +5,7 @@ namespace Data.Models
 {
     public class User : BaseModel
     {
-        private const int TutoringEligibilityYears = 16;
+        private const int TutoringEligibilityYears = 16; // TODO add configuration field to appsettings.json
 
         public string Username { get; set; } = null!;
         public string Email { get; set; } = null!;
@@ -14,6 +14,7 @@ namespace Data.Models
         public long PasswordHashingAlgorithmId { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public long ProfileImageId { get; set; }
+        public File ProfileImage { get; set; } = null!;
         public DateOnly DateOfBirth { get; set; }
         public bool IsEligibleAsTutor =>
             DateOnly
@@ -22,11 +23,16 @@ namespace Data.Models
             > DateOfBirth;
         public string? About { get; set; }
         public long CityId { get; set; }
+        public City City { get; set; } = null!;
         public string MobileNumber { get; set; } = null!;
         public string StripeCustomerId { get; set; } = null!;
         public string? StripeAccountId { get; set; } = null!;
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<TutoringPost> TutoringPosts { get; set; } = new List<TutoringPost>();
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
+        public ICollection<LoginTimestamp> LoginTimestamps { get; set; } = new List<LoginTimestamp>();
     }
 
     public static partial class ModelConfigurations

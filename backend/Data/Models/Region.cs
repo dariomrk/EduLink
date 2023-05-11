@@ -6,6 +6,8 @@ namespace Data.Models
     {
         public string Name { get; set; } = null!;
         public long CountryId { get; set; }
+        public Country Country { get; set; } = null!;
+        public ICollection<City> Cities { get; set; } = new List<City>();
     }
 
     public static partial class ModelConfigurations

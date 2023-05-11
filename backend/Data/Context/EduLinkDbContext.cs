@@ -16,6 +16,8 @@ namespace Data.Context
                 .ConfigureAvailableTimeSpan()
                 .ConfigureCity()
                 .ConfigureCountry()
+                .ConfigureField()
+                .ConfigureFile()
                 .ConfigureLoginTimestamp()
                 .ConfigureMessage()
                 .ConfigurePasswordHashingAlgorithm()

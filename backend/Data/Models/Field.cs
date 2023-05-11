@@ -6,11 +6,13 @@ namespace Data.Models
     {
         public string Name { get; set; } = null!;
         public long SubjectId { get; set; }
+        public Subject Subject { get; set; } = null!;
+        public ICollection<TutoringPostField> TutoringPostsFields { get; set; } = new List<TutoringPostField>();
     }
 
     public static partial class ModelConfigurations
     {
-        public static ModelBuilder FieldConfiguration(this ModelBuilder modelBuilder)
+        public static ModelBuilder ConfigureField(this ModelBuilder modelBuilder)
         {
             var entity = modelBuilder.Entity<Field>();
 

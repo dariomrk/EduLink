@@ -5,16 +5,18 @@ namespace Data.Models
 {
     public class Appointment : BaseModel
     {
-        private const int IsNotCancelableHoursPrior = 24;
+        private const int IsNotCancelableHoursPrior = 24; // TODO add configuration field to appsettings.json
 
         public long PostId { get; set; }
+        public TutoringPost Post { get; set; } = null!;
         public long TutorId { get; set; }
+        public User Tutor { get; set; } = null!;
         public long StudentId { get; set; }
+        public User Student { get; set; } = null!;
         public decimal Price { get; set; }
         public DateTimeOffset StartAt { get; set; }
         public int DurationMinutes { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public bool IsConfirmedByTutor { get; set; }
         public bool IsCancelable =>
             DateTime.UtcNow
                 .Add(StartAt.Offset)
@@ -22,8 +24,11 @@ namespace Data.Models
                 .AddHours(-IsNotCancelableHoursPrior);
         public bool IsCancelled { get; set; }
         public long? AudioRecordingId { get; set; }
+        public File? AudioRecording { get; set; }
         public long? StudentsReviewId { get; set; }
+        public StudentsReview? StudentsReview { get; set; }
         public long? TutorsReviewId { get; set; }
+        public TutorsReview? TutorsReview { get; set; }
     }
 
     public static partial class ModelConfigurations

@@ -10,6 +10,7 @@ namespace Data.Models
         public int Engagement { get; set; }
         public int Behaviour { get; set; }
         public DateTimeOffset AddedAt { get; set; }
+        public Appointment Appointment { get; set; } = null!;
     }
 
     public static partial class ModelConfigurations

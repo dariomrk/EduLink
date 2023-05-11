@@ -8,7 +8,9 @@ namespace Data.Models
         public string Content { get; set; } = null!;
         public DateTimeOffset CreatedAt { get; set; }
         public long SenderId { get; set; }
+        public User Sender { get; set; } = null!;
         public long RecipientId { get; set; }
+        public User Recipient { get; set; } = null!;
     }
 
     public static partial class ModelConfigurations

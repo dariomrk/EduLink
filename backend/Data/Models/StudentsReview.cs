@@ -8,6 +8,7 @@ namespace Data.Models
         public int Stars { get; set; }
         public string Comment { get; set; } = string.Empty;
         public DateTimeOffset AddedAt { get; set; }
+        public Appointment Appointment { get; set; } = null!;
     }
 
     public static partial class ModelConfigurations

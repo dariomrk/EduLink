@@ -5,6 +5,7 @@ namespace Data.Models
     public class Subject : BaseModel
     {
         public string Name { get; set; } = null!;
+        public ICollection<Field> Fields { get; set; } = new List<Field>();
     }
 
     public static partial class ModelConfigurations
