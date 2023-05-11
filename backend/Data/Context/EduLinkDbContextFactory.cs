@@ -1,5 +1,4 @@
-﻿using Laraue.EfCoreTriggers.PostgreSql.Extensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
@@ -16,7 +15,6 @@ namespace Data.Context
 
             var options = new DbContextOptionsBuilder<EduLinkDbContext>()
                 .UseNpgsql(connectionString)
-                .UsePostgreSqlTriggers()
                 .Options;
 
             return new EduLinkDbContext(options);
