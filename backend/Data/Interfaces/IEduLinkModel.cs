@@ -1,4 +1,4 @@
 ﻿namespace Data.Interfaces
 {
-    internal interface IEduLinkModel { }
+    public interface IEduLinkModel { }
 }
