@@ -56,8 +56,7 @@ namespace Data.Models
 
             entity
                 .Property(x => x.IsActive)
-                .IsRequired()
-                .HasDefaultValue(true);
+                .IsRequired();
 
             return modelBuilder;
         }

@@ -29,9 +29,11 @@ namespace Data.Models
         public string? StripeAccountId { get; set; } = null!;
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
-        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<Appointment> StudyAppointments { get; set; } = new List<Appointment>();
+        public ICollection<Appointment> TutoringAppointments { get; set; } = new List<Appointment>();
         public ICollection<TutoringPost> TutoringPosts { get; set; } = new List<TutoringPost>();
-        public ICollection<Message> Messages { get; set; } = new List<Message>();
+        public ICollection<Message> SentMessages { get; set; } = new List<Message>();
+        public ICollection<Message> RecievedMessages { get; set; } = new List<Message>();
         public ICollection<LoginTimestamp> LoginTimestamps { get; set; } = new List<LoginTimestamp>();
     }
 
@@ -40,6 +42,16 @@ namespace Data.Models
         public static ModelBuilder ConfigureUser(this ModelBuilder modelBuilder)
         {
             var entity = modelBuilder.Entity<User>();
+
+            entity
+                .HasMany(x => x.StudyAppointments)
+                .WithOne(x => x.Student)
+                .HasPrincipalKey(x => x.Id);
+
+            entity
+                .HasMany(x => x.TutoringAppointments)
+                .WithOne(x => x.Tutor)
+                .HasPrincipalKey(x => x.Id);
 
             entity
                 .HasIndex(x => x.Username)

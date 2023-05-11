@@ -20,6 +20,16 @@ namespace Data.Models
             var entity = modelBuilder.Entity<Message>();
 
             entity
+                .HasOne(x => x.Sender)
+                .WithMany(x => x.SentMessages)
+                .HasForeignKey(x => x.Id);
+
+            entity
+                .HasOne(x => x.Recipient)
+                .WithMany(x => x.RecievedMessages)
+                .HasForeignKey(x => x.Id);
+
+            entity
                 .Property(x => x.Content)
                 .IsRequired();
 
