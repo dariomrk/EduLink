@@ -47,6 +47,12 @@ Naming pattern: `[area]/[task-type]/[issue-id]-[task-name]`, e.g. `frontend/feat
 
 ### Backend
 
+#### Prerequisites
+
+- IDE (preferably [Visual Studio](https://visualstudio.microsoft.com/))
+- [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+- [Docker](https://www.docker.com/)
+
 #### Local setup
 
 1. Move to the `backend` directory
