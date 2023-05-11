@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Common;
 using Application.Dtos.User;
 using Application.Enums;
+using Data.Models;
 
 namespace Application.Interfaces
 {
@@ -16,7 +17,7 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetStudentsAsync(
-            string myUsername,
+            string tutorUsername,
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
@@ -30,8 +31,24 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetStudentAsync(
-            string myUsername,
+            string tutorUsername,
             long id,
+            CancellationToken cancellationToken = default);
+
+        Task<User?> GetByUsernameOrDefault(
+            string username,
+            CancellationToken cancellationToken = default);
+
+        Task<User> GetByUsername(
+            string username,
+            CancellationToken cancellationToken = default);
+
+        Task<User?> GetByEmailOrDefault(
+            string email,
+            CancellationToken cancellationToken = default);
+
+        Task<User> GetByEmail(
+            string email,
             CancellationToken cancellationToken = default);
     }
 }
