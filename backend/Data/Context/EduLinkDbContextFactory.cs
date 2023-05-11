@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Laraue.EfCoreTriggers.PostgreSql.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
@@ -14,7 +15,9 @@ namespace Data.Context
                 ?? throw new ArgumentNullException("Database connection string is not specified.");
 
             var options = new DbContextOptionsBuilder<EduLinkDbContext>()
-                .UseNpgsql(connectionString).Options;
+                .UseNpgsql(connectionString)
+                .UsePostgreSqlTriggers()
+                .Options;
 
             return new EduLinkDbContext(options);
         }

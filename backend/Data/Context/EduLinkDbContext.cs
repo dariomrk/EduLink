@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
 {
@@ -6,6 +7,12 @@ namespace Data.Context
     {
         public EduLinkDbContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Ignore<BaseModel>();
+
+            modelBuilder
+                .ConfigureAppointment();
+        }
     }
 }
