@@ -22,6 +22,8 @@ our community of educators provides the guidance and support you need.
 
 ### Code conventions
 
+
+
 #### Branches
 
 All lowercase characters, kebab case, separated with forward-slash.  
