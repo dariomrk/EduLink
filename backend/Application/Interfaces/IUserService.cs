@@ -27,27 +27,27 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetTutorAsync(
-            long id,
+            string tutorUsername,
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetStudentAsync(
             string tutorUsername,
-            long id,
+            long studentId,
             CancellationToken cancellationToken = default);
 
-        Task<User?> GetByUsernameOrDefault(
+        internal Task<User?> GetByUsernameOrDefaultAsync(
             string username,
             CancellationToken cancellationToken = default);
 
-        Task<User> GetByUsername(
+        internal Task<User> GetByUsernameAsync(
             string username,
             CancellationToken cancellationToken = default);
 
-        Task<User?> GetByEmailOrDefault(
+        internal Task<User?> GetByEmailOrDefaultAsync(
             string email,
             CancellationToken cancellationToken = default);
 
-        Task<User> GetByEmail(
+        internal Task<User> GetByEmailAsync(
             string email,
             CancellationToken cancellationToken = default);
     }

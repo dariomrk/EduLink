@@ -28,54 +28,58 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public async Task<User?> GetByUsernameOrDefault(
+        public async Task<User?> GetByUsernameOrDefaultAsync(
             string username,
             CancellationToken cancellationToken = default)
         {
             return await _userRepository
-                .FindAsync(user => user.Username == username.ToNormalizedLower(), cancellationToken);
+                .FindAsync(user =>
+                    user.Username == username.ToNormalizedLower(),
+                    cancellationToken);
         }
 
-        public async Task<User> GetByUsername(
+        public async Task<User> GetByUsernameAsync(
             string username,
             CancellationToken cancellationToken = default)
         {
-            return await GetByUsernameOrDefault(username, cancellationToken)
+            return await GetByUsernameOrDefaultAsync(username, cancellationToken)
                 ?? throw new UserNotFoundException();
         }
 
-        public async Task<User?> GetByEmailOrDefault(
+        public async Task<User?> GetByEmailOrDefaultAsync(
             string email,
             CancellationToken cancellationToken = default)
         {
             return await _userRepository
-                .FindAsync(user => user.Email == email.ToNormalizedLower(), cancellationToken);
+                .FindAsync(user =>
+                    user.Email == email.ToNormalizedLower(),
+                    cancellationToken);
         }
 
-        public async Task<User> GetByEmail(
+        public async Task<User> GetByEmailAsync(
             string email,
             CancellationToken cancellationToken = default)
         {
-            return await GetByEmailOrDefault(email, cancellationToken)
+            return await GetByEmailOrDefaultAsync(email, cancellationToken)
                 ?? throw new UserNotFoundException(email);
         }
 
         public async Task<UserDto> GetStudentAsync(
             string tutorUsername,
-            long id,
+            long studentId,
             CancellationToken cancellationToken = default)
         {
-            var tutor = await GetByUsername(tutorUsername, cancellationToken);
+            var tutor = await GetByUsernameAsync(tutorUsername, cancellationToken);
 
             var student = await _appointmentRepository.Query()
-                .Where(appointment => appointment.StudentId == id)
+                .Where(appointment => appointment.StudentId == studentId)
                 .Select(appointment => appointment.Student)
                 .FirstOrDefaultAsync(cancellationToken);
 
             return student?.ToDto() ?? throw new UserNotFoundException();
         }
 
-        public Task<ICollection<UserDto>> GetStudentsAsync(
+        public async Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
             string? countryName = null,
             string? regionName = null,
@@ -85,17 +89,28 @@ namespace Application.Services
             SortProperties orderBy = SortProperties.Rating,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var tutor = await GetByUsernameAsync(tutorUsername, cancellationToken);
+
+            return await _appointmentRepository.Query()
+                .Where(appointment => appointment.TutorId == tutor.Id)
+                .Select(appointment => appointment.Student.ToDto())
+                .ToListAsync(cancellationToken);
         }
 
-        public Task<UserDto> GetTutorAsync(
-            long id,
+        public async Task<UserDto> GetTutorAsync(
+            string tutorUsername,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var tutor = await _userRepository.Query()
+                .Where(user => user.TutoringPosts.Any())
+                .FirstOrDefaultAsync(user =>
+                    user.Username == tutorUsername.ToNormalizedLower(),
+                    cancellationToken);
+
+            return tutor?.ToDto() ?? throw new UserNotFoundException();
         }
 
-        public Task<ICollection<UserDto>> GetTutorsAsync(
+        public async Task<ICollection<UserDto>> GetTutorsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
