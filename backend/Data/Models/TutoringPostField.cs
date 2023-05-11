@@ -15,6 +15,9 @@ namespace Data.Models
             var entity = modelBuilder.Entity<TutoringPostField>();
 
             entity
+                .HasKey(x => new { x.TutoringPostId, x.FieldId });
+
+            entity
                 .Property(x => x.TutoringPostId)
                 .IsRequired();
 
