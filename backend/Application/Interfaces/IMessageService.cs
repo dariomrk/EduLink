@@ -10,15 +10,13 @@ namespace Application.Interfaces
             string myUsername,
             string sendersUsername,
             PaginationDto? paginationDto = null,
-            SortOrder sortOrder = SortOrder.Ascending,
-            SortByProperty orderBy = SortByProperty.Date,
+            SortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<MessageDto>> GetMessagesAsync(
             string myUsername,
             PaginationDto? paginationDto = null,
-            SortOrder sortOrder = SortOrder.Ascending,
-            SortByProperty orderBy = SortByProperty.Date,
+            SortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<(ServiceActionResult Result, MessageDto? Created)> SendMessage(
