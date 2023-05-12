@@ -120,7 +120,7 @@ namespace Application.Services
 
             var tutors = await _userRepository.Query()
                 .Where(user => user.IsTutor())
-                .Where(tutor => tutor.CityId == city.Id) // TODO Add sorting and pagination
+                .Where(tutor => tutor.CityId == city.Id) // TODO add sorting and pagination
                 .ProjectToDto()
                 .ToListAsync(cancellationToken);
 

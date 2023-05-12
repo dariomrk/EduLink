@@ -7,6 +7,6 @@ namespace Application.Interfaces
         internal Task<CountryDto> FindCountry(string countryName, CancellationToken cancellationToken = default);
         internal Task<RegionDto> FindRegion(string countryName, string regionName, CancellationToken cancellationToken = default);
         internal Task<CityDto> FindCity(string countryName, string regionName, string cityName, CancellationToken cancellationToken = default);
-
+        internal double CalculateDistanceInMeters((double Latitude, double Longitude) firstPoint, (double Latitude, double Longitude) secondPoint);
     }
 }

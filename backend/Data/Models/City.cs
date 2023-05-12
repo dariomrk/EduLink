@@ -8,8 +8,8 @@ namespace Data.Models
         public string ZipCode { get; set; } = null!;
         public long RegionId { get; set; }
         public Region Region { get; set; } = null!;
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public ICollection<User> Users { get; set; } = new List<User>();
     }
 

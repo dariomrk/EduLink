@@ -16,20 +16,21 @@ namespace Application.Extensions
         {
             // TODO re-implement
             // TODO add-ordering
-            //return sortByProperty switch
-            //{
-            //    SortByProperty.Rating => tutors.OrderBy(tutor => tutor.TutoringAppointments
-            //        .Where(appointment => appointment.StudentsReview != null)
-            //        .Average(appointment => appointment.StudentsReview!.Stars)),
 
-            //    SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
+            return sortDto.SortByProperty switch
+            {
+                Enums.SortByProperty.Rating => tutors.OrderBy(tutor => tutor.TutoringAppointments
+                    .Where(appointment => appointment.StudentsReview != null)
+                    .Average(appointment => appointment.StudentsReview!.Stars)),
 
-            //    SortByProperty.Distance => throw new NotImplementedException(),
+                Enums.SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
 
-            //    SortByProperty.Date => throw new InvalidRequestException<User>(nameof(SortTutors), nameof(SortByProperty.Date)),
+                Enums.SortByProperty.Distance => throw new NotImplementedException(),
 
-            //    _ => throw new InvalidOperationException(),
-            //};
+                Enums.SortByProperty.Date => throw new NotImplementedException(),
+
+                _ => throw new NotSupportedException(),
+            };
         }
 
     }
