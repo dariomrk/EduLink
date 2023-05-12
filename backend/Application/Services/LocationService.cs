@@ -69,29 +69,5 @@ namespace Application.Services
 
             return city?.ToDto() ?? throw new NotFoundException<City>(cityName);
         }
-
-        public double CalculateDistanceInMeters(
-            (double Latitude, double Longitude) firstPoint,
-            (double Latitude, double Longitude) secondPoint)
-        {
-            const double earthRadiusInMeters = 6371e3; // Earth's radius in meters
-            var firstPointLatitudeInRadians = ConvertDegreesToRadians(firstPoint.Latitude);
-            var secondPointLatitudeInRadians = ConvertDegreesToRadians(secondPoint.Latitude);
-            var differenceInLatitudeInRadians = ConvertDegreesToRadians(secondPoint.Latitude - firstPoint.Latitude);
-            var differenceInLongitudeInRadians = ConvertDegreesToRadians(secondPoint.Longitude - firstPoint.Longitude);
-
-            var a = Math.Sin(differenceInLatitudeInRadians / 2) * Math.Sin(differenceInLatitudeInRadians / 2) +
-                    Math.Cos(firstPointLatitudeInRadians) * Math.Cos(secondPointLatitudeInRadians) *
-                    Math.Sin(differenceInLongitudeInRadians / 2) * Math.Sin(differenceInLongitudeInRadians / 2);
-            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-
-            var distance = earthRadiusInMeters * c;
-            return distance;
-        }
-
-        private double ConvertDegreesToRadians(double angleInDegrees)
-        {
-            return Math.PI * angleInDegrees / 180.0;
-        }
     }
 }

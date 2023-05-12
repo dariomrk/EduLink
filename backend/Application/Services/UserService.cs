@@ -113,14 +113,16 @@ namespace Application.Services
             string regionName,
             string cityName,
             PaginationDto? paginationOptions = null,
-            SortDto? sortDto = null,
+            SortDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var city = await _locationService.FindCity(countryName, regionName, cityName);
 
             var tutors = await _userRepository.Query()
                 .Where(user => user.IsTutor())
-                .Where(tutor => tutor.CityId == city.Id) // TODO add sorting and pagination
+                .Where(tutor => tutor.CityId == city.Id)
+                .SortTutors(sortOptions ?? new SortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationDto { Skip = 0, Take = 25 })
                 .ProjectToDto()
                 .ToListAsync(cancellationToken);
 
