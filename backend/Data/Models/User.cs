@@ -29,6 +29,9 @@ namespace Data.Models
         public string MobileNumber { get; set; } = null!;
         public string StripeCustomerId { get; set; } = null!;
         public string? StripeAccountId { get; set; } = null!;
+        /// <summary>
+        /// <inheritdoc cref="City.Coordinates"/>
+        /// </summary>
         public NetTopologySuite.Geometries.Point? Coordinates { get; set; }
         public ICollection<Appointment> StudyAppointments { get; set; } = new List<Appointment>();
         public ICollection<Appointment> TutoringAppointments { get; set; } = new List<Appointment>();

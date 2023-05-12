@@ -1,4 +1,6 @@
 ﻿using Application.Dtos.Common;
+using Application.Enums;
+using Application.Exceptions;
 using Data.Models;
 
 namespace Application.Extensions
@@ -14,20 +16,17 @@ namespace Application.Extensions
 
         internal static IQueryable<User> SortTutors(this IQueryable<User> tutors, SortDto sortDto)
         {
-            // TODO re-implement
-            // TODO add-ordering
-
             return sortDto.SortByProperty switch
             {
-                Enums.SortByProperty.Rating => tutors.OrderBy(tutor => tutor.TutoringAppointments
+                SortByProperty.Rating => tutors.OrderBy(tutor => tutor.TutoringAppointments
                     .Where(appointment => appointment.StudentsReview != null)
                     .Average(appointment => appointment.StudentsReview!.Stars)),
 
-                Enums.SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
+                SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
 
-                Enums.SortByProperty.Distance => throw new NotImplementedException(),
+                SortByProperty.Distance => throw new NotImplementedException(), // TODO implement sorting by distance from the user
 
-                Enums.SortByProperty.Date => throw new NotImplementedException(),
+                SortByProperty.Date => throw new InvalidRequestException<User>(nameof(SortByProperty), nameof(SortByProperty.Date)),
 
                 _ => throw new NotSupportedException(),
             };

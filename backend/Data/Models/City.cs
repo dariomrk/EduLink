@@ -8,6 +8,25 @@ namespace Data.Models
         public string ZipCode { get; set; } = null!;
         public long RegionId { get; set; }
         public Region Region { get; set; } = null!;
+        /// <summary>
+        /// Coordinates.X: longitude<br/>
+        /// Coordinates.Y: latitude<br/>
+        /// Simple example:
+        /// <code>
+        /// var point = new NetTopologySuite.Geometries.Point(longitude, latitude)
+        /// {
+        ///     SRID = 4326 // Spatial Reference ID for WGS 84 spatial reference system
+        /// }
+        /// </code>
+        /// Distance calculation snippet:
+        /// <code>
+        /// var referencePoint = new NetTopologySuite.Geometries.Point(longitude, latitude) { SRID = 4326 };
+        ///
+        /// var closestLocations = await dbContext.Locations
+        ///    .OrderBy(location => location.Coordinates.Distance(referencePoint))
+        ///    .ToListAsync();
+        /// </code>
+        /// </summary>
         public NetTopologySuite.Geometries.Point Coordinates { get; set; } = null!;
         public ICollection<User> Users { get; set; } = new List<User>();
     }
