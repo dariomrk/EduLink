@@ -7,23 +7,28 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
-        public Task<ICollection<UserDto>> GetTutorsAsync(
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
+        public Task<ICollection<UserDto>> GetTutorsInCityAsync(
+            string countryName,
+            string regionName,
+            string cityName,
             PaginationDto? paginationOptions = null,
             SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.Rating,
+            SortByProperty orderBy = SortByProperty.Rating,
+            CancellationToken cancellationToken = default);
+
+        public Task<ICollection<UserDto>> GetTutorsInRegionAsync(
+            string countryName,
+            string regionName,
+            PaginationDto? paginationOptions = null,
+            SortOrder sortOrder = SortOrder.Ascending,
+            SortByProperty orderBy = SortByProperty.Rating,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
             PaginationDto? paginationOptions = null,
             SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.Rating,
+            SortByProperty orderBy = SortByProperty.Rating,
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetTutorAsync(

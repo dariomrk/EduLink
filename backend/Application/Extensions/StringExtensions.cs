@@ -1,6 +1,6 @@
-﻿namespace Application.Utils
+﻿namespace Application.Extensions
 {
-    public static class StringUtils
+    public static class StringExtensions
     {
         public static string ToNormalizedLower(this string input)
         {

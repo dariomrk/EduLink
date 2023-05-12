@@ -11,14 +11,14 @@ namespace Application.Interfaces
             string sendersUsername,
             PaginationDto? paginationDto = null,
             SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.CreatedAt,
+            SortByProperty orderBy = SortByProperty.Date,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<MessageDto>> GetMessagesAsync(
             string myUsername,
             PaginationDto? paginationDto = null,
             SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.CreatedAt,
+            SortByProperty orderBy = SortByProperty.Date,
             CancellationToken cancellationToken = default);
 
         public Task<(ServiceActionResult Result, MessageDto? Created)> SendMessage(

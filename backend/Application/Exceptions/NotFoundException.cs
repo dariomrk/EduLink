@@ -7,10 +7,9 @@
         public NotFoundException(string? message, Exception? innerException) : base(message, innerException) { }
     }
 
-    public class UserNotFoundException : NotFoundException
+    public class NotFoundException<TEntity> : NotFoundException where TEntity : class
     {
-        public UserNotFoundException() { }
-        public UserNotFoundException(string? message) : base(message) { }
-        public UserNotFoundException(string? message, Exception? innerException) : base(message, innerException) { }
+        public NotFoundException(object searchArgument)
+            : base($"'{nameof(TEntity)}' entity with identifier '{searchArgument?.ToString() ?? "null"}' could not be found.") { }
     }
 }

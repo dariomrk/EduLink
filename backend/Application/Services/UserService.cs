@@ -2,9 +2,9 @@
 using Application.Dtos.User;
 using Application.Enums;
 using Application.Exceptions;
+using Application.Extensions;
 using Application.Interfaces;
 using Application.Mappings;
-using Application.Utils;
 using Data.Interfaces;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,15 +16,18 @@ namespace Application.Services
     {
         private readonly IRepository<User, long> _userRepository;
         private readonly IRepository<Appointment, long> _appointmentRepository;
+        private readonly ILocationService _locationService;
         private readonly ILogger<UserService> _logger;
 
         public UserService(
             IRepository<User, long> userRepository,
             IRepository<Appointment, long> appointmentRepository,
+            ILocationService locationService,
             ILogger<UserService> logger)
         {
             _userRepository = userRepository;
             _appointmentRepository = appointmentRepository;
+            _locationService = locationService;
             _logger = logger;
         }
 
@@ -43,7 +46,7 @@ namespace Application.Services
             CancellationToken cancellationToken = default)
         {
             return await GetByUsernameOrDefaultAsync(username, cancellationToken)
-                ?? throw new UserNotFoundException();
+                ?? throw new NotFoundException<User>(username);
         }
 
         public async Task<User?> GetByEmailOrDefaultAsync(
@@ -61,7 +64,7 @@ namespace Application.Services
             CancellationToken cancellationToken = default)
         {
             return await GetByEmailOrDefaultAsync(email, cancellationToken)
-                ?? throw new UserNotFoundException(email);
+                ?? throw new NotFoundException<User>(email);
         }
 
         public async Task<UserDto> GetStudentAsync(
@@ -69,31 +72,27 @@ namespace Application.Services
             long studentId,
             CancellationToken cancellationToken = default)
         {
-            var tutor = await GetByUsernameAsync(tutorUsername, cancellationToken);
+            var tutor = await GetTutorAsync(tutorUsername, cancellationToken);
 
-            var student = await _appointmentRepository.Query()
-                .Where(appointment => appointment.StudentId == studentId)
-                .Select(appointment => appointment.Student)
-                .FirstOrDefaultAsync(cancellationToken);
+            var student = await _userRepository.Query()
+                .Where(user => user.IsStudentOfTutor(tutorUsername))
+                .FirstOrDefaultAsync(student => student.Id == studentId);
 
-            return student?.ToDto() ?? throw new UserNotFoundException();
+            return student?.ToDto() ?? throw new NotFoundException<User>(studentId);
         }
 
         public async Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
             PaginationDto? paginationOptions = null,
             SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.Rating,
+            SortByProperty orderBy = SortByProperty.Rating,
             CancellationToken cancellationToken = default)
         {
-            var tutor = await GetByUsernameAsync(tutorUsername, cancellationToken);
+            var tutor = await GetTutorAsync(tutorUsername, cancellationToken);
 
-            return await _appointmentRepository.Query()
-                .Where(appointment => appointment.TutorId == tutor.Id)
-                .Select(appointment => appointment.Student.ToDto())
+            return await _userRepository.Query()
+                .Where(user => user.IsStudentOfTutor(tutorUsername))
+                .ProjectToDto()
                 .ToListAsync(cancellationToken);
         }
 
@@ -102,24 +101,53 @@ namespace Application.Services
             CancellationToken cancellationToken = default)
         {
             var tutor = await _userRepository.Query()
-                .Where(user => user.TutoringPosts.Any())
-                .FirstOrDefaultAsync(user =>
-                    user.Username == tutorUsername.ToNormalizedLower(),
+                .Where(user => user.IsTutor())
+                .FirstOrDefaultAsync(tutor =>
+                    tutor.Username == tutorUsername.ToNormalizedLower(),
                     cancellationToken);
 
-            return tutor?.ToDto() ?? throw new UserNotFoundException();
+            return tutor?.ToDto() ?? throw new NotFoundException<User>(tutorUsername);
         }
 
-        public async Task<ICollection<UserDto>> GetTutorsAsync(
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
+        public async Task<ICollection<UserDto>> GetTutorsInCityAsync(
+            string countryName,
+            string regionName,
+            string cityName,
             PaginationDto? paginationOptions = null,
             SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.Rating,
+            SortByProperty orderBy = SortByProperty.Rating,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var city = await _locationService.FindCity(countryName, regionName, cityName);
+
+            var tutors = await _userRepository.Query()
+                .Where(user => user.IsTutor())
+                .Where(tutor => tutor.CityId == city.Id)
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return tutors;
+        }
+
+        public async Task<ICollection<UserDto>> GetTutorsInRegionAsync(
+            string countryName,
+            string regionName,
+            PaginationDto? paginationOptions = null,
+            SortOrder sortOrder = SortOrder.Ascending,
+            SortByProperty orderBy = SortByProperty.Rating,
+            CancellationToken cancellationToken = default)
+        {
+            var region = await _locationService.FindRegion(countryName, regionName);
+
+            var tutorsQuery = _userRepository.Query()
+                .Where(user => user.IsTutor())
+                .Where(tutor => tutor.City.RegionId == region.Id)
+
+            var tutors = await tutorsQuery
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return tutors;
         }
     }
 }
