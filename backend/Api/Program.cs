@@ -1,3 +1,6 @@
+using Data.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Api
 {
@@ -5,18 +8,70 @@ namespace Api
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            WebApplication
+                .CreateBuilder(args)
+                .ConfigureHost()
+                .RegisterApplicationServices()
+                .Build()
+                .ConfigureMiddleware()
+                .Run();
+        }
+    }
 
-            // Add services to the container.
+    public static class HostInitializer
+    {
+        public static WebApplicationBuilder ConfigureHost(this WebApplicationBuilder builder)
+        {
+            var host = builder.Host;
+            // TODO configure host properties
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            return builder;
+        }
+    }
 
-            var app = builder.Build();
+    public static class ServiceInitializer
+    {
+        public static WebApplicationBuilder RegisterApplicationServices(this WebApplicationBuilder builder)
+        {
+            var services = builder.Services;
+            // TODO configure services
 
-            // Configure the HTTP request pipeline.
+            #region Controller registration
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    // endpoints recieve and send enum string representations
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
+            #endregion
+
+            #region Service registration
+            // TODO services go here
+            #endregion
+
+            #region Repository registration
+            // TODO repositories go here
+            #endregion
+
+            var connectionString = ConfigurationHelper
+                .GetConfiguration()
+                .GetConnectionString("Database");
+
+            services.AddDbContext<EduLinkDbContext>(options =>
+                options.UseNpgsql(connectionString, options =>
+                    options.UseNetTopologySuite()));
+
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
+            return builder;
+        }
+    }
+
+    public static class MiddlewareInitializer
+    {
+        public static WebApplication ConfigureMiddleware(this WebApplication app)
+        {
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -24,12 +79,10 @@ namespace Api
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
 
-            app.Run();
+            return app;
         }
     }
 }
