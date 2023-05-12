@@ -101,11 +101,12 @@ namespace Application.Services
         {
             var tutor = await _userRepository.Query()
                 .Where(user => user.IsTutor())
+                .ProjectTutorToDto()
                 .FirstOrDefaultAsync(tutor =>
                     tutor.Username == tutorUsername.ToNormalizedLower(),
                     cancellationToken);
 
-            return tutor?.ToDto() ?? throw new NotFoundException<User>(tutorUsername);
+            return tutor ?? throw new NotFoundException<User>(tutorUsername);
         }
 
         public async Task<ICollection<UserDto>> GetTutorsInCityAsync(
@@ -123,7 +124,7 @@ namespace Application.Services
                 .Where(tutor => tutor.CityId == city.Id)
                 .SortTutors(sortOptions ?? new SortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
                 .Paginate(paginationOptions ?? new PaginationDto { Skip = 0, Take = 25 })
-                .ProjectToDto()
+                .ProjectTutorToDto()
                 .ToListAsync(cancellationToken);
 
             return tutors;
@@ -143,7 +144,7 @@ namespace Application.Services
                 .Where(tutor => tutor.City.RegionId == region.Id)
                 .SortTutors(sortOptions ?? new SortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
                 .Paginate(paginationOptions ?? new PaginationDto { Skip = 0, Take = 25 })
-                .ProjectToDto()
+                .ProjectTutorToDto()
                 .ToListAsync(cancellationToken);
 
             return tutors;

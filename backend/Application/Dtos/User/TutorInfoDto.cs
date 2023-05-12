@@ -2,7 +2,7 @@
 {
     public class TutorInfoDto
     {
-        public double AverageRating { get; set; }
+        public double? AverageRating { get; set; }
         public int TotalTutoringHours { get; set; }
     }
 }

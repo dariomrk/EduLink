@@ -31,6 +31,5 @@ namespace Application.Extensions
                 _ => throw new NotSupportedException(),
             };
         }
-
     }
 }
