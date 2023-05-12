@@ -7,6 +7,8 @@ namespace Data.Models
     {
         private const int TutoringEligibilityYears = 16; // TODO add configuration field to appsettings.json
 
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
         public string Username { get; set; } = null!;
         public string Email { get; set; } = null!;
         public byte[] PasswordHash { get; set; } = null!;
@@ -27,8 +29,10 @@ namespace Data.Models
         public string MobileNumber { get; set; } = null!;
         public string StripeCustomerId { get; set; } = null!;
         public string? StripeAccountId { get; set; } = null!;
-        public decimal? Latitude { get; set; }
-        public decimal? Longitude { get; set; }
+        /// <summary>
+        /// <inheritdoc cref="City.Coordinates"/>
+        /// </summary>
+        public NetTopologySuite.Geometries.Point? Coordinates { get; set; }
         public ICollection<Appointment> StudyAppointments { get; set; } = new List<Appointment>();
         public ICollection<Appointment> TutoringAppointments { get; set; } = new List<Appointment>();
         public ICollection<TutoringPost> TutoringPosts { get; set; } = new List<TutoringPost>();

@@ -10,6 +10,7 @@ namespace Data.Interfaces
         Task<TModel?> FindByIdAsync(TId id, CancellationToken cancellationToken = default);
         Task<TModel?> FindAsync(Expression<Func<TModel, bool>> selector, CancellationToken cancellationToken = default);
         Task<ICollection<TModel>> WhereAsync(Expression<Func<TModel, bool>> selector, CancellationToken cancellationToken = default);
+        Task<bool> AnyAsync(Expression<Func<TModel, bool>> selector, CancellationToken cancellationToken = default);
         Task<bool> CheckExistsAsync(Expression<Func<TModel, bool>> selector, CancellationToken cancellationToken = default);
 
         Task BeginTransactionAsync();

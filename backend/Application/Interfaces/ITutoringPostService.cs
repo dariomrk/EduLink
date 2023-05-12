@@ -11,8 +11,7 @@ namespace Application.Interfaces
             string? regionName = null,
             string? cityName = null,
             PaginationDto? paginationOptions = null,
-            SortOrder sortOrder = SortOrder.Ascending,
-            SortProperties orderBy = SortProperties.Rating,
+            SortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<TutoringPostDto> GetTutoringPostAsync(

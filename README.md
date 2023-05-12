@@ -57,10 +57,11 @@ Naming pattern: `[area]/[task-type]/[issue-id]-[task-name]`, e.g. `frontend/feat
 
 1. Move to the `backend` directory
 2. In the `backend` root create the `.env` file in accordance with `.env.example` and `appsettings.Development.json`
-3. In the Package Manager Console execute: `$env:ASPNETCORE_ENVIRONMENT = "Development"`
-4. Set the Default project in the Package Manager Console to `Data`
-5. To apply existing migrations execute: `Update-Database`
-6. Start the application using the `Development` profile
+3. Run `docker-compose up` to create the Docker container
+4. In the Package Manager Console execute: `$env:ASPNETCORE_ENVIRONMENT = "Development"`
+5. Set the Default project in the Package Manager Console to `Data`
+6. To apply existing migrations execute `Update-Database`
+7. Start the application using the `Development` profile
 
 ### Frontend
 

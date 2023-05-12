@@ -81,6 +81,10 @@ namespace Data.Repositories
                 .Where(selector)
                 .ToListAsync(cancellationToken);
 
+        public async Task<bool> AnyAsync(Expression<Func<TModel, bool>> selector, CancellationToken cancellationToken = default) =>
+            await Query()
+                .AnyAsync(selector, cancellationToken);
+
         public async Task<bool> CheckExistsAsync(Expression<Func<TModel, bool>> selector, CancellationToken cancellationToken = default) =>
             await FindAsync(selector, cancellationToken) is null;
 

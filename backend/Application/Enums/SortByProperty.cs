@@ -1,10 +1,10 @@
 ﻿namespace Application.Enums
 {
-    public enum SortProperties
+    public enum SortByProperty
     {
         Rating,
         Name,
         Distance,
-        CreatedAt,
+        Date,
     }
 }
