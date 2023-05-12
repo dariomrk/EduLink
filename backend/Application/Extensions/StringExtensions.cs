@@ -1,8 +1,8 @@
 ﻿namespace Application.Extensions
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
-        public static string ToNormalizedLower(this string input)
+        internal static string ToNormalizedLower(this string input)
         {
             return input
                 .Trim()

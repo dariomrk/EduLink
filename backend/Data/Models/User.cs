@@ -7,6 +7,8 @@ namespace Data.Models
     {
         private const int TutoringEligibilityYears = 16; // TODO add configuration field to appsettings.json
 
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
         public string Username { get; set; } = null!;
         public string Email { get; set; } = null!;
         public byte[] PasswordHash { get; set; } = null!;

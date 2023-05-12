@@ -1,6 +1,5 @@
 ﻿using Application.Dtos.Common;
 using Application.Dtos.User;
-using Application.Enums;
 using Data.Models;
 
 namespace Application.Interfaces
@@ -12,23 +11,20 @@ namespace Application.Interfaces
             string regionName,
             string cityName,
             PaginationDto? paginationOptions = null,
-            SortOrder sortOrder = SortOrder.Ascending,
-            SortByProperty orderBy = SortByProperty.Rating,
+            SortDto? sortDto = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetTutorsInRegionAsync(
             string countryName,
             string regionName,
             PaginationDto? paginationOptions = null,
-            SortOrder sortOrder = SortOrder.Ascending,
-            SortByProperty orderBy = SortByProperty.Rating,
+            SortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
             PaginationDto? paginationOptions = null,
-            SortOrder sortOrder = SortOrder.Ascending,
-            SortByProperty orderBy = SortByProperty.Rating,
+            SortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetTutorAsync(
