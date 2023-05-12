@@ -109,6 +109,31 @@ namespace Application.Services
             return tutor ?? throw new NotFoundException<User>(tutorUsername);
         }
 
+        public async Task<bool> UserExistsAsync(
+            string username,
+            CancellationToken cancellationToken = default) =>
+            await _userRepository
+                .AnyAsync(user =>
+                    user.Username == username.ToNormalizedLower(),
+                    cancellationToken);
+
+        public async Task<bool> IsTutorAsync(
+            string username,
+            CancellationToken cancellationToken = default) =>
+            await _userRepository
+                .AnyAsync(user =>
+                    user.Username == username.ToNormalizedLower()
+                    && user.IsTutor());
+
+        public async Task<bool> IsEligibleAsTutor(
+            string username,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await GetByUsernameAsync(username, cancellationToken);
+
+            return result.IsEligibleAsTutor;
+        }
+
         public async Task<ICollection<UserDto>> GetTutorsInCityAsync(
             string countryName,
             string regionName,

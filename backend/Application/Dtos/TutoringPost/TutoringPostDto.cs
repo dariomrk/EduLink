@@ -9,5 +9,7 @@ namespace Application.Dtos.TutoringPost
         public decimal PricePerHour { get; set; }
         public Currency Currency { get; set; }
         public ICollection<AvailableTimeSpanDto> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpanDto>();
+        public ICollection<string> Fields { get; set; } = new List<string>();
+        public string SubjectName { get; set; } = null!;
     }
 }
