@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.TutoringPost
 {
-    public class CreateDto { }
+    public class CreateTutoringPostDto { }
 }
