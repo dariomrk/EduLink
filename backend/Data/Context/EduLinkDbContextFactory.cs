@@ -14,7 +14,8 @@ namespace Data.Context
                 ?? throw new ArgumentNullException("Database connection string is not specified.");
 
             var options = new DbContextOptionsBuilder<EduLinkDbContext>()
-                .UseNpgsql(connectionString)
+                .UseNpgsql(connectionString, options =>
+                    options.UseNetTopologySuite())
                 .Options;
 
             return new EduLinkDbContext(options);

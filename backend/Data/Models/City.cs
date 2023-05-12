@@ -8,8 +8,7 @@ namespace Data.Models
         public string ZipCode { get; set; } = null!;
         public long RegionId { get; set; }
         public Region Region { get; set; } = null!;
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public NetTopologySuite.Geometries.Point Coordinates { get; set; } = null!;
         public ICollection<User> Users { get; set; } = new List<User>();
     }
 
@@ -36,11 +35,7 @@ namespace Data.Models
                 .IsRequired();
 
             entity
-                .Property(x => x.Latitude)
-                .IsRequired();
-
-            entity
-                .Property(x => x.Longitude)
+                .Property(x => x.Coordinates)
                 .IsRequired();
 
             return modelBuilder;

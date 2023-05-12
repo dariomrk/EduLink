@@ -29,8 +29,7 @@ namespace Data.Models
         public string MobileNumber { get; set; } = null!;
         public string StripeCustomerId { get; set; } = null!;
         public string? StripeAccountId { get; set; } = null!;
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
+        public NetTopologySuite.Geometries.Point? Coordinates { get; set; }
         public ICollection<Appointment> StudyAppointments { get; set; } = new List<Appointment>();
         public ICollection<Appointment> TutoringAppointments { get; set; } = new List<Appointment>();
         public ICollection<TutoringPost> TutoringPosts { get; set; } = new List<TutoringPost>();
