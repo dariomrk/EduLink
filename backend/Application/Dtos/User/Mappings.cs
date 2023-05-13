@@ -23,12 +23,13 @@ namespace Application.Dtos.User
                             .Any()
                                 ? tutor.TutoringAppointments.Average(appointment => appointment.StudentsReview!.Stars)
                                 : null,
-                    TotalTutoringHours = tutor.TutoringAppointments
-                            .Any(appointment =>
-                                appointment.StartAt.AddMinutes(appointment.DurationMinutes)
-                                < DateTime.UtcNow.Add(appointment.StartAt.Offset))
-                                ? tutor.TutoringAppointments.Sum(x => x.DurationMinutes) / 60
-                                : 0,
+                    // TODO fix query
+                    //TotalTutoringHours = tutor.TutoringAppointments
+                    //        .Any(appointment =>
+                    //            appointment.StartAt.AddMinutes(appointment.DurationMinutes)
+                    //            < DateTime.UtcNow.Add(appointment.StartAt.Offset))
+                    //            ? tutor.TutoringAppointments.Sum(x => x.DurationMinutes) / 60
+                    //            : 0,
                 }
             });
     }

@@ -39,6 +39,7 @@ namespace Data.Models
         public ICollection<Message> SentMessages { get; set; } = new List<Message>();
         public ICollection<Message> RecievedMessages { get; set; } = new List<Message>();
         public ICollection<LoginTimestamp> LoginTimestamps { get; set; } = new List<LoginTimestamp>();
+        public ICollection<AvailableTimeSpan> AssignedStudyAppointmentTimeSpans = new List<AvailableTimeSpan>();
     }
 
     public static partial class ModelConfigurations

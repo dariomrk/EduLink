@@ -20,5 +20,13 @@ namespace Application.Interfaces
 
         public Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(
            RequestDto post);
+
+        public Task<ICollection<ResponseDto>> GetAvailableTutoringPostsAsync(
+            string? countryName = null,
+            string? regionName = null,
+            string? cityName = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
+            CancellationToken cancellationToken = default);
     }
 }

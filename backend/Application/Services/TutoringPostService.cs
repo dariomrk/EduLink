@@ -87,5 +87,26 @@ namespace Application.Services
 
             return tutoringPosts;
         }
+
+        public async Task<ICollection<ResponseDto>> GetAvailableTutoringPostsAsync(
+            string? countryName = null,
+            string? regionName = null,
+            string? cityName = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
+            CancellationToken cancellationToken = default)
+        {
+            var tutoringPosts = await _tutoringPostRepository.Query()
+                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
+                    .Any(timeSpan => timeSpan.Start > DateTime.UtcNow.Add(timeSpan.Start.Offset)))
+                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
+                    .Any(timeSpan => timeSpan.TakenByStudent == null))
+                .SortTutoringPosts(sortOptions ?? new RequestSortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new RequestPaginationDto { Skip = 0, Take = 25 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return tutoringPosts;
+        }
     }
 }
