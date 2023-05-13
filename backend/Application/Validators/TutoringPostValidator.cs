@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.TutoringPost;
+using Application.Extensions;
 using Application.Interfaces;
 using Data.Enums;
 using Data.Interfaces;
@@ -14,10 +15,12 @@ namespace Application.Validators
 
         public TutoringPostValidator(
             IRepository<Data.Models.TutoringPost, long> tutoringPostRepository,
-            IUserService userService)
+            IUserService userService,
+            IFieldService fieldService)
         {
             _tutoringPostRepository = tutoringPostRepository;
             _userService = userService;
+            _fieldService = fieldService;
 
             RuleFor(tutoringPost => tutoringPost.TutorUsername)
                 .NotEmpty()
@@ -46,10 +49,33 @@ namespace Application.Validators
                         timeSpan.Start.AddHours(8) < timeSpan.End)
                     .WithMessage("A single appointment time frame must be less then 8 hours."));
 
-            //RuleFor(tutoringPost => tutoringPost.Fields)
-            //    .NotEmpty()
-            //    .ForEach(field => field
-            //        .Must(field => )) // TODO check whether the field exists for the given subject
+            RuleFor(tutoringPost => tutoringPost.SubjectName)
+                .NotEmpty()
+                .MustAsync(_fieldService.SubjectExists);
+
+            RuleFor(tutoringPost => tutoringPost.Fields)
+                .NotEmpty()
+                .CustomAsync(async (fields, context, cancellationToken) =>
+                {
+                    var fieldsList = fields.ToList();
+
+                    var tasks = fieldsList.Select(field =>
+                        _fieldService.FieldInSubject(
+                            field,
+                            context.InstanceToValidate.SubjectName,
+                            cancellationToken));
+
+                    var taskResults = await Task.WhenAll(tasks);
+
+                    taskResults
+                        .ToList()
+                        .ForEach((taskResult, i) =>
+                        {
+                            if (!taskResult) context.AddFailure(
+                                $"Field `{fieldsList[i]}` " +
+                                $"is not contained in subject `{context.InstanceToValidate.SubjectName}`.");
+                        });
+                });
 
             throw new NotImplementedException();
         }
