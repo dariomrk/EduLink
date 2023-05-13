@@ -9,5 +9,6 @@ namespace Application.TutoringPost
         internal static partial ResponseDto ToDto(this Data.Models.TutoringPost tutoringPost);
         [MapperIgnoreTarget(nameof(Data.Models.TutoringPost.Fields))]
         internal static partial Data.Models.TutoringPost ToModel(this RequestDto dto);
+        internal static partial IQueryable<ResponseDto> ProjectToDto(this IQueryable<Data.Models.TutoringPost> posts);
     }
 }

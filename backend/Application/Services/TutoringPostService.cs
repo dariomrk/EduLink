@@ -1,11 +1,13 @@
 ﻿using Application.Dtos.Common;
 using Application.Dtos.TutoringPost;
 using Application.Enums;
+using Application.Exceptions;
 using Application.Extensions;
 using Application.Interfaces;
 using Application.TutoringPost;
 using Data.Interfaces;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services
@@ -50,7 +52,7 @@ namespace Application.Services
                     }));
 
             var tutor = await _userService.GetTutorAsync(creationRequestDto.TutorUsername);
-            mapped.UserId = tutor.Id;
+            mapped.TutorId = tutor.Id;
             mapped.IsPaidAd = false; // TODO implement stripe integration
 
             var creationResult = await _tutoringPostRepository.CreateAsync(mapped);
@@ -60,12 +62,14 @@ namespace Application.Services
             return (ServiceActionResult.Created, creationResult.Created!.ToDto());
         }
 
-        public Task<ResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<ResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var tutoringPost = await _tutoringPostRepository.FindByIdAsync(id, cancellationToken);
+
+            return tutoringPost?.ToDto() ?? throw new NotFoundException<Data.Models.TutoringPost>(id);
         }
 
-        public Task<ResponseDto> GetTutoringPostsAsync(
+        public async Task<ICollection<ResponseDto>> GetTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
@@ -73,7 +77,15 @@ namespace Application.Services
             RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var tutoringPosts = await _tutoringPostRepository.Query()
+                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
+                    .Any(timeSpan => timeSpan.Start > DateTime.UtcNow.Add(timeSpan.Start.Offset)))
+                .SortTutoringPosts(sortOptions ?? new RequestSortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new RequestPaginationDto { Skip = 0, Take = 25 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return tutoringPosts;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Application.Interfaces
 {
     public interface ITutoringPostService
     {
-        public Task<ResponseDto> GetTutoringPostsAsync(
+        public Task<ICollection<ResponseDto>> GetTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,

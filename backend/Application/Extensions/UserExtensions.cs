@@ -18,9 +18,12 @@ namespace Application.Extensions
         {
             return sortDto.SortByProperty switch
             {
-                SortByProperty.Rating => tutors.OrderBy(tutor => tutor.TutoringAppointments
-                    .Where(appointment => appointment.StudentsReview != null)
-                    .Average(appointment => appointment.StudentsReview!.Stars)),
+                SortByProperty.Rating => tutors.OrderBy(tutor =>
+                    tutor.TutoringAppointments
+                        .Where(appointment => appointment.StudentsReview != null)
+                        .Select(appointment => (double?)appointment.StudentsReview!.Stars)
+                        .DefaultIfEmpty(0)
+                        .Average()),
 
                 SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
 
