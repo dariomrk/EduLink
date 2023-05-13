@@ -64,9 +64,12 @@ namespace Application.Services
 
         public async Task<ResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
         {
-            var tutoringPost = await _tutoringPostRepository.FindByIdAsync(id, cancellationToken);
+            var tutoringPost = await _tutoringPostRepository.Query()
+                .Where(x => x.Id == id)
+                .ProjectToDto()
+                .FirstOrDefaultAsync(cancellationToken);
 
-            return tutoringPost?.ToDto() ?? throw new NotFoundException<Data.Models.TutoringPost>(id);
+            return tutoringPost ?? throw new NotFoundException<Data.Models.TutoringPost>(id);
         }
 
         public async Task<ICollection<ResponseDto>> GetTutoringPostsAsync(

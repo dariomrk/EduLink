@@ -6,7 +6,9 @@ namespace Application.Dtos.User
     internal static partial class UserMappings
     {
         internal static partial UserDto ToDto(this Data.Models.User user);
+
         internal static partial IQueryable<UserDto> ProjectToDto(this IQueryable<Data.Models.User> users);
+
         internal static IQueryable<UserDto> ProjectTutorToDto(this IQueryable<Data.Models.User> tutors) =>
             tutors.Select(tutor => new UserDto
             {

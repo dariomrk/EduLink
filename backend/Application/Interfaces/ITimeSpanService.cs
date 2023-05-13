@@ -5,8 +5,8 @@ namespace Application.Interfaces
 {
     public interface ITimeSpanService
     {
-        internal bool IsValidTimeSpan(TimeSpanDto timeSpan);
-        internal bool DoTimeSpansOverlap(TimeSpanDto timeSpan1, TimeSpanDto timeSpan2);
-        internal bool AnyOverlappingTimeSpans(IEnumerable<TimeSpanDto> timeSpans);
+        internal bool IsValidTimeSpan(RequestDto timeSpan);
+        internal bool DoTimeSpansOverlap(RequestDto timeSpan1, RequestDto timeSpan2);
+        internal bool AnyOverlappingTimeSpans(IEnumerable<RequestDto> timeSpans);
     }
 }
