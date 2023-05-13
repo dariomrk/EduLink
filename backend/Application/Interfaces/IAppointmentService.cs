@@ -23,7 +23,7 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(
-            AppointmentCreateRequestDto createDto);
+            CreateAppointmentRequestDto createDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
             string myUsername,

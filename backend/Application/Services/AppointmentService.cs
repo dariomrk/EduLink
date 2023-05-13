@@ -16,7 +16,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(AppointmentCreateRequestDto createDto)
+        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(CreateAppointmentRequestDto createDto)
         {
             // TODO validate that the appointment is not already taken
             throw new NotImplementedException();
@@ -32,7 +32,7 @@ namespace Application.Services
 
         public async Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
             string myUsername,
-            RequestPaginationDto? paginationOptions = null,
+            PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
@@ -40,7 +40,7 @@ namespace Application.Services
 
         public async Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
             string myUsername,
-            RequestPaginationDto? paginationOptions = null,
+            PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
@@ -48,7 +48,7 @@ namespace Application.Services
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            RequestReviewAsStudentDto reviewDto)
+            ReviewAsStudentRequestDto reviewDto)
         {
             // TODO validate that the appointment has passed
             // TODO validate that the student is actually the student that attended the appointment
@@ -57,7 +57,7 @@ namespace Application.Services
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
-            RequestReviewAsTutorDto reviewDto)
+            ReviewAsTutorRequestDto reviewDto)
         {
             // TODO validate that the appointment has passed
             // TODO validate that the tutor is actually the tutor of said appointment
