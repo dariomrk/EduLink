@@ -31,11 +31,11 @@ namespace Application.Interfaces
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            ReviewAsStudentRequestDto reviewDto);
+            CreateReviewAsStudentRequestDto reviewDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
-            ReviewAsTutorRequestDto reviewDto);
+            CreateReviewAsTutorRequestDto reviewDto);
 
         internal Task<bool> IsAvailableTimeSpan(long appointmentTimeSpanId, CancellationToken cancellationToken = default);
 

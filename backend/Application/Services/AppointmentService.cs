@@ -48,7 +48,7 @@ namespace Application.Services
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            ReviewAsStudentRequestDto reviewDto)
+            CreateReviewAsStudentRequestDto reviewDto)
         {
             // TODO validate that the appointment has passed
             // TODO validate that the student is actually the student that attended the appointment
@@ -57,7 +57,7 @@ namespace Application.Services
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
-            ReviewAsTutorRequestDto reviewDto)
+            CreateReviewAsTutorRequestDto reviewDto)
         {
             // TODO validate that the appointment has passed
             // TODO validate that the tutor is actually the tutor of said appointment
