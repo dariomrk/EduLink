@@ -111,5 +111,14 @@ namespace Application.Services
 
             return tutoringPosts;
         }
+
+        public async Task<bool> TutoringPostExistsAsync(
+            long tutoringPost,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await GetTutoringPostAsync(tutoringPost, cancellationToken);
+
+            return result is not null;
+        }
     }
 }

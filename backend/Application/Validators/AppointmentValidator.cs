@@ -4,13 +4,13 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    internal class AppointmentValidator : AbstractValidator<RequestCreateDto>
+    public class AppointmentValidator : AbstractValidator<RequestCreateDto>
     {
         private readonly IUserService _userService;
         private readonly IAppointmentService _appointmentService;
         private readonly ITutoringPostService _tutoringPostService;
 
-        internal AppointmentValidator(
+        public AppointmentValidator(
             IUserService userService,
             IAppointmentService appointmentService,
             ITutoringPostService tutoringPostService)
@@ -26,7 +26,7 @@ namespace Application.Validators
 
             RuleFor(appointment => appointment.PostId)
                 .NotEmpty()
-                .MustAsync(_tutoringPostService.TutoringPostExists)
+                .MustAsync(_tutoringPostService.TutoringPostExistsAsync)
                 .WithMessage(postId => $"Tutoring post with id `{postId} does not exist.`");
 
             RuleFor(appointment => appointment.AppointmentTimeSpanId)

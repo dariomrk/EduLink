@@ -7,7 +7,7 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    internal class TutoringPostValidator : AbstractValidator<RequestDto>
+    public class TutoringPostValidator : AbstractValidator<RequestDto>
     {
         private readonly IRepository<Data.Models.TutoringPost, long> _tutoringPostRepository;
         private readonly IUserService _userService;

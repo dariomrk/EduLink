@@ -29,7 +29,7 @@ namespace Application.Interfaces
             RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        internal Task<bool> TutoringPostExists(
+        internal Task<bool> TutoringPostExistsAsync(
             long tutoringPostId,
             CancellationToken cancellationToken = default);
     }
