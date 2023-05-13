@@ -31,10 +31,10 @@ namespace Application.Interfaces
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            RequestAsStudentDto reviewDto);
+            RequestReviewAsStudentDto reviewDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
-            RequestAsTutorDto reviewDto);
+            RequestReviewAsTutorDto reviewDto);
     }
 }
