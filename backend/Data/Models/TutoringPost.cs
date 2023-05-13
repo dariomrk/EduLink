@@ -15,6 +15,7 @@ namespace Data.Models
         public bool IsActive { get; set; }
         public ICollection<AvailableTimeSpan> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpan>();
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<TutoringPostField> Fields { get; set; } = new List<TutoringPostField>();
     }
 
     public static partial class ModelConfigurations

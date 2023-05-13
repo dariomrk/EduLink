@@ -25,16 +25,19 @@ namespace Application.Validators
             RuleFor(tutoringPost => tutoringPost.TutorUsername)
                 .NotEmpty()
                 .MustAsync(async (username, cancellationToken) =>
-                    await _userService.IsEligibleAsTutor(username, cancellationToken));
+                    await _userService.IsEligibleAsTutor(username, cancellationToken))
+                .WithMessage($"The user is not eligible to be a tutor.");
 
             RuleFor(tutoringPost => tutoringPost.PricePerHour)
                 .NotEmpty()
-                .GreaterThan(0);
+                .GreaterThan(0)
+                .WithMessage($"Price per hour must be greater than 0.");
 
             RuleFor(tutoringPost => tutoringPost.Currency)
                 .NotEmpty()
                 .Length(3)
-                .IsEnumName(typeof(Currency), caseSensitive: false);
+                .IsEnumName(typeof(Currency), caseSensitive: false)
+                .WithMessage($"Currency is not supported.");
 
             RuleFor(tutoringPost => tutoringPost.AvailableTimeSpans)
                 .NotEmpty()
@@ -60,9 +63,9 @@ namespace Application.Validators
                     var fieldsList = fields.ToList();
 
                     var tasks = fieldsList.Select(field =>
-                        _fieldService.FieldInSubject(
-                            field,
+                        _fieldService.SubjectContainsField(
                             context.InstanceToValidate.SubjectName,
+                            field,
                             cancellationToken));
 
                     var taskResults = await Task.WhenAll(tasks);
