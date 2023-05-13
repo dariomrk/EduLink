@@ -37,8 +37,6 @@ namespace Application.Interfaces
             long appointmentId,
             CreateReviewAsTutorRequestDto reviewDto);
 
-        internal Task<bool> IsAvailableTimeSpan(long appointmentTimeSpanId, CancellationToken cancellationToken = default);
-
         internal Task<bool> IsPartOfPost(long appointmentId, long postId, CancellationToken cancellationToken = default);
 
         internal Task<bool> StudentIsAssignedToAppointment(string username, long appointmentId, CancellationToken cancellationToken = default);

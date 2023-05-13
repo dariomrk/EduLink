@@ -21,7 +21,7 @@ namespace Application.Extensions
                 SortByProperty.Distance => throw new NotImplementedException(), // TODO implement sorting by distance from the user
 
                 SortByProperty.Date => tutoringPosts.OrderBy(tutoringPost =>
-                    tutoringPost.AvailableTimeSpans.OrderBy(timeSpan => timeSpan.Start)),
+                    tutoringPost.AvailableTimeFrames.OrderBy(timeFrame => timeFrame.Start)),
 
                 _ => throw new NotSupportedException(),
             };

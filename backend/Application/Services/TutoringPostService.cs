@@ -82,8 +82,8 @@ namespace Application.Services
             CancellationToken cancellationToken = default)
         {
             var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
-                    .Any(timeSpan => timeSpan.Start > DateTime.UtcNow.Add(timeSpan.Start.Offset)))
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
                 .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
                 .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
                 .ProjectToDto()
@@ -101,10 +101,10 @@ namespace Application.Services
             CancellationToken cancellationToken = default)
         {
             var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
-                    .Any(timeSpan => timeSpan.Start > DateTime.UtcNow.Add(timeSpan.Start.Offset)))
-                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
-                    .Any(timeSpan => timeSpan.TakenByStudent == null))
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.TakenByStudent == null))
                 .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
                 .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
                 .ProjectToDto()

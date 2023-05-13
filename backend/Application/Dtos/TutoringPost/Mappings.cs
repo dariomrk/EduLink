@@ -22,12 +22,12 @@ namespace Application.TutoringPost
                     .ToList(),
                 PricePerHour = post.PricePerHour,
                 SubjectName = post.Fields.FirstOrDefault()!.Field.Subject.Name,
-                AvailableTimeSpans = post.AvailableTimeSpans
-                    .Select(timeSpan => new Dtos.AvailableTimeSpan.AvailableTimeSpanResponseDto
+                AvailableTimeFrames = post.AvailableTimeFrames
+                    .Select(timeFrame => new Dtos.TimeFrame.TimeFrameResponseDto
                     {
-                        Start = timeSpan.Start,
-                        End = timeSpan.End,
-                        IsAvailable = timeSpan.TakenByStudent == null,
+                        Start = timeFrame.Start,
+                        End = timeFrame.End,
+                        IsAvailable = timeFrame.TakenByStudent == null,
                     })
                     .ToList(),
             });

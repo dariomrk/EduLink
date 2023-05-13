@@ -33,13 +33,13 @@ namespace Data.Models
         /// <inheritdoc cref="City.Coordinates"/>
         /// </summary>
         public NetTopologySuite.Geometries.Point? Coordinates { get; set; }
-        public ICollection<AvailableTimeSpan> StudyAppointments { get; set; } = new List<AvailableTimeSpan>();
+        public ICollection<TimeFrame> StudyAppointments { get; set; } = new List<TimeFrame>();
         public ICollection<Appointment> TutoringAppointments { get; set; } = new List<Appointment>();
         public ICollection<TutoringPost> TutoringPosts { get; set; } = new List<TutoringPost>();
         public ICollection<Message> SentMessages { get; set; } = new List<Message>();
         public ICollection<Message> RecievedMessages { get; set; } = new List<Message>();
         public ICollection<LoginTimestamp> LoginTimestamps { get; set; } = new List<LoginTimestamp>();
-        public ICollection<AvailableTimeSpan> AssignedStudyAppointmentTimeSpans = new List<AvailableTimeSpan>();
+        public ICollection<TimeFrame> AssignedStudyAppointmentTimeFrames = new List<TimeFrame>();
     }
 
     public static partial class ModelConfigurations

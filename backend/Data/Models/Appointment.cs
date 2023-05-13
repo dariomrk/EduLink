@@ -19,8 +19,8 @@ namespace Data.Models
         public StudentsReview? StudentsReview { get; set; }
         public long? TutorsReviewId { get; set; }
         public TutorsReview? TutorsReview { get; set; }
-        public long AppointmentTimeSpanId { get; set; }
-        public AvailableTimeSpan AppointmentTimeSpan { get; set; } = null!;
+        public long AppointmentTimeFrameId { get; set; }
+        public TimeFrame AppointmentTimeFrame { get; set; } = null!;
     }
 
     public static partial class ModelConfigurations
@@ -47,7 +47,7 @@ namespace Data.Models
                 .HasDefaultValue(false);
 
             entity
-                .Property(x => x.AppointmentTimeSpanId)
+                .Property(x => x.AppointmentTimeFrameId)
                 .IsRequired();
 
             return modelBuilder;

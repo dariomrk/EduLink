@@ -1,6 +1,6 @@
-﻿namespace Application.Dtos.AvailableTimeSpan
+﻿namespace Application.Dtos.TimeFrame
 {
-    public class AvailableTimeSpanRequestDto
+    public class TimeFrameRequestDto
     {
         public DateTimeOffset Start { get; set; }
         public DateTimeOffset End { get; set; }

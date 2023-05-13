@@ -13,7 +13,7 @@ namespace Data.Context
 
             modelBuilder
                 .ConfigureAppointment()
-                .ConfigureAvailableTimeSpan()
+                .ConfigureAvailableTimeFrame()
                 .ConfigureCity()
                 .ConfigureCountry()
                 .ConfigureField()

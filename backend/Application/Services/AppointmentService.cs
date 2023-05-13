@@ -88,13 +88,6 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<bool> IsAvailableTimeSpan(
-            long appointmentId,
-            CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> IsPartOfPost(
             long appointmentId,
             long postId,
@@ -110,9 +103,9 @@ namespace Application.Services
         {
             return await _appointmentRepository.Query()
                 .Where(appointment => appointment.Id == appointmentId)
-                .Where(appointment => appointment.AppointmentTimeSpan.TakenByStudent != null)
+                .Where(appointment => appointment.AppointmentTimeFrame.TakenByStudent != null)
                 .AnyAsync(appointment =>
-                    appointment.AppointmentTimeSpan.TakenByStudent!.Username == username.ToNormalizedLower(),
+                    appointment.AppointmentTimeFrame.TakenByStudent!.Username == username.ToNormalizedLower(),
                     cancellationToken);
         }
     }
