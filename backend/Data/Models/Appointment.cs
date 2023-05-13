@@ -13,7 +13,7 @@ namespace Data.Models
         public User Tutor { get; set; } = null!;
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsCancelled { get; set; }
-        public long? AudioRecordingId { get; set; }
+        public long? AudioRecordingId { get; set; } // TODO future feature
         public File? AudioRecording { get; set; }
         public long? StudentsReviewId { get; set; }
         public StudentsReview? StudentsReview { get; set; }

@@ -8,20 +8,21 @@ namespace Application.Services
 {
     public class AppointmentService : IAppointmentService
     {
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
+        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
             string myUsername,
             long appointmentId)
         {
+            // TODO check whether the appointment is cancelable
             throw new NotImplementedException();
         }
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(RequestCreateDto createDto)
+        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(RequestCreateDto createDto)
         {
             // TODO validate that the appointment is not already taken
             throw new NotImplementedException();
         }
 
-        public Task<ResponseAppointmentDto> GetAppointmentAsync(
+        public async Task<ResponseAppointmentDto> GetAppointmentAsync(
             string myUsername,
             long id,
             CancellationToken cancellationToken = default)
@@ -29,7 +30,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
+        public async Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
             string myUsername,
             RequestPaginationDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
@@ -37,7 +38,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
+        public async Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
             string myUsername,
             RequestPaginationDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
@@ -45,7 +46,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
+        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
             RequestReviewAsStudentDto reviewDto)
         {
@@ -54,12 +55,27 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
+        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
             RequestReviewAsTutorDto reviewDto)
         {
             // TODO validate that the appointment has passed
             // TODO validate that the tutor is actually the tutor of said appointment
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsAvailableTimeSpan(
+            long appointmentId,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsPartOfPost(
+            long appointmentId,
+            long postId,
+            CancellationToken cancellationToken = default)
+        {
             throw new NotImplementedException();
         }
     }

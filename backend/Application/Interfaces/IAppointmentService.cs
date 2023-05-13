@@ -36,5 +36,9 @@ namespace Application.Interfaces
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
             RequestReviewAsTutorDto reviewDto);
+
+        internal Task<bool> IsAvailableTimeSpan(long appointmentTimeSpanId, CancellationToken cancellationToken = default);
+
+        Task<bool> IsPartOfPost(long appointmentId, long postId, CancellationToken cancellationToken = default);
     }
 }

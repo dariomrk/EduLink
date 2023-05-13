@@ -28,5 +28,9 @@ namespace Application.Interfaces
             RequestPaginationDto? paginationOptions = null,
             RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
+
+        internal Task<bool> TutoringPostExists(
+            long tutoringPostId,
+            CancellationToken cancellationToken = default);
     }
 }

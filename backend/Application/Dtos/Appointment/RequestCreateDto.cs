@@ -4,6 +4,6 @@
     {
         public long PostId { get; set; }
         public string StudentUsername { get; set; } = null!;
-
+        public long AppointmentTimeSpanId { get; set; }
     }
 }
