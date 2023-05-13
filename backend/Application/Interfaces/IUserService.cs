@@ -51,8 +51,8 @@ namespace Application.Interfaces
         internal Task<User> GetByEmailAsync(
             string email,
             CancellationToken cancellationToken = default);
-        Task<bool> IsTutorAsync(string username, CancellationToken cancellationToken = default);
-        Task<bool> UserExistsAsync(string username, CancellationToken cancellationToken = default);
-        Task<bool> IsEligibleAsTutor(string username, CancellationToken cancellationToken = default);
+        internal Task<bool> IsTutorAsync(string username, CancellationToken cancellationToken = default);
+        internal Task<bool> UserExistsAsync(string username, CancellationToken cancellationToken = default);
+        internal Task<bool> IsEligibleAsTutor(string username, CancellationToken cancellationToken = default);
     }
 }
