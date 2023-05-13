@@ -11,15 +11,18 @@ namespace Application.Validators
     {
         private readonly IRepository<Data.Models.TutoringPost, long> _tutoringPostRepository;
         private readonly IUserService _userService;
+        private readonly ITimeSpanService _timeSpanService;
         private readonly IFieldService _fieldService;
 
         public TutoringPostValidator(
             IRepository<Data.Models.TutoringPost, long> tutoringPostRepository,
             IUserService userService,
+            ITimeSpanService timeSpanService,
             IFieldService fieldService)
         {
             _tutoringPostRepository = tutoringPostRepository;
             _userService = userService;
+            _timeSpanService = timeSpanService;
             _fieldService = fieldService;
 
             RuleFor(tutoringPost => tutoringPost.TutorUsername)
@@ -42,15 +45,16 @@ namespace Application.Validators
             RuleFor(tutoringPost => tutoringPost.AvailableTimeSpans)
                 .NotEmpty()
                 .ForEach(timeSpan => timeSpan
-                    .Must(timeSpan =>
-                        timeSpan.Start < timeSpan.End)
+                    .Must(_timeSpanService.IsValidTimeSpan)
                     .WithMessage("The appointment time frame start must precede the time frame end.")
                     .Must(timeSpan =>
                         timeSpan.Start > DateTime.Now.Add(timeSpan.Start.Offset))
                     .WithMessage("An appointment time frame must start in the future.")
                     .Must(timeSpan =>
                         timeSpan.Start.AddHours(8) < timeSpan.End)
-                    .WithMessage("A single appointment time frame must be less then 8 hours."));
+                    .WithMessage("A single appointment time frame must be less then 8 hours."))
+                    .Must(_timeSpanService.AnyOverlappingTimeSpans)
+                    .WithMessage("Appointment time frames cannot overlap.");
 
             RuleFor(tutoringPost => tutoringPost.SubjectName)
                 .NotEmpty()
