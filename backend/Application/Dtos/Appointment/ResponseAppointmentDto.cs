@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.Appointment
 {
-    public class ReviewDto { }
+    public class ResponseAppointmentDto { }
 }

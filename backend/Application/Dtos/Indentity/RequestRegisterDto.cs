@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.Indentity
 {
-    public class RegisterDto { }
+    public class RequestRegisterDto { }
 }

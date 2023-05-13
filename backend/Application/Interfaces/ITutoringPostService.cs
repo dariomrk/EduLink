@@ -6,19 +6,19 @@ namespace Application.Interfaces
 {
     public interface ITutoringPostService
     {
-        public Task<TutoringPostDto> GetTutoringPostsAsync(
+        public Task<ResponseDto> GetTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<TutoringPostDto> GetTutoringPostAsync(
+        public Task<ResponseDto> GetTutoringPostAsync(
             long id,
             CancellationToken cancellationToken = default);
 
-        public Task<(ServiceActionResult Result, TutoringPostDto? Created)> CreateTutoringPostAsync(
-           CreateDto post);
+        public Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(
+           RequestDto post);
     }
 }

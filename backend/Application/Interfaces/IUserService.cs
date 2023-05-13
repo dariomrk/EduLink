@@ -10,21 +10,21 @@ namespace Application.Interfaces
             string countryName,
             string regionName,
             string cityName,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortDto = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortDto = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetTutorsInRegionAsync(
             string countryName,
             string regionName,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetTutorAsync(
@@ -51,5 +51,8 @@ namespace Application.Interfaces
         internal Task<User> GetByEmailAsync(
             string email,
             CancellationToken cancellationToken = default);
+        Task<bool> IsTutorAsync(string username, CancellationToken cancellationToken = default);
+        Task<bool> UserExistsAsync(string username, CancellationToken cancellationToken = default);
+        Task<bool> IsEligibleAsTutor(string username, CancellationToken cancellationToken = default);
     }
 }

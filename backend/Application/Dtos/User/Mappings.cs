@@ -1,15 +1,13 @@
-﻿using Application.Dtos.User;
-using Data.Models;
-using Riok.Mapperly.Abstractions;
+﻿using Riok.Mapperly.Abstractions;
 
-namespace Application.Mappings
+namespace Application.Dtos.User
 {
     [Mapper]
     internal static partial class UserMappings
     {
-        internal static partial UserDto ToDto(this User user);
-        internal static partial IQueryable<UserDto> ProjectToDto(this IQueryable<User> users);
-        internal static IQueryable<UserDto> ProjectTutorToDto(this IQueryable<User> tutors) =>
+        internal static partial UserDto ToDto(this Data.Models.User user);
+        internal static partial IQueryable<UserDto> ProjectToDto(this IQueryable<Data.Models.User> users);
+        internal static IQueryable<UserDto> ProjectTutorToDto(this IQueryable<Data.Models.User> tutors) =>
             tutors.Select(tutor => new UserDto
             {
                 Id = tutor.Id,
