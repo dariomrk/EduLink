@@ -8,6 +8,8 @@ namespace Data.Models
         public TutoringPost TutoringPost { get; set; } = null!;
         public DateTimeOffset Start { get; set; }
         public DateTimeOffset End { get; set; }
+        public long? TakenByStudentId { get; set; }
+        public User? TakenByStudent { get; set; }
     }
 
     public static partial class ModelConfigurations

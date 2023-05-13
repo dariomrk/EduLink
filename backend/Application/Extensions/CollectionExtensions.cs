@@ -16,5 +16,27 @@ namespace Application.Extensions
             Enums.SortOrder.Descending => collection.Reverse(),
             _ => collection,
         };
+
+        internal static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> predicate)
+        {
+            foreach (var item in collection)
+            {
+                predicate(item);
+            }
+
+            return collection;
+        }
+
+        internal static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T, int> predicate)
+        {
+            var index = 0;
+            collection.ForEach(item =>
+            {
+                predicate(item, index);
+                index++;
+            });
+
+            return collection;
+        }
     }
 }

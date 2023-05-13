@@ -7,8 +7,8 @@ namespace Application.Dtos.TutoringPost
         public string TutorUsername { get; set; } = null!;
         public decimal PricePerHour { get; set; }
         public string Currency { get; set; } = null!;
-        public ICollection<ResponseAvailableTimeSpanDto> AvailableTimeSpans { get; set; } = new List<ResponseAvailableTimeSpanDto>();
-        public ICollection<string> Fields { get; set; } = new List<string>();
+        public ICollection<AvailableTimeSpan.RequestDto> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpan.RequestDto>();
         public string SubjectName { get; set; } = null!;
+        public ICollection<string> Fields { get; set; } = new List<string>();
     }
 }

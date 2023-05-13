@@ -6,7 +6,9 @@ namespace Application.Dtos.User
     internal static partial class UserMappings
     {
         internal static partial UserDto ToDto(this Data.Models.User user);
+
         internal static partial IQueryable<UserDto> ProjectToDto(this IQueryable<Data.Models.User> users);
+
         internal static IQueryable<UserDto> ProjectTutorToDto(this IQueryable<Data.Models.User> tutors) =>
             tutors.Select(tutor => new UserDto
             {
@@ -23,12 +25,13 @@ namespace Application.Dtos.User
                             .Any()
                                 ? tutor.TutoringAppointments.Average(appointment => appointment.StudentsReview!.Stars)
                                 : null,
-                    TotalTutoringHours = tutor.TutoringAppointments
-                            .Any(appointment =>
-                                appointment.StartAt.AddMinutes(appointment.DurationMinutes)
-                                < DateTime.UtcNow.Add(appointment.StartAt.Offset))
-                                ? tutor.TutoringAppointments.Sum(x => x.DurationMinutes) / 60
-                                : 0,
+                    // TODO fix query
+                    //TotalTutoringHours = tutor.TutoringAppointments
+                    //        .Any(appointment =>
+                    //            appointment.StartAt.AddMinutes(appointment.DurationMinutes)
+                    //            < DateTime.UtcNow.Add(appointment.StartAt.Offset))
+                    //            ? tutor.TutoringAppointments.Sum(x => x.DurationMinutes) / 60
+                    //            : 0,
                 }
             });
     }

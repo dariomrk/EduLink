@@ -14,14 +14,8 @@ namespace Data.Models
         public long StudentId { get; set; }
         public User Student { get; set; } = null!;
         public decimal Price { get; set; }
-        public DateTimeOffset StartAt { get; set; }
         public int DurationMinutes { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public bool IsCancelable =>
-            DateTime.UtcNow
-                .Add(StartAt.Offset)
-            > StartAt
-                .AddHours(-IsNotCancelableHoursPrior);
         public bool IsCancelled { get; set; }
         public long? AudioRecordingId { get; set; }
         public File? AudioRecording { get; set; }
@@ -57,13 +51,6 @@ namespace Data.Models
                 .Property(x => x.CreatedAt)
                 .IsRequired()
                 .HasDefaultValueSql(RawSql.Timestamp);
-
-            entity
-                .Ignore(x => x.IsCancelable);
-
-            entity
-                .Property(x => x.StartAt)
-                .IsRequired();
 
             entity
                 .Property(x => x.DurationMinutes)

@@ -1,14 +1,12 @@
-﻿using Application.Dtos.AvailableTimeSpan;
-
-namespace Application.Dtos.TutoringPost
+﻿namespace Application.Dtos.TutoringPost
 {
     public class ResponseDto
     {
         public string TutorUsername { get; set; } = null!;
         public decimal PricePerHour { get; set; }
         public string Currency { get; set; } = null!;
-        public ICollection<ResponseAvailableTimeSpanDto> AvailableTimeSpans { get; set; } = new List<ResponseAvailableTimeSpanDto>();
-        public ICollection<string> Fields { get; set; } = new List<string>();
+        public ICollection<AvailableTimeSpan.ResponseDto> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpan.ResponseDto>();
         public string SubjectName { get; set; } = null!;
+        public ICollection<string> Fields { get; set; } = new List<string>();
     }
 }

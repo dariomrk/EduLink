@@ -6,8 +6,8 @@ namespace Data.Models
 {
     public class TutoringPost : BaseModel
     {
-        public long UserId { get; set; }
-        public User User { get; set; } = null!;
+        public long TutorId { get; set; }
+        public User Tutor { get; set; } = null!;
         public decimal PricePerHour { get; set; }
         public Currency Currency { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
@@ -15,6 +15,7 @@ namespace Data.Models
         public bool IsActive { get; set; }
         public ICollection<AvailableTimeSpan> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpan>();
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<TutoringPostField> Fields { get; set; } = new List<TutoringPostField>();
     }
 
     public static partial class ModelConfigurations
@@ -32,7 +33,7 @@ namespace Data.Models
                 });
 
             entity
-                .Property(x => x.UserId)
+                .Property(x => x.TutorId)
                 .IsRequired();
 
             entity
