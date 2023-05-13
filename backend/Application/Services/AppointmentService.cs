@@ -17,6 +17,7 @@ namespace Application.Services
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(RequestCreateDto createDto)
         {
+            // TODO validate that the appointment is not already taken
             throw new NotImplementedException();
         }
 

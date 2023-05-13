@@ -13,8 +13,6 @@ namespace Data.Models
         public User Tutor { get; set; } = null!;
         public long StudentId { get; set; }
         public User Student { get; set; } = null!;
-        public decimal Price { get; set; }
-        public int DurationMinutes { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsCancelled { get; set; }
         public long? AudioRecordingId { get; set; }
@@ -23,6 +21,8 @@ namespace Data.Models
         public StudentsReview? StudentsReview { get; set; }
         public long? TutorsReviewId { get; set; }
         public TutorsReview? TutorsReview { get; set; }
+        public long AppointmentTimeSpanId { get; set; }
+        public AvailableTimeSpan AppointmentTimeSpan { get; set; } = null!;
     }
 
     public static partial class ModelConfigurations
@@ -32,18 +32,6 @@ namespace Data.Models
             var entity = modelBuilder.Entity<Appointment>();
 
             entity
-                .ToTable(nameof(Appointment), table =>
-                {
-                    table.HasCheckConstraint(
-                        $"CK_{nameof(Appointment)}_{nameof(Appointment.DurationMinutes)}",
-                        $"\"{nameof(Appointment.DurationMinutes)}\" > 0 AND \"{nameof(Appointment.DurationMinutes)}\" < 1440");
-
-                    table.HasCheckConstraint(
-                        $"CK_{nameof(Appointment)}_{nameof(Appointment.Price)}",
-                        $"\"{nameof(Appointment.Price)}\" >= 0");
-                });
-
-            entity
                 .Property(x => x.PostId)
                 .IsRequired();
 
@@ -51,10 +39,6 @@ namespace Data.Models
                 .Property(x => x.CreatedAt)
                 .IsRequired()
                 .HasDefaultValueSql(RawSql.Timestamp);
-
-            entity
-                .Property(x => x.DurationMinutes)
-                .IsRequired();
 
             entity
                 .Property(x => x.TutorId)
@@ -69,7 +53,7 @@ namespace Data.Models
                 .HasDefaultValue(false);
 
             entity
-                .Property(x => x.Price)
+                .Property(x => x.AppointmentTimeSpanId)
                 .IsRequired();
 
             return modelBuilder;
