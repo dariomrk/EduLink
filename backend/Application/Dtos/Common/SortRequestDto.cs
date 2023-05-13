@@ -2,7 +2,7 @@
 
 namespace Application.Dtos.Common
 {
-    public class RequestSortDto
+    public class SortRequestDto
     {
         public SortByProperty SortByProperty { get; set; }
         public SortOrder SortOrder { get; set; }

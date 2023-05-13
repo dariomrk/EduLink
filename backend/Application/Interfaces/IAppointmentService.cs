@@ -9,12 +9,12 @@ namespace Application.Interfaces
     {
         public Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
             string myUsername,
-            RequestPaginationDto? paginationOptions = null,
+            PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
             string myUsername,
-            RequestPaginationDto? paginationOptions = null,
+            PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ResponseAppointmentDto> GetAppointmentAsync(
@@ -23,7 +23,7 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(
-            RequestCreateDto createDto);
+            AppointmentCreateRequestDto createDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
             string myUsername,
@@ -31,11 +31,11 @@ namespace Application.Interfaces
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            RequestReviewAsStudentDto reviewDto);
+            ReviewAsStudentRequestDto reviewDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
-            RequestReviewAsTutorDto reviewDto);
+            ReviewAsTutorRequestDto reviewDto);
 
         internal Task<bool> IsAvailableTimeSpan(long appointmentTimeSpanId, CancellationToken cancellationToken = default);
 

@@ -6,10 +6,10 @@ namespace Application.Interfaces
 {
     public interface IIdentityService
     {
-        public Task<(ServiceActionResult Result, UserDto? Created, ResponseTokenDto? Token)> RegisterAsync(
-            RequestRegisterDto registerDto);
+        public Task<(ServiceActionResult Result, UserResponseDto? Created, TokenRequestDto? Token)> RegisterAsync(
+            RegisterRequestDto registerDto);
 
-        public Task<(IdentityActionResult Result, ResponseTokenDto Token)> LoginAsync(
-            RequestLoginDto loginDto);
+        public Task<(IdentityActionResult Result, TokenRequestDto Token)> LoginAsync(
+            LoginRequestDto loginDto);
     }
 }

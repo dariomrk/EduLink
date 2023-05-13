@@ -6,14 +6,14 @@ namespace Application.TutoringPost
     [Mapper(EnumMappingStrategy = EnumMappingStrategy.ByName, EnumMappingIgnoreCase = true)]
     internal static partial class Mappings
     {
-        internal static partial ResponseDto ToDto(this Data.Models.TutoringPost tutoringPost);
+        internal static partial TutoringPostResponseDto ToDto(this Data.Models.TutoringPost tutoringPost);
 
         [MapperIgnoreTarget(nameof(Data.Models.TutoringPost.Fields))]
-        internal static partial Data.Models.TutoringPost ToModel(this RequestDto dto);
+        internal static partial Data.Models.TutoringPost ToModel(this TutoringPostRequestDto dto);
 
-        internal static IQueryable<ResponseDto> ProjectToDto(this IQueryable<Data.Models.TutoringPost> posts)
+        internal static IQueryable<TutoringPostResponseDto> ProjectToDto(this IQueryable<Data.Models.TutoringPost> posts)
         {
-            return posts.Select(post => new ResponseDto
+            return posts.Select(post => new TutoringPostResponseDto
             {
                 TutorUsername = post.Tutor.Username,
                 Currency = post.Currency.ToString(),
@@ -23,7 +23,7 @@ namespace Application.TutoringPost
                 PricePerHour = post.PricePerHour,
                 SubjectName = post.Fields.FirstOrDefault()!.Field.Subject.Name,
                 AvailableTimeSpans = post.AvailableTimeSpans
-                    .Select(timeSpan => new Dtos.AvailableTimeSpan.ResponseDto
+                    .Select(timeSpan => new Dtos.AvailableTimeSpan.AvailableTimeSpanResponseDto
                     {
                         Start = timeSpan.Start,
                         End = timeSpan.End,

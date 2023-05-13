@@ -5,7 +5,7 @@ namespace Application.Extensions
 {
     internal static class TutoringPostExtensions
     {
-        internal static IQueryable<Data.Models.TutoringPost> SortTutoringPosts(this IQueryable<Data.Models.TutoringPost> tutoringPosts, RequestSortDto sortDto)
+        internal static IQueryable<Data.Models.TutoringPost> SortTutoringPosts(this IQueryable<Data.Models.TutoringPost> tutoringPosts, SortRequestDto sortDto)
         {
             return sortDto.SortByProperty switch
             {

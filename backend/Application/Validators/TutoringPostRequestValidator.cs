@@ -7,14 +7,14 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    public class TutoringPostValidator : AbstractValidator<RequestDto>
+    public class TutoringPostRequestValidator : AbstractValidator<TutoringPostRequestDto>
     {
         private readonly IRepository<Data.Models.TutoringPost, long> _tutoringPostRepository;
         private readonly IUserService _userService;
         private readonly ITimeSpanService _timeSpanService;
         private readonly IFieldService _fieldService;
 
-        public TutoringPostValidator(
+        public TutoringPostRequestValidator(
             IRepository<Data.Models.TutoringPost, long> tutoringPostRepository,
             IUserService userService,
             ITimeSpanService timeSpanService,

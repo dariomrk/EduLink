@@ -4,13 +4,13 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    public class AppointmentValidator : AbstractValidator<RequestCreateDto>
+    public class CreateAppointmentRequestValidator : AbstractValidator<CreateAppointmentRequestDto>
     {
         private readonly IUserService _userService;
         private readonly IAppointmentService _appointmentService;
         private readonly ITutoringPostService _tutoringPostService;
 
-        public AppointmentValidator(
+        public CreateAppointmentRequestValidator(
             IUserService userService,
             IAppointmentService appointmentService,
             ITutoringPostService tutoringPostService)

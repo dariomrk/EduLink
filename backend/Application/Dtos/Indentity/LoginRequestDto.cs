@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.Indentity
 {
-    public class RequestRegisterDto { }
+    public class LoginRequestDto { }
 }

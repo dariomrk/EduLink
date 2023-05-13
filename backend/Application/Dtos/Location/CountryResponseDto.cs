@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.Location
 {
-    public class ResponseCountryDto { }
+    public class CountryResponseDto { }
 }

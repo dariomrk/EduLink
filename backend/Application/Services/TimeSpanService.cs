@@ -5,17 +5,17 @@ namespace Application.Services
 {
     public class TimeSpanService : ITimeSpanService
     {
-        public bool IsValidTimeSpan(RequestDto timeSpan)
+        public bool IsValidTimeSpan(AvailableTimeSpanRequestDto timeSpan)
         {
             return timeSpan.Start < timeSpan.End;
         }
 
-        public bool DoTimeSpansOverlap(RequestDto timeSpan1, RequestDto timeSpan2)
+        public bool DoTimeSpansOverlap(AvailableTimeSpanRequestDto timeSpan1, AvailableTimeSpanRequestDto timeSpan2)
         {
             return timeSpan1.Start < timeSpan2.End && timeSpan1.End > timeSpan2.Start;
         }
 
-        public bool AnyOverlappingTimeSpans(IEnumerable<RequestDto> timeSpans)
+        public bool AnyOverlappingTimeSpans(IEnumerable<AvailableTimeSpanRequestDto> timeSpans)
         {
             var timeSpanList = timeSpans.ToList();
 
