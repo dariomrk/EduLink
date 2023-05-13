@@ -6,12 +6,13 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    internal class CreateTutoringPostDtoValidator : AbstractValidator<RequestDto>
+    internal class TutoringPostValidator : AbstractValidator<RequestDto>
     {
         private readonly IRepository<Data.Models.TutoringPost, long> _tutoringPostRepository;
         private readonly IUserService _userService;
+        private readonly IFieldService _fieldService;
 
-        public CreateTutoringPostDtoValidator(
+        public TutoringPostValidator(
             IRepository<Data.Models.TutoringPost, long> tutoringPostRepository,
             IUserService userService)
         {
