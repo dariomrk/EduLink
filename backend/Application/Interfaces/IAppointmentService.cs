@@ -39,6 +39,8 @@ namespace Application.Interfaces
 
         internal Task<bool> IsAvailableTimeSpan(long appointmentTimeSpanId, CancellationToken cancellationToken = default);
 
-        Task<bool> IsPartOfPost(long appointmentId, long postId, CancellationToken cancellationToken = default);
+        internal Task<bool> IsPartOfPost(long appointmentId, long postId, CancellationToken cancellationToken = default);
+
+        internal Task<bool> StudentIsAssignedToAppointment(string username, long appointmentId, CancellationToken cancellationToken = default);
     }
 }
