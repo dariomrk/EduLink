@@ -33,7 +33,7 @@ namespace Data.Models
         /// <inheritdoc cref="City.Coordinates"/>
         /// </summary>
         public NetTopologySuite.Geometries.Point? Coordinates { get; set; }
-        public ICollection<Appointment> StudyAppointments { get; set; } = new List<Appointment>();
+        public ICollection<AvailableTimeSpan> StudyAppointments { get; set; } = new List<AvailableTimeSpan>();
         public ICollection<Appointment> TutoringAppointments { get; set; } = new List<Appointment>();
         public ICollection<TutoringPost> TutoringPosts { get; set; } = new List<TutoringPost>();
         public ICollection<Message> SentMessages { get; set; } = new List<Message>();
@@ -47,11 +47,6 @@ namespace Data.Models
         public static ModelBuilder ConfigureUser(this ModelBuilder modelBuilder)
         {
             var entity = modelBuilder.Entity<User>();
-
-            entity
-                .HasMany(x => x.StudyAppointments)
-                .WithOne(x => x.Student)
-                .HasPrincipalKey(x => x.Id);
 
             entity
                 .HasMany(x => x.TutoringAppointments)

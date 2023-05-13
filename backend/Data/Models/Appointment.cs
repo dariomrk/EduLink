@@ -11,8 +11,6 @@ namespace Data.Models
         public TutoringPost Post { get; set; } = null!;
         public long TutorId { get; set; }
         public User Tutor { get; set; } = null!;
-        public long StudentId { get; set; }
-        public User Student { get; set; } = null!;
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsCancelled { get; set; }
         public long? AudioRecordingId { get; set; }
@@ -42,10 +40,6 @@ namespace Data.Models
 
             entity
                 .Property(x => x.TutorId)
-                .IsRequired();
-
-            entity
-                .Property(x => x.StudentId)
                 .IsRequired();
 
             entity
