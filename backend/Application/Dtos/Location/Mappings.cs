@@ -1,8 +1,7 @@
-﻿using Application.Dtos.Location;
-using Data.Models;
+﻿using Data.Models;
 using Riok.Mapperly.Abstractions;
 
-namespace Application.Mappings
+namespace Application.Dtos.Location
 {
     [Mapper]
     internal static partial class Mappings

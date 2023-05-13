@@ -1,4 +1,4 @@
-﻿namespace Application.Dtos.StudentsReview
+﻿namespace Application.Dtos.Review
 {
     public class RequestAsStudentDto { }
 }

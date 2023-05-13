@@ -2,18 +2,17 @@
 using Application.Interfaces;
 using Data.Enums;
 using Data.Interfaces;
-using Data.Models;
 using FluentValidation;
 
 namespace Application.Validators
 {
     internal class CreateTutoringPostDtoValidator : AbstractValidator<RequestDto>
     {
-        private readonly IRepository<TutoringPost, long> _tutoringPostRepository;
+        private readonly IRepository<Data.Models.TutoringPost, long> _tutoringPostRepository;
         private readonly IUserService _userService;
 
         public CreateTutoringPostDtoValidator(
-            IRepository<TutoringPost, long> tutoringPostRepository,
+            IRepository<Data.Models.TutoringPost, long> tutoringPostRepository,
             IUserService userService)
         {
             _tutoringPostRepository = tutoringPostRepository;

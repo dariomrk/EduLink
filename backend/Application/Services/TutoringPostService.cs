@@ -7,7 +7,7 @@ namespace Application.Services
 {
     public class TutoringPostService : ITutoringPostService
     {
-        public Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(CreateTutoringPostDto post)
+        public Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(RequestDto post)
         {
             throw new NotImplementedException();
         }

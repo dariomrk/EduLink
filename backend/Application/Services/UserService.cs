@@ -1,10 +1,10 @@
 ﻿using Application.Dtos.Common;
+using Application.Dtos.Location;
 using Application.Dtos.User;
 using Application.Enums;
 using Application.Exceptions;
 using Application.Extensions;
 using Application.Interfaces;
-using Application.Mappings;
 using Data.Interfaces;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;

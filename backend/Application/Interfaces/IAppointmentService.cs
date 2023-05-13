@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.Appointment;
 using Application.Dtos.Common;
+using Application.Dtos.Review;
 using Application.Enums;
 
 namespace Application.Interfaces
@@ -30,10 +31,10 @@ namespace Application.Interfaces
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            Dtos.StudentsReview.RequestAsStudentDto reviewDto);
+            RequestAsStudentDto reviewDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
-            Dtos.StudentsReview.RequestAsTutorDto reviewDto);
+            RequestAsTutorDto reviewDto);
     }
 }

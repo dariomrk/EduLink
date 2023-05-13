@@ -2,7 +2,6 @@
 using Application.Exceptions;
 using Application.Extensions;
 using Application.Interfaces;
-using Application.Mappings;
 using Data.Interfaces;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
