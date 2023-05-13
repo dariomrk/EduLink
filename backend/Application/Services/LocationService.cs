@@ -29,7 +29,7 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public async Task<CountryDto> FindCountry(
+        public async Task<ResponseCountryDto> FindCountry(
             string countryName,
             CancellationToken cancellationToken)
         {
@@ -40,7 +40,7 @@ namespace Application.Services
             return country?.ToDto() ?? throw new NotFoundException<Country>(countryName);
         }
 
-        public async Task<RegionDto> FindRegion(
+        public async Task<ResponseRegionDto> FindRegion(
             string countryName,
             string regionName,
             CancellationToken cancellationToken)
@@ -54,7 +54,7 @@ namespace Application.Services
             return region?.ToDto() ?? throw new NotFoundException<Region>(regionName);
         }
 
-        public async Task<CityDto> FindCity(
+        public async Task<ResponseCityDto> FindCity(
             string countryName,
             string regionName,
             string cityName,

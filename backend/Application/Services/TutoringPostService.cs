@@ -7,22 +7,22 @@ namespace Application.Services
 {
     public class TutoringPostService : ITutoringPostService
     {
-        public Task<(ServiceActionResult Result, TutoringPostDto? Created)> CreateTutoringPostAsync(CreateTutoringPostDto post)
+        public Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(CreateTutoringPostDto post)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TutoringPostDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
+        public Task<ResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TutoringPostDto> GetTutoringPostsAsync(
+        public Task<ResponseDto> GetTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();

@@ -2,12 +2,12 @@
 
 namespace Application.Dtos.TutoringPost
 {
-    public class CreateTutoringPostDto
+    public class RequestDto
     {
         public string TutorUsername { get; set; } = null!;
         public decimal PricePerHour { get; set; }
         public string Currency { get; set; } = null!;
-        public ICollection<AvailableTimeSpanDto> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpanDto>();
+        public ICollection<ResponseAvailableTimeSpanDto> AvailableTimeSpans { get; set; } = new List<ResponseAvailableTimeSpanDto>();
         public ICollection<string> Fields { get; set; } = new List<string>();
         public string SubjectName { get; set; } = null!;
     }

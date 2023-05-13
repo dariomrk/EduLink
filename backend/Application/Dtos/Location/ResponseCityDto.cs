@@ -1,6 +1,6 @@
 ﻿namespace Application.Dtos.Location
 {
-    public class RegionDto
+    public class ResponseCityDto
     {
         public int Id { get; set; }
     }

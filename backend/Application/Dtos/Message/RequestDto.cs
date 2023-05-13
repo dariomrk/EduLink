@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.Message
 {
-    public class CreateDto { }
+    public class RequestDto { }
 }

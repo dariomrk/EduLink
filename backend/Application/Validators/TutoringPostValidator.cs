@@ -5,9 +5,9 @@ using Data.Interfaces;
 using Data.Models;
 using FluentValidation;
 
-namespace Application.Validators.TutoringPostValidators
+namespace Application.Validators
 {
-    internal class CreateTutoringPostDtoValidator : AbstractValidator<CreateTutoringPostDto>
+    internal class CreateTutoringPostDtoValidator : AbstractValidator<RequestDto>
     {
         private readonly IRepository<TutoringPost, long> _tutoringPostRepository;
         private readonly IUserService _userService;

@@ -1,4 +1,4 @@
 ﻿namespace Application.Dtos.Indentity
 {
-    public class TokenDto { }
+    public class ResponseTokenDto { }
 }

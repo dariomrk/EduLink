@@ -14,7 +14,7 @@ namespace Application.Extensions
             user.TutoringAppointments
                 .Any(appointment => appointment.Tutor.Username == tutorUsername.ToNormalizedLower());
 
-        internal static IQueryable<User> SortTutors(this IQueryable<User> tutors, SortDto sortDto)
+        internal static IQueryable<User> SortTutors(this IQueryable<User> tutors, RequestSortDto sortDto)
         {
             return sortDto.SortByProperty switch
             {

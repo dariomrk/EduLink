@@ -10,21 +10,21 @@ namespace Application.Interfaces
             string countryName,
             string regionName,
             string cityName,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortDto = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortDto = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetTutorsInRegionAsync(
             string countryName,
             string regionName,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<UserDto> GetTutorAsync(

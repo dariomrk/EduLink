@@ -5,8 +5,8 @@ using Riok.Mapperly.Abstractions;
 namespace Application.Mappings
 {
     [Mapper]
-    internal static partial class TutoringPostMappings
+    internal static partial class Mappings
     {
-        internal static partial TutoringPostDto ToDto(this TutoringPost tutoringPost);
+        internal static partial ResponseDto ToDto(this TutoringPost tutoringPost);
     }
 }

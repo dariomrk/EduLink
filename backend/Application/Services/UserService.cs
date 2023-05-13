@@ -83,8 +83,8 @@ namespace Application.Services
 
         public async Task<ICollection<UserDto>> GetStudentsAsync(
             string tutorUsername,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var tutor = await GetTutorAsync(tutorUsername, cancellationToken);
@@ -138,8 +138,8 @@ namespace Application.Services
             string countryName,
             string regionName,
             string cityName,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var city = await _locationService.FindCity(countryName, regionName, cityName);
@@ -147,8 +147,8 @@ namespace Application.Services
             var tutors = await _userRepository.Query()
                 .Where(user => user.IsTutor())
                 .Where(tutor => tutor.CityId == city.Id)
-                .SortTutors(sortOptions ?? new SortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new PaginationDto { Skip = 0, Take = 25 })
+                .SortTutors(sortOptions ?? new RequestSortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new RequestPaginationDto { Skip = 0, Take = 25 })
                 .ProjectTutorToDto()
                 .ToListAsync(cancellationToken);
 
@@ -158,8 +158,8 @@ namespace Application.Services
         public async Task<ICollection<UserDto>> GetTutorsInRegionAsync(
             string countryName,
             string regionName,
-            PaginationDto? paginationOptions = null,
-            SortDto? sortOptions = null,
+            RequestPaginationDto? paginationOptions = null,
+            RequestSortDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var region = await _locationService.FindRegion(countryName, regionName);
@@ -167,8 +167,8 @@ namespace Application.Services
             var tutors = await _userRepository.Query()
                 .Where(user => user.IsTutor())
                 .Where(tutor => tutor.City.RegionId == region.Id)
-                .SortTutors(sortOptions ?? new SortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new PaginationDto { Skip = 0, Take = 25 })
+                .SortTutors(sortOptions ?? new RequestSortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new RequestPaginationDto { Skip = 0, Take = 25 })
                 .ProjectTutorToDto()
                 .ToListAsync(cancellationToken);
 

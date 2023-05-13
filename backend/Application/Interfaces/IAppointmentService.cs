@@ -6,30 +6,34 @@ namespace Application.Interfaces
 {
     public interface IAppointmentService
     {
-        public Task<ICollection<AppointmentDto>> GetAppointmentsAsync(
+        public Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
             string myUsername,
-            PaginationDto? paginationOptions = null,
+            RequestPaginationDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ICollection<AppointmentDto>> GetFutureAppointmentsAsync(
+        public Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
             string myUsername,
-            PaginationDto? paginationOptions = null,
+            RequestPaginationDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<AppointmentDto> GetAppointmentAsync(
+        public Task<ResponseAppointmentDto> GetAppointmentAsync(
             string myUsername,
             long id,
             CancellationToken cancellationToken = default);
 
-        public Task<(ServiceActionResult Result, AppointmentDto? Created)> CreateAppointmentAsync(
-            CreateDto createDto);
+        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(
+            RequestCreateDto createDto);
 
-        public Task<(ServiceActionResult Result, AppointmentDto? Updated)> CancelAppointmentAsync(
+        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
             string myUsername,
             long appointmentId);
 
-        public Task<(ServiceActionResult Result, AppointmentDto? Updated)> ReviewAppointmentAsync(
+        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
-            ReviewDto reviewDto);
+            Dtos.StudentsReview.RequestAsStudentDto reviewDto);
+
+        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
+            long appointmentId,
+            Dtos.StudentsReview.RequestAsTutorDto reviewDto);
     }
 }
