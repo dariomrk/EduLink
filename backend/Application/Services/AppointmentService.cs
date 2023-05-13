@@ -6,6 +6,7 @@ using Application.Extensions;
 using Application.Interfaces;
 using Data.Interfaces;
 using Data.Models;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services
@@ -13,10 +14,14 @@ namespace Application.Services
     public class AppointmentService : IAppointmentService
     {
         private readonly IRepository<Appointment, long> _appointmentRepository;
+        private readonly IValidator<CreateAppointmentRequestDto> _createAppointmentRequestValidator;
 
-        public AppointmentService(IRepository<Appointment, long> appointmentRepository)
+        public AppointmentService(
+            IRepository<Appointment, long> appointmentRepository,
+            IValidator<CreateAppointmentRequestDto> createAppointmentRequestValidator)
         {
             _appointmentRepository = appointmentRepository;
+            _createAppointmentRequestValidator = createAppointmentRequestValidator;
         }
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
@@ -29,8 +34,16 @@ namespace Application.Services
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(CreateAppointmentRequestDto createDto)
         {
-            // TODO validate that the appointment is not already taken
-            throw new NotImplementedException();
+            await _createAppointmentRequestValidator.ValidateAndThrowAsync(createDto);
+
+            var mapped = createDto.ToModel();
+
+            var (result, created) = await _appointmentRepository.CreateAsync(mapped);
+
+            if (result is not Data.Enums.RepositoryActionResult.Success)
+                return (ServiceActionResult.Failed, null);
+
+            return (ServiceActionResult.Created, created!.ToDto());
         }
 
         public async Task<ResponseAppointmentDto> GetAppointmentAsync(

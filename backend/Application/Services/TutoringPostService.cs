@@ -40,11 +40,11 @@ namespace Application.Services
 
             var mapped = creationRequestDto.ToModel();
 
-            var (SubjectKey, FieldKeys) = await _fieldService.GetSubjectAndFieldKeys(
+            var (subjectKey, fieldKeys) = await _fieldService.GetSubjectAndFieldKeys(
                 creationRequestDto.SubjectName,
                 creationRequestDto.Fields);
 
-            FieldKeys
+            fieldKeys
                 .ForEach(key => mapped.Fields
                     .Add(new Data.Models.TutoringPostField
                     {
@@ -55,11 +55,12 @@ namespace Application.Services
             mapped.TutorId = tutor.Id;
             mapped.IsPaidAd = false; // TODO implement stripe integration
 
-            var creationResult = await _tutoringPostRepository.CreateAsync(mapped);
+            var (result, created) = await _tutoringPostRepository.CreateAsync(mapped);
 
-            if (creationResult.Result is not Data.Enums.RepositoryActionResult.Success)
+            if (result is not Data.Enums.RepositoryActionResult.Success)
                 return (ServiceActionResult.Failed, null);
-            return (ServiceActionResult.Created, creationResult.Created!.ToDto());
+
+            return (ServiceActionResult.Created, created!.ToDto());
         }
 
         public async Task<TutoringPostResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
