@@ -14,7 +14,7 @@ namespace Application.Extensions
 
                 Enums.SortByProperty.Name => throw new NotSupportedRequestException<Appointment>(nameof(SortAppointments), nameof(Enums.SortByProperty.Name)),
 
-                Enums.SortByProperty.Distance => throw new NotImplementedException(), // TODO implement sorting by distance from the user
+                Enums.SortByProperty.Distance => throw new NotImplementedException(), // TODO: Implement sorting by distance from the user in SortAppointments
 
                 Enums.SortByProperty.Date => appointments.OrderBy(appointment => appointment.AppointmentTimeFrame.Start),
 

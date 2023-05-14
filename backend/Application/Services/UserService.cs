@@ -90,7 +90,7 @@ namespace Application.Services
             var tutor = await GetTutorAsync(tutorUsername, cancellationToken);
 
             return await _userRepository.Query()
-                .Where(user => user.IsStudentOfTutor(tutorUsername)) // TODO implement missing sorting and pagination
+                .Where(user => user.IsStudentOfTutor(tutorUsername)) // TODO: Implement missing sorting and pagination in GetStudentsAsync
                 .ProjectToDto()
                 .ToListAsync(cancellationToken);
         }
