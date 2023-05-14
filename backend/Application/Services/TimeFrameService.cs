@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.TimeFrame;
+using Application.Exceptions;
 using Application.Interfaces;
 using Data.Interfaces;
 using Data.Models;
@@ -46,9 +47,13 @@ namespace Application.Services
             long timeFrameId,
             CancellationToken cancellationToken = default)
         {
-            // TODO check whether the timeframe is in the future
-            // TODO check whether the timeframe is taken
-            throw new NotImplementedException();
+            var timeFrame = await _timeFrameRepository.FindByIdAsync(timeFrameId, cancellationToken);
+
+            if (timeFrame is null)
+                throw new NotFoundException<TimeFrame>(timeFrameId);
+
+            return timeFrame.TakenByStudentId.HasValue
+                && timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset);
         }
     }
 }
