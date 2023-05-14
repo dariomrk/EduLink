@@ -7,14 +7,14 @@ namespace Application.Interfaces
     public interface IMessageService
     {
         public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
-            string myUsername,
-            string sendersUsername,
+            string recipientUsername,
+            string senderUsername,
             PaginationRequestDto? paginationDto = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
-            string myUsername,
+            string username,
             PaginationRequestDto? paginationDto = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);

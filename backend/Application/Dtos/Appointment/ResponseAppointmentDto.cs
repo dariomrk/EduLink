@@ -6,5 +6,6 @@
         public long TutorId { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public long AppointmentTimeFrameId { get; set; }
+        public bool IsCancelled { get; set; }
     }
 }

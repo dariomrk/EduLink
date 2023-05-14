@@ -2,6 +2,7 @@
 using Application.Dtos.Common;
 using Application.Dtos.Review;
 using Application.Enums;
+using Application.Exceptions;
 using Application.Extensions;
 using Application.Interfaces;
 using Data.Interfaces;
@@ -25,11 +26,28 @@ namespace Application.Services
         }
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
-            string myUsername,
+            string username,
             long appointmentId)
         {
-            // TODO check whether the appointment is cancelable
-            throw new NotImplementedException();
+            await GetAppointmentAsync(username, appointmentId);
+
+            var isAssignedToAppointment = await IsAssignedToAppointmentAsync(username, appointmentId);
+
+            var isCancelable = await IsAppointmentCancelableAsync(appointmentId);
+
+            if (isCancelable is false)
+                throw new InvalidRequestException<Appointment>(nameof(CancelAppointmentAsync), appointmentId);
+
+            var appointment = await _appointmentRepository.FindByIdAsync(appointmentId);
+
+            appointment!.IsCancelled = true;
+
+            var (result, updated) = await _appointmentRepository.UpdateAsync(appointment);
+
+            if (result is not Data.Enums.RepositoryActionResult.Success)
+                return (ServiceActionResult.Failed, null);
+
+            return (ServiceActionResult.Updated, updated!.ToDto());
         }
 
         public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(CreateAppointmentRequestDto createDto)
@@ -47,15 +65,22 @@ namespace Application.Services
         }
 
         public async Task<ResponseAppointmentDto> GetAppointmentAsync(
-            string myUsername,
+            string username,
             long id,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var appointment = await _appointmentRepository.Query()
+                .FirstOrDefaultAsync(appointment => appointment.Id == id &&
+                    (appointment.Tutor.Username == username.ToNormalizedLower()
+                    || appointment.AppointmentTimeFrame.TakenByStudentId.HasValue
+                        && appointment.AppointmentTimeFrame.TakenByStudent!.Username == username.ToNormalizedLower()),
+                    cancellationToken);
+
+            return appointment?.ToDto() ?? throw new NotFoundException<Appointment>(id);
         }
 
         public async Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
-            string myUsername,
+            string username,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
         {
@@ -88,7 +113,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<bool> IsPartOfPost(
+        public async Task<bool> IsPartOfPostAsync(
             long appointmentId,
             long postId,
             CancellationToken cancellationToken = default)
@@ -96,7 +121,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<bool> StudentIsAssignedToAppointment(
+        public async Task<bool> IsStudentAssignedToAppointmentAsync(
             string username,
             long appointmentId,
             CancellationToken cancellationToken = default)
@@ -106,6 +131,40 @@ namespace Application.Services
                 .Where(appointment => appointment.AppointmentTimeFrame.TakenByStudent != null)
                 .AnyAsync(appointment =>
                     appointment.AppointmentTimeFrame.TakenByStudent!.Username == username.ToNormalizedLower(),
+                    cancellationToken);
+        }
+
+        public async Task<bool> IsTutorAssignedToAppointmentAsync(
+            string username,
+            long appointmentId,
+            CancellationToken cancellationToken = default)
+        {
+            return await _appointmentRepository.Query()
+                .AnyAsync(appointment =>
+                    appointment.Id == appointmentId
+                        && appointment.Tutor.Username == username.ToNormalizedLower(),
+                    cancellationToken);
+        }
+
+        public async Task<bool> IsAssignedToAppointmentAsync(
+            string username,
+            long appointmentId,
+            CancellationToken cancellationToken = default)
+        {
+            var toStudent = await IsStudentAssignedToAppointmentAsync(username, appointmentId, cancellationToken);
+            var toTutor = await IsTutorAssignedToAppointmentAsync(username, appointmentId, cancellationToken);
+
+            return toStudent || toTutor;
+        }
+
+        public async Task<bool> IsAppointmentCancelableAsync(
+            long id,
+            CancellationToken cancellationToken = default)
+        {
+            return await _appointmentRepository.Query()
+                .AnyAsync(appointment => appointment.Id == id
+                    && appointment.AppointmentTimeFrame.Start
+                        > DateTime.Now.Add(appointment.AppointmentTimeFrame.Start.Offset),
                     cancellationToken);
         }
     }

@@ -8,17 +8,17 @@ namespace Application.Interfaces
     public interface IAppointmentService
     {
         public Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
-            string myUsername,
+            string username,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
-            string myUsername,
+            string username,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ResponseAppointmentDto> GetAppointmentAsync(
-            string myUsername,
+            string username,
             long id,
             CancellationToken cancellationToken = default);
 
@@ -26,7 +26,7 @@ namespace Application.Interfaces
             CreateAppointmentRequestDto createDto);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
-            string myUsername,
+            string username,
             long appointmentId);
 
         public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
@@ -37,8 +37,11 @@ namespace Application.Interfaces
             long appointmentId,
             CreateReviewAsTutorRequestDto reviewDto);
 
-        internal Task<bool> IsPartOfPost(long appointmentId, long postId, CancellationToken cancellationToken = default);
+        internal Task<bool> IsPartOfPostAsync(long appointmentId, long postId, CancellationToken cancellationToken = default);
 
-        internal Task<bool> StudentIsAssignedToAppointment(string username, long appointmentId, CancellationToken cancellationToken = default);
+        internal Task<bool> IsStudentAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
+        internal Task<bool> IsTutorAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
+        internal Task<bool> IsAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
+        internal Task<bool> IsAppointmentCancelableAsync(long id, CancellationToken cancellationToken = default);
     }
 }

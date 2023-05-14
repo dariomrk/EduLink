@@ -35,7 +35,7 @@ namespace Application.Validators
             RuleFor(appointment => appointment.AppointmentTimeFrameId)
                 .NotEmpty()
                 .MustAsync(async (appointment, appointmentId, cancellationToken) =>
-                    await _appointmentService.IsPartOfPost(appointmentId, appointment.PostId, cancellationToken))
+                    await _appointmentService.IsPartOfPostAsync(appointmentId, appointment.PostId, cancellationToken))
                 .WithMessage((instance, appointmentId) =>
                     $"Appointment with id `{appointmentId}` is " +
                     $"not a part of the post with id `{instance.PostId}.`")
