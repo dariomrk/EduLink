@@ -40,10 +40,10 @@ namespace Application.Interfaces
             CreateReviewAsTutorRequestDto reviewDto);
 
         internal Task<bool> IsPartOfPostAsync(long appointmentId, long postId, CancellationToken cancellationToken = default);
-
         internal Task<bool> IsStudentAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
         internal Task<bool> IsTutorAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
         internal Task<bool> IsAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
         internal Task<bool> IsAppointmentCancelableAsync(long id, CancellationToken cancellationToken = default);
+        internal Task<bool> HasAppointmentPassedAsync(long id, CancellationToken cancellationToken = default);
     }
 }

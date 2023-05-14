@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Models
 {
