@@ -7,5 +7,6 @@ namespace Application.Dtos.Appointment
     {
         internal static partial Data.Models.Appointment ToModel(this CreateAppointmentRequestDto dto);
         internal static partial ResponseAppointmentDto ToDto(this Data.Models.Appointment model);
+        internal static partial IQueryable<ResponseAppointmentDto> ProjectToDto(this IQueryable<Data.Models.Appointment> appointments);
     }
 }

@@ -81,14 +81,25 @@ namespace Application.Services
 
         public async Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
             string username,
+            SortRequestDto? sortOptions = null,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _appointmentRepository.Query()
+                .Where(appointment =>
+                    appointment.Tutor.Username == username.ToNormalizedLower()
+                    || appointment.AppointmentTimeFrame.TakenByStudentId.HasValue
+                        && appointment.AppointmentTimeFrame.TakenByStudent!.Username == username.ToNormalizedLower())
+                .OrderBy(appointment => appointment.AppointmentTimeFrame.Start)
+                .SortAppointments(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Date, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
             string myUsername,
+            SortRequestDto? sortRequest = null,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default)
         {
@@ -128,9 +139,8 @@ namespace Application.Services
         {
             return await _appointmentRepository.Query()
                 .Where(appointment => appointment.Id == appointmentId)
-                .Where(appointment => appointment.AppointmentTimeFrame.TakenByStudent != null)
-                .AnyAsync(appointment =>
-                    appointment.AppointmentTimeFrame.TakenByStudent!.Username == username.ToNormalizedLower(),
+                .AnyAsync(appointment => appointment.AppointmentTimeFrame.TakenByStudentId.HasValue
+                    && appointment.AppointmentTimeFrame.TakenByStudent!.Username == username.ToNormalizedLower(),
                     cancellationToken);
         }
 
@@ -163,7 +173,7 @@ namespace Application.Services
         {
             return await _appointmentRepository.Query()
                 .AnyAsync(appointment => appointment.Id == id
-                    && appointment.AppointmentTimeFrame.Start
+                    && appointment.AppointmentTimeFrame.Start.AddHours(-24) // TODO add configuration field in appsettings.json
                         > DateTime.Now.Add(appointment.AppointmentTimeFrame.Start.Offset),
                     cancellationToken);
         }

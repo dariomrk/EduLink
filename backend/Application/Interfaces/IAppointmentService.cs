@@ -9,11 +9,13 @@ namespace Application.Interfaces
     {
         public Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
             string username,
+            SortRequestDto? sortRequest = null,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
             string username,
+            SortRequestDto? sortRequest = null,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
