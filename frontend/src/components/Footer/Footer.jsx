@@ -4,11 +4,12 @@ import { ReactComponent as Facebook } from '../../img/Facebook.svg';
 import { ReactComponent as Instagram } from '../../img/Instagram.svg';
 import { ReactComponent as Youtube } from '../../img/Youtube.svg';
 import { ReactComponent as LinkedIn } from '../../img/Linkedin.svg';
+import { Color } from '../../common';
 
 export const Footer = () => {
   return (
     <Flex
-      bg="#9795B5"
+      bg={Color.Primary}
       gap="md"
       justify="center"
       align="center"
