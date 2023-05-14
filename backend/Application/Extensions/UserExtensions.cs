@@ -27,7 +27,7 @@ namespace Application.Extensions
 
                 SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
 
-                SortByProperty.Distance => throw new NotImplementedException(), // TODO implement sorting by distance from the user
+                SortByProperty.Distance => throw new NotImplementedException(), // TODO: Implement sorting by distance from the user in SortTutors
 
                 SortByProperty.Date => throw new InvalidRequestException<User>(nameof(SortByProperty), nameof(SortByProperty.Date)),
 

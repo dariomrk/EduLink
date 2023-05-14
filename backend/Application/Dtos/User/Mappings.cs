@@ -25,7 +25,7 @@ namespace Application.Dtos.User
                             .Any()
                                 ? tutor.TutoringAppointments.Average(appointment => appointment.StudentsReview!.Stars)
                                 : null,
-                    // TODO fix query
+                    // TODO: Fix total tutoring hours calculation
                     //TotalTutoringHours = tutor.TutoringAppointments
                     //        .Any(appointment =>
                     //            appointment.StartAt.AddMinutes(appointment.DurationMinutes)

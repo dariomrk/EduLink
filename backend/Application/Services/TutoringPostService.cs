@@ -53,7 +53,7 @@ namespace Application.Services
 
             var tutor = await _userService.GetTutorAsync(creationRequestDto.TutorUsername);
             mapped.TutorId = tutor.Id;
-            mapped.IsPaidAd = false; // TODO implement stripe integration
+            mapped.IsPaidAd = false; // TODO: Implement stripe integration
 
             var (result, created) = await _tutoringPostRepository.CreateAsync(mapped);
 

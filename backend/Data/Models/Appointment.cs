@@ -1,5 +1,4 @@
-﻿using Data.Constants;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Data.Models
 {
@@ -11,7 +10,7 @@ namespace Data.Models
         public User Tutor { get; set; } = null!;
         public DateTimeOffset CreatedAt { get; set; }
         public bool IsCancelled { get; set; }
-        public long? AudioRecordingId { get; set; } // TODO future feature
+        public long? AudioRecordingId { get; set; } // TODO: Implement audio recording
         public File? AudioRecording { get; set; }
         public long? StudentsReviewId { get; set; }
         public StudentsReview? StudentsReview { get; set; }
