@@ -23,7 +23,7 @@ namespace Api
         public static WebApplicationBuilder ConfigureHost(this WebApplicationBuilder builder)
         {
             var host = builder.Host;
-            // TODO configure host properties
+            // TODO: Configure host properties
 
             return builder;
         }
@@ -34,7 +34,7 @@ namespace Api
         public static WebApplicationBuilder RegisterApplicationServices(this WebApplicationBuilder builder)
         {
             var services = builder.Services;
-            // TODO configure services
+            // TODO: Configure services
 
             #region Controller registration
             services.AddControllers()
@@ -46,11 +46,11 @@ namespace Api
             #endregion
 
             #region Service registration
-            // TODO services go here
+            // services go here
             #endregion
 
             #region Repository registration
-            // TODO repositories go here
+            // repositories go here
             #endregion
 
             var connectionString = ConfigurationHelper
