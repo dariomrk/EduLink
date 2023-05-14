@@ -6,32 +6,32 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
-        public Task<ICollection<UserDto>> GetTutorsInCityAsync(
+        public Task<ICollection<UserResponseDto>> GetTutorsInCityAsync(
             string countryName,
             string regionName,
             string cityName,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortDto = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortDto = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ICollection<UserDto>> GetTutorsInRegionAsync(
+        public Task<ICollection<UserResponseDto>> GetTutorsInRegionAsync(
             string countryName,
             string regionName,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortOptions = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ICollection<UserDto>> GetStudentsAsync(
+        public Task<ICollection<UserResponseDto>> GetStudentsAsync(
             string tutorUsername,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortOptions = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<UserDto> GetTutorAsync(
+        public Task<UserResponseDto> GetTutorAsync(
             string tutorUsername,
             CancellationToken cancellationToken = default);
 
-        public Task<UserDto> GetStudentAsync(
+        public Task<UserResponseDto> GetStudentAsync(
             string tutorUsername,
             long studentId,
             CancellationToken cancellationToken = default);

@@ -6,27 +6,31 @@ namespace Application.Interfaces
 {
     public interface ITutoringPostService
     {
-        public Task<ICollection<ResponseDto>> GetTutoringPostsAsync(
+        public Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortOptions = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ResponseDto> GetTutoringPostAsync(
+        public Task<TutoringPostResponseDto> GetTutoringPostAsync(
             long id,
             CancellationToken cancellationToken = default);
 
-        public Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(
-           RequestDto post);
+        public Task<(ServiceActionResult Result, TutoringPostResponseDto? Created)> CreateTutoringPostAsync(
+           TutoringPostRequestDto post);
 
-        public Task<ICollection<ResponseDto>> GetAvailableTutoringPostsAsync(
+        public Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortOptions = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
+            CancellationToken cancellationToken = default);
+
+        internal Task<bool> TutoringPostExistsAsync(
+            long tutoringPostId,
             CancellationToken cancellationToken = default);
     }
 }

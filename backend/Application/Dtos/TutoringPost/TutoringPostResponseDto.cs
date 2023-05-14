@@ -1,13 +1,13 @@
-﻿using Application.Dtos.AvailableTimeSpan;
+﻿using Application.Dtos.TimeFrame;
 
 namespace Application.Dtos.TutoringPost
 {
-    public class RequestDto
+    public class TutoringPostResponseDto
     {
         public string TutorUsername { get; set; } = null!;
         public decimal PricePerHour { get; set; }
         public string Currency { get; set; } = null!;
-        public ICollection<AvailableTimeSpan.RequestDto> AvailableTimeSpans { get; set; } = new List<AvailableTimeSpan.RequestDto>();
+        public ICollection<TimeFrameResponseDto> AvailableTimeFrames { get; set; } = new List<TimeFrameResponseDto>();
         public string SubjectName { get; set; } = null!;
         public ICollection<string> Fields { get; set; } = new List<string>();
     }

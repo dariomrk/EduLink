@@ -2,7 +2,7 @@
 
 namespace Data.Models
 {
-    public class AvailableTimeSpan : BaseModel
+    public class TimeFrame : BaseModel
     {
         public long TutoringPostId { get; set; }
         public TutoringPost TutoringPost { get; set; } = null!;
@@ -14,16 +14,16 @@ namespace Data.Models
 
     public static partial class ModelConfigurations
     {
-        public static ModelBuilder ConfigureAvailableTimeSpan(this ModelBuilder modelBuilder)
+        public static ModelBuilder ConfigureAvailableTimeFrame(this ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<AvailableTimeSpan>();
+            var entity = modelBuilder.Entity<TimeFrame>();
 
             entity
-                .ToTable(nameof(AvailableTimeSpan), table =>
+                .ToTable(nameof(TimeFrame), table =>
                 {
                     table.HasCheckConstraint(
-                        $"CK_\"{nameof(AvailableTimeSpan)}\"_\"{nameof(AvailableTimeSpan.Start)}\"",
-                        $"\"{nameof(AvailableTimeSpan.Start)}\" < \"{nameof(AvailableTimeSpan.End)}\"");
+                        $"CK_\"{nameof(TimeFrame)}\"_\"{nameof(TimeFrame.Start)}\"",
+                        $"\"{nameof(TimeFrame.Start)}\" < \"{nameof(TimeFrame.End)}\"");
                 });
 
             entity

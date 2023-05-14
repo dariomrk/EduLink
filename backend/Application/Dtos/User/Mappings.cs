@@ -5,12 +5,12 @@ namespace Application.Dtos.User
     [Mapper]
     internal static partial class UserMappings
     {
-        internal static partial UserDto ToDto(this Data.Models.User user);
+        internal static partial UserResponseDto ToDto(this Data.Models.User user);
 
-        internal static partial IQueryable<UserDto> ProjectToDto(this IQueryable<Data.Models.User> users);
+        internal static partial IQueryable<UserResponseDto> ProjectToDto(this IQueryable<Data.Models.User> users);
 
-        internal static IQueryable<UserDto> ProjectTutorToDto(this IQueryable<Data.Models.User> tutors) =>
-            tutors.Select(tutor => new UserDto
+        internal static IQueryable<UserResponseDto> ProjectTutorToDto(this IQueryable<Data.Models.User> tutors) =>
+            tutors.Select(tutor => new UserResponseDto
             {
                 Id = tutor.Id,
                 Username = tutor.Username,
@@ -18,7 +18,7 @@ namespace Application.Dtos.User
                 LastName = tutor.LastName,
                 About = tutor.About,
                 CityName = tutor.City.Name,
-                TutorInfo = new TutorInfoDto
+                TutorInfo = new TutorInfoResponseDto
                 {
                     AverageRating = tutor.TutoringAppointments
                             .Where(appointment => appointment.StudentsReview != null)

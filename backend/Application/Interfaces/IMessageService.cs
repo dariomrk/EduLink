@@ -6,20 +6,20 @@ namespace Application.Interfaces
 {
     public interface IMessageService
     {
-        public Task<ICollection<ResponseDto>> GetMessagesAsync(
-            string myUsername,
-            string sendersUsername,
-            RequestPaginationDto? paginationDto = null,
-            RequestSortDto? sortOptions = null,
+        public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
+            string recipientUsername,
+            string senderUsername,
+            PaginationRequestDto? paginationDto = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ICollection<ResponseDto>> GetMessagesAsync(
-            string myUsername,
-            RequestPaginationDto? paginationDto = null,
-            RequestSortDto? sortOptions = null,
+        public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
+            string username,
+            PaginationRequestDto? paginationDto = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<(ServiceActionResult Result, ResponseDto? Created)> SendMessage(
-            RequestDto message);
+        public Task<(ServiceActionResult Result, MessageResponseDto? Created)> SendMessage(
+            MessageRequestDto message);
     }
 }

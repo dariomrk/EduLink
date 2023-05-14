@@ -6,8 +6,8 @@ namespace Application.Dtos.Location
     [Mapper]
     internal static partial class Mappings
     {
-        internal static partial ResponseCountryDto ToDto(this Country country);
-        internal static partial ResponseRegionDto ToDto(this Region region);
-        internal static partial ResponseCityDto ToDto(this City city);
+        internal static partial CountryResponseDto ToDto(this Country country);
+        internal static partial RegionResponseDto ToDto(this Region region);
+        internal static partial CityResponseDto ToDto(this City city);
     }
 }

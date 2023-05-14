@@ -5,7 +5,7 @@ namespace Application.Extensions
 {
     internal static class CollectionExtensions
     {
-        internal static IQueryable<T> Paginate<T>(this IQueryable<T> collection, RequestPaginationDto paginationDto) =>
+        internal static IQueryable<T> Paginate<T>(this IQueryable<T> collection, PaginationRequestDto paginationDto) =>
             collection.Skip(paginationDto.Skip)
                 .Take(paginationDto.Take);
 

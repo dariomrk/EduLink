@@ -14,14 +14,14 @@ namespace Application.Services
 {
     public class TutoringPostService : ITutoringPostService
     {
-        private readonly IValidator<RequestDto> _tutoringPostValidator;
+        private readonly IValidator<TutoringPostRequestDto> _tutoringPostValidator;
         private readonly IRepository<Data.Models.TutoringPost, long> _tutoringPostRepository;
         private readonly IFieldService _fieldService;
         private readonly IUserService _userService;
         private readonly ILogger<TutoringPostService> _logger;
 
         public TutoringPostService(
-            IValidator<RequestDto> tutoringPostValidator,
+            IValidator<TutoringPostRequestDto> tutoringPostValidator,
             IRepository<Data.Models.TutoringPost, long> tutoringPostRepository,
             IFieldService fieldService,
             IUserService userService,
@@ -34,17 +34,17 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public async Task<(ServiceActionResult Result, ResponseDto? Created)> CreateTutoringPostAsync(RequestDto creationRequestDto)
+        public async Task<(ServiceActionResult Result, TutoringPostResponseDto? Created)> CreateTutoringPostAsync(TutoringPostRequestDto creationRequestDto)
         {
             await _tutoringPostValidator.ValidateAndThrowAsync(creationRequestDto);
 
             var mapped = creationRequestDto.ToModel();
 
-            var (SubjectKey, FieldKeys) = await _fieldService.GetSubjectAndFieldKeys(
+            var (subjectKey, fieldKeys) = await _fieldService.GetSubjectAndFieldKeys(
                 creationRequestDto.SubjectName,
                 creationRequestDto.Fields);
 
-            FieldKeys
+            fieldKeys
                 .ForEach(key => mapped.Fields
                     .Add(new Data.Models.TutoringPostField
                     {
@@ -55,14 +55,15 @@ namespace Application.Services
             mapped.TutorId = tutor.Id;
             mapped.IsPaidAd = false; // TODO: Implement stripe integration
 
-            var creationResult = await _tutoringPostRepository.CreateAsync(mapped);
+            var (result, created) = await _tutoringPostRepository.CreateAsync(mapped);
 
-            if (creationResult.Result is not Data.Enums.RepositoryActionResult.Success)
+            if (result is not Data.Enums.RepositoryActionResult.Success)
                 return (ServiceActionResult.Failed, null);
-            return (ServiceActionResult.Created, creationResult.Created!.ToDto());
+
+            return (ServiceActionResult.Created, created!.ToDto());
         }
 
-        public async Task<ResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<TutoringPostResponseDto> GetTutoringPostAsync(long id, CancellationToken cancellationToken = default)
         {
             var tutoringPost = await _tutoringPostRepository.Query()
                 .Where(x => x.Id == id)
@@ -72,44 +73,53 @@ namespace Application.Services
             return tutoringPost ?? throw new NotFoundException<Data.Models.TutoringPost>(id);
         }
 
-        public async Task<ICollection<ResponseDto>> GetTutoringPostsAsync(
+        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortOptions = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
-                    .Any(timeSpan => timeSpan.Start > DateTime.UtcNow.Add(timeSpan.Start.Offset)))
-                .SortTutoringPosts(sortOptions ?? new RequestSortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new RequestPaginationDto { Skip = 0, Take = 25 })
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
+                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
                 .ProjectToDto()
                 .ToListAsync(cancellationToken);
 
             return tutoringPosts;
         }
 
-        public async Task<ICollection<ResponseDto>> GetAvailableTutoringPostsAsync(
+        public async Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
             string? countryName = null,
             string? regionName = null,
             string? cityName = null,
-            RequestPaginationDto? paginationOptions = null,
-            RequestSortDto? sortOptions = null,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
-                    .Any(timeSpan => timeSpan.Start > DateTime.UtcNow.Add(timeSpan.Start.Offset)))
-                .Where(tutoringPost => tutoringPost.AvailableTimeSpans
-                    .Any(timeSpan => timeSpan.TakenByStudent == null))
-                .SortTutoringPosts(sortOptions ?? new RequestSortDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new RequestPaginationDto { Skip = 0, Take = 25 })
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.TakenByStudent == null))
+                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
                 .ProjectToDto()
                 .ToListAsync(cancellationToken);
 
             return tutoringPosts;
+        }
+
+        public async Task<bool> TutoringPostExistsAsync(
+            long tutoringPost,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await GetTutoringPostAsync(tutoringPost, cancellationToken);
+
+            return result is not null;
         }
     }
 }

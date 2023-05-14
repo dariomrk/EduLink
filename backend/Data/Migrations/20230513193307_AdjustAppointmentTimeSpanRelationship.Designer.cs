@@ -3,6 +3,7 @@ using System;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(EduLinkDbContext))]
-    partial class EduLinkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513193307_AdjustAppointmentTimeSpanRelationship")]
+    partial class AdjustAppointmentTimeSpanRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +35,7 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppointmentTimeFrameId")
+                    b.Property<long>("AppointmentTimeSpanId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("AudioRecordingId")
@@ -51,6 +54,9 @@ namespace Data.Migrations
                     b.Property<long>("PostId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("StudentsReviewId")
                         .HasColumnType("bigint");
 
@@ -62,12 +68,14 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentTimeFrameId");
+                    b.HasIndex("AppointmentTimeSpanId");
 
                     b.HasIndex("AudioRecordingId")
                         .IsUnique();
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("StudentsReviewId")
                         .IsUnique();
@@ -78,6 +86,39 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Appointment");
+                });
+
+            modelBuilder.Entity("Data.Models.AvailableTimeSpan", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTimeOffset>("End")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset>("Start")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("TakenByStudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TutoringPostId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TakenByStudentId");
+
+                    b.HasIndex("TutoringPostId", "Start", "End")
+                        .IsUnique();
+
+                    b.ToTable("AvailableTimeSpan", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_\"AvailableTimeSpan\"_\"Start\"", "\"Start\" < \"End\"");
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.City", b =>
@@ -339,39 +380,6 @@ namespace Data.Migrations
                     b.ToTable("Subject");
                 });
 
-            modelBuilder.Entity("Data.Models.TimeFrame", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTimeOffset>("End")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("Start")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long?>("TakenByStudentId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TutoringPostId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TakenByStudentId");
-
-                    b.HasIndex("TutoringPostId", "Start", "End")
-                        .IsUnique();
-
-                    b.ToTable("TimeFrame", null, t =>
-                        {
-                            t.HasCheckConstraint("CK_\"TimeFrame\"_\"Start\"", "\"Start\" < \"End\"");
-                        });
-                });
-
             modelBuilder.Entity("Data.Models.TutoringPost", b =>
                 {
                     b.Property<long>("Id")
@@ -554,9 +562,9 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Models.Appointment", b =>
                 {
-                    b.HasOne("Data.Models.TimeFrame", "AppointmentTimeFrame")
+                    b.HasOne("Data.Models.AvailableTimeSpan", "AppointmentTimeSpan")
                         .WithMany()
-                        .HasForeignKey("AppointmentTimeFrameId")
+                        .HasForeignKey("AppointmentTimeSpanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -567,6 +575,12 @@ namespace Data.Migrations
                     b.HasOne("Data.Models.TutoringPost", "Post")
                         .WithMany("Appointments")
                         .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Models.User", "Student")
+                        .WithMany("StudyAppointments")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -584,17 +598,36 @@ namespace Data.Migrations
                         .WithOne("Appointment")
                         .HasForeignKey("Data.Models.Appointment", "TutorsReviewId");
 
-                    b.Navigation("AppointmentTimeFrame");
+                    b.Navigation("AppointmentTimeSpan");
 
                     b.Navigation("AudioRecording");
 
                     b.Navigation("Post");
+
+                    b.Navigation("Student");
 
                     b.Navigation("StudentsReview");
 
                     b.Navigation("Tutor");
 
                     b.Navigation("TutorsReview");
+                });
+
+            modelBuilder.Entity("Data.Models.AvailableTimeSpan", b =>
+                {
+                    b.HasOne("Data.Models.User", "TakenByStudent")
+                        .WithMany()
+                        .HasForeignKey("TakenByStudentId");
+
+                    b.HasOne("Data.Models.TutoringPost", "TutoringPost")
+                        .WithMany("AvailableTimeSpans")
+                        .HasForeignKey("TutoringPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TakenByStudent");
+
+                    b.Navigation("TutoringPost");
                 });
 
             modelBuilder.Entity("Data.Models.City", b =>
@@ -658,23 +691,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("Data.Models.TimeFrame", b =>
-                {
-                    b.HasOne("Data.Models.User", "TakenByStudent")
-                        .WithMany("StudyAppointments")
-                        .HasForeignKey("TakenByStudentId");
-
-                    b.HasOne("Data.Models.TutoringPost", "TutoringPost")
-                        .WithMany("AvailableTimeFrames")
-                        .HasForeignKey("TutoringPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TakenByStudent");
-
-                    b.Navigation("TutoringPost");
                 });
 
             modelBuilder.Entity("Data.Models.TutoringPost", b =>
@@ -779,7 +795,7 @@ namespace Data.Migrations
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("AvailableTimeFrames");
+                    b.Navigation("AvailableTimeSpans");
 
                     b.Navigation("Fields");
                 });
