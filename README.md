@@ -65,4 +65,4 @@ Naming pattern: `[area]/[task-type]/[issue-id]-[task-name]`, e.g. `frontend/feat
 
 ### Frontend
 
-*TODO*
+*TODO: Add frontend setup to README*

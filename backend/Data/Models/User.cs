@@ -5,7 +5,7 @@ namespace Data.Models
 {
     public class User : BaseModel
     {
-        private const int TutoringEligibilityYears = 16; // TODO add configuration field to appsettings.json
+        private const int TutoringEligibilityYears = 16;
 
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;

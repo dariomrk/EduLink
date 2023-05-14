@@ -5,7 +5,7 @@ namespace Data.Models
 {
     public class Appointment : BaseModel
     {
-        private const int IsNotCancelableHoursPrior = 24; // TODO add configuration field to appsettings.json
+        private const int IsNotCancelableHoursPrior = 24;
 
         public long PostId { get; set; }
         public TutoringPost Post { get; set; } = null!;
