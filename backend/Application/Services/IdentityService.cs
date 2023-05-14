@@ -7,12 +7,12 @@ namespace Application.Services
 {
     public class IdentityService : IIdentityService
     {
-        public Task<(IdentityActionResult Result, TokenRequestDto Token)> LoginAsync(LoginRequestDto loginDto)
+        public Task<(IdentityActionResult Result, TokenResponseDto Token)> LoginAsync(LoginRequestDto loginDto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<(ServiceActionResult Result, UserResponseDto? Created, TokenRequestDto? Token)> RegisterAsync(RegisterRequestDto registerDto)
+        public Task<(ServiceActionResult Result, UserResponseDto? Created, TokenResponseDto? Token)> RegisterAsync(RegisterRequestDto registerDto)
         {
             throw new NotImplementedException();
         }
