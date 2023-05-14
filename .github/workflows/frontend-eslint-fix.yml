@@ -21,6 +21,8 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
+      working-directory: frontend
 
     - name: Run ESLint
-      run: npx eslint 'frontend/**/*.{js,jsx}' --fix
+      run: npx eslint '**/*.{js,jsx}' --fix
+      working-directory: frontend
