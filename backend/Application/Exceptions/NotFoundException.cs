@@ -9,7 +9,7 @@
 
     public class NotFoundException<TEntity> : NotFoundException where TEntity : class
     {
-        internal NotFoundException(object searchArgument)
+        internal NotFoundException(object? searchArgument)
             : base($"'{nameof(TEntity)}' entity with identifier '{searchArgument?.ToString() ?? "null"}' could not be found.") { }
     }
 }

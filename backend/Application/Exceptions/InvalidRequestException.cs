@@ -9,7 +9,7 @@
 
     public class InvalidRequestException<TEntity> : InvalidRequestException where TEntity : class
     {
-        internal InvalidRequestException(string requestName, object argument)
+        internal InvalidRequestException(string requestName, object? argument)
             : base($"Request '{requestName}' on '{nameof(TEntity)}' entity with argument " +
                   $"'{argument?.ToString() ?? "null"}' could not processed.")
         { }
