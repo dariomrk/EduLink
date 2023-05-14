@@ -1,9 +1,9 @@
 import { Flex } from '@mantine/core'
-import { ReactComponent as Logo } from './../img/logo.svg';
-import { ReactComponent as Facebook } from './../img/Facebook.svg';
-import { ReactComponent as Instagram } from './../img/Instagram.svg';
-import { ReactComponent as Youtube } from './../img/Youtube.svg';
-import { ReactComponent as LinkedIn } from './../img/Linkedin.svg';
+import { ReactComponent as Logo } from '../../img/logo.svg';
+import { ReactComponent as Facebook } from '../../img/Facebook.svg';
+import { ReactComponent as Instagram } from '../../img/Instagram.svg';
+import { ReactComponent as Youtube } from '../../img/Youtube.svg';
+import { ReactComponent as LinkedIn } from '../../img/Linkedin.svg';
 
 export const Footer = () => {
   return (
