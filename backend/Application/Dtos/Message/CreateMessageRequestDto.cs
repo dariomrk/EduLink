@@ -4,6 +4,6 @@
     {
         public string SenderUsername { get; set; } = null!;
         public string RecipientUsername { get; set; } = null!;
-        public string Message { get; set; } = null!;
+        public string Content { get; set; } = null!;
     }
 }

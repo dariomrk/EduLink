@@ -40,7 +40,7 @@ namespace Application.Validators
                     $"and recipient `{message.RecipientUsername}` could not be sent " +
                     $"as the users have no relation to one another.");
 
-            RuleFor(message => message.Message)
+            RuleFor(message => message.Content)
                 .NotEmpty()
                 .MaximumLength(2048)
                 .WithMessage("Maximum message length is 2048 characters.");

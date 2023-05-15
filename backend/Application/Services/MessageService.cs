@@ -1,10 +1,12 @@
 ﻿using Application.Dtos.Common;
 using Application.Dtos.Message;
 using Application.Enums;
+using Application.Extensions;
 using Application.Interfaces;
 using Data.Interfaces;
 using Data.Models;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services
@@ -28,44 +30,65 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
+        public async Task<ICollection<MessageResponseDto>> GetMessagesAsync(
             string recipientUsername,
             string senderUsername,
-            PaginationRequestDto? paginationDto = null,
+            PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _messageRepository.Query()
+                .Where(message =>
+                    message.Recipient.Username == recipientUsername.ToNormalizedLower()
+                    && message.Sender.Username == senderUsername.ToNormalizedLower())
+                .SortMessages(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Date, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 50 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
         }
 
-        public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
+        public async Task<ICollection<MessageResponseDto>> GetMessagesAsync(
             string username,
-            PaginationRequestDto? paginationDto = null,
+            PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _messageRepository.Query()
+                .Where(message =>
+                    message.Recipient.Username == username.ToNormalizedLower()
+                    && message.Sender.Username == username.ToNormalizedLower())
+                .SortMessages(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Date, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 50 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<(ServiceActionResult Result, MessageResponseDto? Created)> SendMessage(CreateMessageRequestDto message)
         {
             await _createMessageRequestValidator.ValidateAndThrowAsync(message);
 
-            var sender = _userService.GetByUsernameAsync(message.SenderUsername);
-            var recipient = _userService.GetByUsernameAsync(message.RecipientUsername);
+            var sender = await _userService.GetByUsernameAsync(message.SenderUsername);
+            var recipient = await _userService.GetByUsernameAsync(message.RecipientUsername);
 
             var newMessage = new Message
             {
                 SenderId = sender.Id,
                 RecipientId = recipient.Id,
-                Content = message.Message,
+                Content = message.Content,
             };
 
             var (result, created) = await _messageRepository.CreateAsync(newMessage);
 
             if (result is not Data.Enums.RepositoryActionResult.Success)
                 return (ServiceActionResult.Failed, null);
-            return (ServiceActionResult.Created, created!.ToDto());
+
+            return (ServiceActionResult.Created, new MessageResponseDto
+            {
+                Content = created!.Content,
+                RecipientUsername = recipient.Username,
+                SenderUsername = sender.Username,
+                CreatedAt = created!.CreatedAt,
+            });
         }
     }
 }
