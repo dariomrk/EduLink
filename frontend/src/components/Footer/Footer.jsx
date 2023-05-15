@@ -1,10 +1,11 @@
+import React from 'react'
 import { Flex } from '@mantine/core'
-import { ReactComponent as Logo } from '../../img/logo.svg';
-import { ReactComponent as Facebook } from '../../img/Facebook.svg';
-import { ReactComponent as Instagram } from '../../img/Instagram.svg';
-import { ReactComponent as Youtube } from '../../img/Youtube.svg';
-import { ReactComponent as LinkedIn } from '../../img/Linkedin.svg';
-import { Color } from '../../common';
+import { ReactComponent as Logo } from '../../img/logo.svg'
+import { ReactComponent as Facebook } from '../../img/Facebook.svg'
+import { ReactComponent as Instagram } from '../../img/Instagram.svg'
+import { ReactComponent as Youtube } from '../../img/Youtube.svg'
+import { ReactComponent as LinkedIn } from '../../img/Linkedin.svg'
+import { Color } from '../../style/colors'
 
 export const Footer = () => {
   return (
@@ -17,7 +18,7 @@ export const Footer = () => {
       wrap="wrap"
       style={{
         width: '100%',
-        color: '#FFFFFF',
+        color: Color.White,
         boxSizing: 'border-box',
         padding: '40px 10px 24px 10px',
         lineHeight: '23.5px',
@@ -47,7 +48,7 @@ export const Footer = () => {
         wrap="wrap"
         style={{ marginBottom: '32px' }}>
 
-        <a style={{ fontWeight: 700, fontSize: '20px' }}> {/* <Link> insted of <a>*/}
+        <a style={{ fontWeight: 700, fontSize: '20px' }}> {/* <Link> insted of <a> */}
           Korisni linkovi
         </a>
         <a>Načini plaćanja</a>
@@ -74,4 +75,4 @@ export const Footer = () => {
       <span>Copyright © 2023 Edulink</span>
     </Flex>
   )
-};
+}
