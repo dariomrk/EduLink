@@ -39,7 +39,6 @@ namespace Application.Interfaces
             long appointmentId,
             CreateReviewAsTutorRequestDto reviewDto);
 
-        internal Task<bool> IsPartOfPostAsync(long appointmentId, long postId, CancellationToken cancellationToken = default);
         internal Task<bool> IsStudentAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
         internal Task<bool> IsTutorAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
         internal Task<bool> IsAssignedToAppointmentAsync(string username, long appointmentId, CancellationToken cancellationToken = default);
