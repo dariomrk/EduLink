@@ -11,5 +11,6 @@ namespace Application.Interfaces
 
         public Task<(IdentityActionResult Result, TokenResponseDto Token)> LoginAsync(
             LoginRequestDto loginDto);
+        internal string GenerateUserJwt(long userId, string username, string email);
     }
 }

@@ -7,5 +7,6 @@ namespace Application.Interfaces
         internal Task<CountryResponseDto> FindCountry(string countryName, CancellationToken cancellationToken = default);
         internal Task<RegionResponseDto> FindRegion(string countryName, string regionName, CancellationToken cancellationToken = default);
         internal Task<CityResponseDto> FindCity(string countryName, string regionName, string cityName, CancellationToken cancellationToken = default);
+        internal Task<bool> CityExists(string countryName, string regionName, string cityName, CancellationToken cancellationToken);
     }
 }
