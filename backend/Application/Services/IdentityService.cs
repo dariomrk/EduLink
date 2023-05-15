@@ -22,7 +22,6 @@ namespace Application.Services
         private readonly IRepository<User, long> _userRepository;
         private readonly IUserService _userService;
         private readonly IValidator<RegisterRequestDto> _registerRequestValidator;
-        private readonly IValidator<LoginRequestDto> _loginRequestValidator;
         private readonly IPasswordService _passwordService;
         private readonly ILocationService _locationService;
         private readonly ILogger<IdentityService> _logger;
@@ -32,7 +31,6 @@ namespace Application.Services
             IRepository<User, long> userRepository,
             IUserService userService,
             IValidator<RegisterRequestDto> registerRequestValidator,
-            IValidator<LoginRequestDto> loginRequestValidator,
             IPasswordService passwordService,
             ILocationService locationService,
             ILogger<IdentityService> logger)
@@ -41,7 +39,6 @@ namespace Application.Services
             _userRepository = userRepository;
             _userService = userService;
             _registerRequestValidator = registerRequestValidator;
-            _loginRequestValidator = loginRequestValidator;
             _passwordService = passwordService;
             _locationService = locationService;
             _logger = logger;
