@@ -15,5 +15,15 @@ namespace Application.Services
 
             return (hash, salt);
         }
+
+        public bool ComparePassword(string password, byte[] storedHash, byte[] salt, int iterations)
+        {
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA512);
+            var computedHash = pbkdf2.GetBytes(storedHash.Length);
+
+            pbkdf2.Dispose();
+
+            return CryptographicOperations.FixedTimeEquals(computedHash, storedHash);
+        }
     }
 }
