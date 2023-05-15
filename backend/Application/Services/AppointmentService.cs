@@ -169,17 +169,6 @@ namespace Application.Services
             return (ServiceActionResult.Updated, updated!.ToDto());
         }
 
-        public async Task<bool> IsPartOfPostAsync(
-            long appointmentId,
-            long postId,
-            CancellationToken cancellationToken = default)
-        {
-            return await _appointmentRepository.Query()
-                .AnyAsync(appointment =>
-                    appointment.Id == appointmentId && appointment.PostId == postId,
-                    cancellationToken);
-        }
-
         public async Task<bool> IsStudentAssignedToAppointmentAsync(
             string username,
             long appointmentId,

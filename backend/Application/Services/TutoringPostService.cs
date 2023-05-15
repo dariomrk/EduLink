@@ -121,5 +121,18 @@ namespace Application.Services
 
             return result is not null;
         }
+
+        public async Task<bool> IsPartOfPostAsync(
+            long appointmentId,
+            long postId,
+            CancellationToken cancellationToken = default)
+        {
+            return await _tutoringPostRepository.Query()
+                .AnyAsync(tutoringPost =>
+                    tutoringPost.Id == postId
+                    && tutoringPost.Appointments.Any(appointment =>
+                        appointment.Id == appointmentId),
+                    cancellationToken);
+        }
     }
 }
