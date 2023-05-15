@@ -64,8 +64,8 @@ namespace Api.Controllers
             [FromQuery] PaginationRequestDto paginationOptions,
             CancellationToken cancellationToken)
         {
-            var headers = Request.Headers;
-
+            // TODO: Implement controllers
+            // - Investigate how to get user information from the JWT
             throw new NotImplementedException();
         }
     }
