@@ -8,10 +8,11 @@
         {
             private const string ControllerBase = $"{ApiBase}/users";
 
-            public const string GetAllTutors = $"{ControllerBase}/tutors/{{countryName}}/{{regionName}}/{{cityName}}";
+            public const string GetAllTutorsInRegion = $"{ControllerBase}/tutors/{{countryName}}/{{regionName}}";
+            public const string GetAllTutorsInCity = $"{ControllerBase}/tutors/{{countryName}}/{{regionName}}/{{cityName}}";
             public const string GetAllStudents = $"{ControllerBase}/students";
-            public const string GetStudent = $"{ControllerBase}/students/{{id:int}}";
-            public const string GetTutor = $"{ControllerBase}/tutors/{{id:int}}";
+            public const string GetStudent = $"{ControllerBase}/students/{{id:long}}";
+            public const string GetTutor = $"{ControllerBase}/tutors/{{id:long}}";
         }
     }
 }

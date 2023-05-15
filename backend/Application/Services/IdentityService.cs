@@ -1,4 +1,5 @@
-﻿using Application.Dtos.Indentity;
+﻿using Application.Constants;
+using Application.Dtos.Indentity;
 using Application.Dtos.User;
 using Application.Enums;
 using Application.Exceptions;
@@ -130,7 +131,8 @@ namespace Application.Services
         public string GenerateUserJwt(
             long userId,
             string username,
-            string email)
+            string email,
+            Role role = Role.User)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Identity:TokenSecret")!);
@@ -141,6 +143,7 @@ namespace Application.Services
                 new(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new(JwtRegisteredClaimNames.Email, email),
                 new(JwtRegisteredClaimNames.NameId, username),
+                new(CustomClaimNames.Role, role.ToString()),
             };
 
             var tokenDescriptior = new SecurityTokenDescriptor
