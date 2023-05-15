@@ -1,5 +1,17 @@
+using Application.Dtos.Appointment;
+using Application.Dtos.Indentity;
+using Application.Dtos.Message;
+using Application.Dtos.TutoringPost;
+using Application.Interfaces;
+using Application.Services;
+using Application.Validators;
 using Data.Context;
+using Data.Interfaces;
+using Data.Models;
+using Data.Repositories;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Text.Json.Serialization;
 
 namespace Api
@@ -23,7 +35,14 @@ namespace Api
         public static WebApplicationBuilder ConfigureHost(this WebApplicationBuilder builder)
         {
             var host = builder.Host;
-            // TODO: Configure host properties
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateLogger();
+
+            host.UseSerilog();
+            builder.Services.AddLogging(loggingBuilder =>
+                loggingBuilder.AddSerilog());
 
             return builder;
         }
@@ -34,7 +53,6 @@ namespace Api
         public static WebApplicationBuilder RegisterApplicationServices(this WebApplicationBuilder builder)
         {
             var services = builder.Services;
-            // TODO: Configure services
 
             #region Controller registration
             services.AddControllers()
@@ -45,12 +63,44 @@ namespace Api
                 });
             #endregion
 
+            #region Validator registration
+            services.AddScoped<IValidator<CreateAppointmentRequestDto>, CreateAppointmentRequestValidator>();
+            services.AddScoped<IValidator<CreateMessageRequestDto>, CreateMessageRequestValidator>();
+            services.AddScoped<IValidator<RegisterRequestDto>, RegisterRequestValidator>();
+            services.AddScoped<IValidator<TutoringPostRequestDto>, TutoringPostRequestValidator>();
+            #endregion
+
             #region Service registration
+            services.AddScoped<IAppointmentService, AppointmentService>();
+            // TODO: Implement FieldService
+            //services.AddScoped<IFieldService, FieldService>();
+            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IPasswordService, PasswordService>();
+            services.AddScoped<ITimeFrameService, TimeFrameService>();
+            services.AddScoped<ITutoringPostService, TutoringPostService>();
+            services.AddScoped<IUserService, UserService>();
             // services go here
             #endregion
 
             #region Repository registration
-            // repositories go here
+            services.AddScoped<IRepository<Appointment, long>, BaseRepository<Appointment, long>>();
+            services.AddScoped<IRepository<City, long>, BaseRepository<City, long>>();
+            services.AddScoped<IRepository<Country, long>, BaseRepository<Country, long>>();
+            services.AddScoped<IRepository<Field, long>, BaseRepository<Field, long>>();
+            services.AddScoped<IRepository<Data.Models.File, long>, BaseRepository<Data.Models.File, long>>();
+            services.AddScoped<IRepository<Appointment, long>, BaseRepository<Appointment, long>>();
+            // TODO: Implement login timestamp
+            services.AddScoped<IRepository<LoginTimestamp, long>, BaseRepository<LoginTimestamp, long>>();
+            services.AddScoped<IRepository<Message, long>, BaseRepository<Message, long>>();
+            services.AddScoped<IRepository<Region, long>, BaseRepository<Region, long>>();
+            services.AddScoped<IRepository<StudentsReview, long>, BaseRepository<StudentsReview, long>>();
+            services.AddScoped<IRepository<Subject, long>, BaseRepository<Subject, long>>();
+            services.AddScoped<IRepository<TimeFrame, long>, BaseRepository<TimeFrame, long>>();
+            services.AddScoped<IRepository<TutoringPost, long>, BaseRepository<TutoringPost, long>>();
+            services.AddScoped<IRepository<TutorsReview, long>, BaseRepository<TutorsReview, long>>();
+            services.AddScoped<IRepository<User, long>, BaseRepository<User, long>>();
             #endregion
 
             var connectionString = ConfigurationHelper

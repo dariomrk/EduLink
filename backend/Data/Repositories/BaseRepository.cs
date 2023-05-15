@@ -11,9 +11,9 @@ namespace Data.Repositories
     {
         protected readonly EduLinkDbContext _dbContext;
         protected readonly DbSet<TModel> _dbSet;
-        protected readonly ILogger _logger;
+        protected readonly ILogger<TModel> _logger;
 
-        public BaseRepository(EduLinkDbContext dbContext, ILogger logger)
+        public BaseRepository(EduLinkDbContext dbContext, ILogger<TModel> logger)
         {
             _dbContext = dbContext;
             _dbSet = dbContext.Set<TModel>();
