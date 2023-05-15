@@ -72,8 +72,7 @@ namespace Api
 
             #region Service registration
             services.AddScoped<IAppointmentService, AppointmentService>();
-            // TODO: Implement FieldService
-            //services.AddScoped<IFieldService, FieldService>();
+            services.AddScoped<IFieldService, FieldService>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IMessageService, MessageService>();
