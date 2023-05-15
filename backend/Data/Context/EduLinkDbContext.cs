@@ -20,7 +20,6 @@ namespace Data.Context
                 .ConfigureFile()
                 .ConfigureLoginTimestamp()
                 .ConfigureMessage()
-                .ConfigurePasswordHashingAlgorithm()
                 .ConfigureRegion()
                 .ConfigureStudentsReview()
                 .ConfigureSubject()

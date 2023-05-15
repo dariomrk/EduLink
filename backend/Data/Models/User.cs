@@ -13,7 +13,6 @@ namespace Data.Models
         public string Email { get; set; } = null!;
         public byte[] PasswordHash { get; set; } = null!;
         public byte[] Salt { get; set; } = null!;
-        public long PasswordHashingAlgorithmId { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public long ProfileImageId { get; set; }
         public File ProfileImage { get; set; } = null!;
@@ -75,10 +74,6 @@ namespace Data.Models
 
             entity
                 .Property(x => x.Salt)
-                .IsRequired();
-
-            entity
-                .Property(x => x.PasswordHashingAlgorithmId)
                 .IsRequired();
 
             entity
