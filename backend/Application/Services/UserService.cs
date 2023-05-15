@@ -174,5 +174,28 @@ namespace Application.Services
 
             return tutors;
         }
+
+        public async Task<bool> IsStudentOfTutorAsync(
+            string studentUsername,
+            string tutorUsername,
+            CancellationToken cancellationToken = default) =>
+                await _userRepository.Query()
+                    .AnyAsync(user =>
+                        user.IsStudentOfTutor(tutorUsername.ToNormalizedLower())
+                        && user.Username == studentUsername.ToNormalizedLower(),
+                        cancellationToken);
+
+        public async Task<bool> IsTutorOfStudentAsync(
+            string tutorUsername,
+            string studentUsername,
+            CancellationToken cancellationToken = default) =>
+                await _userRepository.Query()
+                    .AnyAsync(user =>
+                        user.IsTutor()
+                        && user.Username == tutorUsername.ToNormalizedLower()
+                        && user.TutoringAppointments
+                            .Any(appointments =>
+                                appointments.AppointmentTimeFrame.TakenByStudentId.HasValue
+                                && appointments.AppointmentTimeFrame.TakenByStudent!.Username == studentUsername.ToNormalizedLower()));
     }
 }

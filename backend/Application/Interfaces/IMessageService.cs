@@ -9,17 +9,17 @@ namespace Application.Interfaces
         public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
             string recipientUsername,
             string senderUsername,
-            PaginationRequestDto? paginationDto = null,
+            PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<ICollection<MessageResponseDto>> GetMessagesAsync(
             string username,
-            PaginationRequestDto? paginationDto = null,
+            PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
 
         public Task<(ServiceActionResult Result, MessageResponseDto? Created)> SendMessage(
-            MessageRequestDto message);
+            CreateMessageRequestDto message);
     }
 }
