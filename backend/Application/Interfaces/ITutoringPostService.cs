@@ -32,5 +32,7 @@ namespace Application.Interfaces
         internal Task<bool> TutoringPostExistsAsync(
             long tutoringPostId,
             CancellationToken cancellationToken = default);
+
+        internal Task<bool> IsPartOfPostAsync(long appointmentId, long postId, CancellationToken cancellationToken = default);
     }
 }
