@@ -20,6 +20,6 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         public Task<(ServiceActionResult Result, MessageResponseDto? Created)> SendMessage(
-            MessageRequestDto message);
+            CreateMessageRequestDto message);
     }
 }

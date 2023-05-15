@@ -54,5 +54,7 @@ namespace Application.Interfaces
         internal Task<bool> IsTutorAsync(string username, CancellationToken cancellationToken = default);
         internal Task<bool> UserExistsAsync(string username, CancellationToken cancellationToken = default);
         internal Task<bool> IsEligibleAsTutor(string username, CancellationToken cancellationToken = default);
+        internal Task<bool> IsStudentOfTutorAsync(string studentUsername, string tutorUsername, CancellationToken cancellationToken = default);
+        internal Task<bool> IsTutorOfStudentAsync(string tutorUsername, string studentUsername, CancellationToken cancellationToken = default);
     }
 }
