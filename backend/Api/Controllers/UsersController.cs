@@ -1,4 +1,4 @@
-﻿using Api.Constants;
+﻿using Application.Constants;
 using Application.Dtos.Common;
 using Application.Dtos.User;
 using Application.Interfaces;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Authorize(Policy = Policy.User)]
+    [Authorize(Policy = Roles.User)]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -64,6 +64,8 @@ namespace Api.Controllers
             [FromQuery] PaginationRequestDto paginationOptions,
             CancellationToken cancellationToken)
         {
+            var headers = Request.Headers;
+
             throw new NotImplementedException();
         }
     }

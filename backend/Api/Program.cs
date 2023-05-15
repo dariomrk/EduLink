@@ -1,4 +1,3 @@
-using Api.Constants;
 using Application.Constants;
 using Application.Dtos.Appointment;
 using Application.Dtos.Indentity;
@@ -141,8 +140,8 @@ namespace Api
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(Policy.User, policy =>
-                    policy.RequireClaim(CustomClaimNames.Role, Policy.User));
+                options.AddPolicy(Roles.User, policy =>
+                    policy.RequireRole(Roles.User));
             });
 
             return builder;
