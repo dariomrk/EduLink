@@ -41,7 +41,6 @@ namespace Application.Validators
                     $"not a part of the post with id `{instance.PostId}.`")
                 .MustAsync(_timeFrameService.IsAvailableTimeFrameAsync)
                 .WithMessage("Time frame is already taken.");
-            _timeFrameService = timeFrameService;
         }
     }
 }

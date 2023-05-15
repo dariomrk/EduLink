@@ -68,5 +68,23 @@ namespace Application.Services
 
             return city?.ToDto() ?? throw new NotFoundException<City>(cityName);
         }
+
+        public async Task<bool> CityExists(
+            string countryName,
+            string regionName,
+            string cityName,
+            CancellationToken cancellationToken)
+        {
+            try
+            {
+                await FindCity(countryName, regionName, cityName, cancellationToken);
+            }
+            catch (NotFoundException)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

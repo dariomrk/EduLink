@@ -52,7 +52,7 @@ namespace Application.Validators
                     .WithMessage("An appointment time frame must start in the future.")
                     .Must(timeFrame =>
                         timeFrame.Start.AddHours(8) < timeFrame.End)
-                    .WithMessage("A single appointment time frame must be less then 8 hours."))
+                    .WithMessage("A single appointment time frame must be less then 8 hours.")) // TODO: Implement configuration for time frame duration
                     .Must(_timeFrameService.AnyOverlappingTimeFrames)
                     .WithMessage("Appointment time frames cannot overlap.");
 
