@@ -9,7 +9,7 @@ namespace Application.Interfaces
         public Task<(ServiceActionResult Result, UserResponseDto? Created, TokenResponseDto? Token)> RegisterAsync(
             RegisterRequestDto registerDto);
 
-        public Task<(IdentityActionResult Result, TokenResponseDto Token)> LoginAsync(
+        public Task<(IdentityActionResult Result, TokenResponseDto? Token)> LoginAsync(
             LoginRequestDto loginDto);
         internal string GenerateUserJwt(long userId, string username, string email);
     }

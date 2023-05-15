@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Indentity;
 using Application.Dtos.User;
 using Application.Enums;
+using Application.Exceptions;
 using Application.Extensions;
 using Application.Interfaces;
 using Data.Interfaces;
@@ -46,9 +47,37 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public async Task<(IdentityActionResult Result, TokenResponseDto Token)> LoginAsync(LoginRequestDto loginDto)
+        public async Task<(IdentityActionResult Result, TokenResponseDto? Token)> LoginAsync(LoginRequestDto loginDto)
         {
-            throw new NotImplementedException();
+            User user;
+
+            if (loginDto.Email is not null)
+                user = await _userService.GetByEmailAsync(loginDto.Email.ToNormalizedLower());
+
+            else if (loginDto.Username is not null)
+                user = await _userService.GetByUsernameAsync(loginDto.Username.ToNormalizedLower());
+
+            else
+                throw new InvalidRequestException<User>(nameof(LoginAsync), null);
+
+            var comparasionResult = _passwordService.ComparePassword(
+                loginDto.Password,
+                user.PasswordHash,
+                user.PasswordHash,
+                _configuration.GetValue<int>("Security:PasswordHashIterations"));
+
+            if (comparasionResult is false)
+                return (IdentityActionResult.Rejected, null);
+
+            return (
+                IdentityActionResult.Authenticated,
+                new TokenResponseDto
+                {
+                    Jwt = GenerateUserJwt(
+                        user.Id,
+                        user.Username,
+                        user.Email),
+                });
         }
 
         public async Task<(ServiceActionResult Result, UserResponseDto? Created, TokenResponseDto? Token)> RegisterAsync(RegisterRequestDto registerDto)
@@ -97,7 +126,7 @@ namespace Application.Services
                     Jwt = GenerateUserJwt(
                         created!.Id,
                         created!.Username,
-                        created!.Email)
+                        created!.Email),
                 });
         }
 
