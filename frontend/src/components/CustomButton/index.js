@@ -1,3 +1,3 @@
-import { CustomButton } from "./CustomButton.jsx"
+import { CustomButton } from './CustomButton.jsx'
 
 export default CustomButton
