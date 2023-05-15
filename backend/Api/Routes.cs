@@ -8,8 +8,8 @@
         {
             public const string GetTutorsInCity = Base + $"/users/tutors/{{countryName:string}}/region/{{regionName:string}}/city/{{cityName:string}}";
             public const string GetTutorsInRegion = Base + $"/users/tutors/{{countryName:string}}/region/{{regionName:string}}";
-            public const string GetAllStudents = Base + $"/users/students";
-            public const string GetStudent = Base + $"/users/students/{{username:string}}";
+            public const string GetStudents = Base + $"/users/students";
+            public const string GetStudent = Base + $"/users/tutors/{{username:string}}/students/{{username:string}}";
             public const string GetTutor = Base + $"/users/tutors/{{username:string}}";
         }
             public static class Posts

@@ -23,8 +23,8 @@ namespace Api.Controllers
            [FromRoute] string regionName,
            [FromRoute] string cityName,
            PaginationRequestDto? paginationDto,
-            SortRequestDto? sortOptions,
-            CancellationToken cancellationToken = default)
+           SortRequestDto? sortOptions,
+           CancellationToken cancellationToken = default)
         {
             var result = await _userService.GetTutorsInCityAsync(countryName, regionName, cityName, paginationDto, sortOptions, cancellationToken);
 
@@ -39,8 +39,8 @@ namespace Api.Controllers
            [FromRoute] string countryName,
            [FromRoute] string regionName,
            PaginationRequestDto? paginationDto,
-            SortRequestDto? sortOptions,
-            CancellationToken cancellationToken = default)
+           SortRequestDto? sortOptions,
+           CancellationToken cancellationToken = default)
         {
             var result = await _userService.GetTutorsInRegionAsync(countryName, regionName, paginationDto, sortOptions, cancellationToken);
 
@@ -54,8 +54,8 @@ namespace Api.Controllers
         public async Task<ActionResult<UserResponseDto>> GetAllStudents(
            string tutorUsername, //jwt
            PaginationRequestDto? paginationDto,
-            SortRequestDto? sortOptions,
-            CancellationToken cancellationToken = default)
+           SortRequestDto? sortOptions,
+           CancellationToken cancellationToken = default)
         {
             var result = await _userService.GetStudentsAsync(tutorUsername, paginationDto, sortOptions, cancellationToken);
 
@@ -68,7 +68,7 @@ namespace Api.Controllers
         [HttpGet(Routes.Users.GetStudents)]
         public async Task<ActionResult<UserResponseDto>> GetStudents(
             [FromRoute] string tutorUsername,
-           PaginationRequestDto? paginationDto,
+            PaginationRequestDto? paginationDto,
             SortRequestDto? sortOptions,
             CancellationToken cancellationToken)
         {
