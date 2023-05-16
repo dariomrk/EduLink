@@ -62,7 +62,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 1,
-                    Name = "Zagreb",
+                    Name = "zagreb",
                     RegionId = 21,
                     ZipCode = "10000",
                     Coordinates = new NetTopologySuite.Geometries.Point(15.9819, 45.8150)
@@ -73,7 +73,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 2,
-                    Name = "Split",
+                    Name = "split",
                     RegionId = 15,
                     ZipCode = "21000",
                     Coordinates = new NetTopologySuite.Geometries.Point(16.4402, 43.5089)
@@ -84,7 +84,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 3,
-                    Name = "Rijeka",
+                    Name = "rijeka",
                     RegionId = 12,
                     ZipCode = "51000",
                     Coordinates = new NetTopologySuite.Geometries.Point(14.4378, 45.3431)
@@ -95,7 +95,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 4,
-                    Name = "Osijek",
+                    Name = "osijek",
                     RegionId = 10,
                     ZipCode = "31000",
                     Coordinates = new NetTopologySuite.Geometries.Point(18.6955, 45.5511)
@@ -106,7 +106,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 5,
-                    Name = "Zadar",
+                    Name = "zadar",
                     RegionId = 19,
                     ZipCode = "23000",
                     Coordinates = new NetTopologySuite.Geometries.Point(15.2306, 44.1194)
@@ -117,7 +117,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 6,
-                    Name = "Pula",
+                    Name = "pula",
                     RegionId = 4,
                     ZipCode = "52100",
                     Coordinates = new NetTopologySuite.Geometries.Point(13.8481, 44.8738)
@@ -128,7 +128,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 7,
-                    Name = "Slavonski Brod",
+                    Name = "slavonski Brod",
                     RegionId = 2,
                     ZipCode = "35000",
                     Coordinates = new NetTopologySuite.Geometries.Point(18.0160, 45.1603)
@@ -139,7 +139,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 8,
-                    Name = "Karlovac",
+                    Name = "karlovac",
                     RegionId = 5,
                     ZipCode = "47000",
                     Coordinates = new NetTopologySuite.Geometries.Point(15.5481, 45.4929)
@@ -150,7 +150,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 9,
-                    Name = "Varazdin",
+                    Name = "varazdin",
                     RegionId = 16,
                     ZipCode = "42000",
                     Coordinates = new NetTopologySuite.Geometries.Point(16.3366, 46.3044)
@@ -161,7 +161,7 @@ namespace Data.Models
                 new City
                 {
                     Id = 10,
-                    Name = "Sibenik",
+                    Name = "sibenik",
                     RegionId = 13,
                     ZipCode = "22000",
                     Coordinates = new NetTopologySuite.Geometries.Point(15.8958, 43.7350)

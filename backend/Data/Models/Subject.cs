@@ -23,22 +23,22 @@ namespace Data.Models
                 new Subject
                 {
                     Id = 1,
-                    Name = "Matematika",
+                    Name = "matematika",
                 },
                 new Subject
                 {
                     Id = 2,
-                    Name = "Fizika",
+                    Name = "fizika",
                 },
                 new Subject
                 {
                     Id = 3,
-                    Name = "Kemija",
+                    Name = "kemija",
                 },
                 new Subject
                 {
                     Id = 4,
-                    Name = "Biologija",
+                    Name = "biologija",
                 }
             });
 
