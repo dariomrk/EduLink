@@ -57,6 +57,120 @@ namespace Data.Models
                 .Property(x => x.Coordinates)
                 .IsRequired();
 
+            entity.HasData(new List<City>
+            {
+                new City
+                {
+                    Id = 1,
+                    Name = "Zagreb",
+                    RegionId = 21,
+                    ZipCode = "10000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(15.9819, 45.8150)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 2,
+                    Name = "Split",
+                    RegionId = 15,
+                    ZipCode = "21000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(16.4402, 43.5089)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 3,
+                    Name = "Rijeka",
+                    RegionId = 12,
+                    ZipCode = "51000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(14.4378, 45.3431)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 4,
+                    Name = "Osijek",
+                    RegionId = 10,
+                    ZipCode = "31000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(18.6955, 45.5511)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 5,
+                    Name = "Zadar",
+                    RegionId = 19,
+                    ZipCode = "23000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(15.2306, 44.1194)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 6,
+                    Name = "Pula",
+                    RegionId = 4,
+                    ZipCode = "52100",
+                    Coordinates = new NetTopologySuite.Geometries.Point(13.8481, 44.8738)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 7,
+                    Name = "Slavonski Brod",
+                    RegionId = 2,
+                    ZipCode = "35000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(18.0160, 45.1603)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 8,
+                    Name = "Karlovac",
+                    RegionId = 5,
+                    ZipCode = "47000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(15.5481, 45.4929)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 9,
+                    Name = "Varazdin",
+                    RegionId = 16,
+                    ZipCode = "42000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(16.3366, 46.3044)
+                    {
+                        SRID = 4326
+                    },
+                },
+                new City
+                {
+                    Id = 10,
+                    Name = "Sibenik",
+                    RegionId = 13,
+                    ZipCode = "22000",
+                    Coordinates = new NetTopologySuite.Geometries.Point(15.8958, 43.7350)
+                    {
+                        SRID = 4326
+                    },
+                },
+            });
+
             return modelBuilder;
         }
     }

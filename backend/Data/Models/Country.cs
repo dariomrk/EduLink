@@ -5,7 +5,7 @@ namespace Data.Models
     public class Country : BaseModel
     {
         public string Name { get; set; } = null!;
-        public int MobileNumberPrefix { get; set; }
+        public string MobileNumberPrefix { get; set; } = null!;
         public ICollection<Region> Regions { get; set; } = new List<Region>();
     }
 
@@ -29,8 +29,18 @@ namespace Data.Models
 
             entity
                 .Property(x => x.MobileNumberPrefix)
-                .HasMaxLength(3)
+                .HasMaxLength(4)
                 .IsRequired();
+
+            entity.HasData(new List<Country>
+            {
+                new Country
+                {
+                    Id = 1,
+                    MobileNumberPrefix = "+385",
+                    Name = "Hrvatska",
+                }
+            });
 
             return modelBuilder;
         }
