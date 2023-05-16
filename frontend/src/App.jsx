@@ -8,11 +8,21 @@ function App () {
     <MantineProvider
       theme={{
         colors: {
-          purple: [Color.Primary, Color.Secondary, Color.Primary, Color.Primary, Color.Primary, Color.Primary, Color.Primary, Color.Primary, Color.Primary, Color.Primary] // more shades
+          purple: [
+            Color.Primary,
+            Color.Secondary,
+            Color.Primary,
+            Color.Primary,
+            Color.Primary,
+            Color.Primary,
+            Color.Primary,
+            Color.Primary,
+            Color.Primary,
+            Color.Primary
+          ] // more shades
         }
       }}
-    >
-    </MantineProvider>
+    ></MantineProvider>
   )
 }
 
