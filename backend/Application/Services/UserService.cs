@@ -75,7 +75,8 @@ namespace Application.Services
             var tutor = await GetTutorAsync(tutorUsername, cancellationToken);
 
             var student = await _userRepository.Query()
-                .Where(user => user.IsStudentOfTutor(tutorUsername))
+                .Where(user => user.TutoringAppointments
+                    .Any(appointment => appointment.Tutor.Username == tutorUsername.ToNormalizedLower()))
                 .FirstOrDefaultAsync(student => student.Id == studentId);
 
             return student?.ToDto() ?? throw new NotFoundException<User>(studentId);
@@ -90,7 +91,8 @@ namespace Application.Services
             var tutor = await GetTutorAsync(tutorUsername, cancellationToken);
 
             return await _userRepository.Query()
-                .Where(user => user.IsStudentOfTutor(tutorUsername)) // TODO: Implement missing sorting and pagination in GetStudentsAsync
+                .Where(user => user.TutoringAppointments
+                    .Any(appointment => appointment.Tutor.Username == tutorUsername.ToNormalizedLower()))
                 .ProjectToDto()
                 .ToListAsync(cancellationToken);
         }
@@ -100,11 +102,11 @@ namespace Application.Services
             CancellationToken cancellationToken = default)
         {
             var tutor = await _userRepository.Query()
-                .Where(user => user.IsTutor())
-                .ProjectTutorToDto()
-                .FirstOrDefaultAsync(tutor =>
-                    tutor.Username == tutorUsername.ToNormalizedLower(),
-                    cancellationToken);
+                .Where(user =>
+                    user.TutoringPosts.Any()
+                    && user.Username == tutorUsername.ToNormalizedLower())
+                .ProjectToDto()
+                .FirstOrDefaultAsync(cancellationToken);
 
             return tutor ?? throw new NotFoundException<User>(tutorUsername);
         }
@@ -120,10 +122,11 @@ namespace Application.Services
         public async Task<bool> IsTutorAsync(
             string username,
             CancellationToken cancellationToken = default) =>
-            await _userRepository
+            await _userRepository.Query()
                 .AnyAsync(user =>
                     user.Username == username.ToNormalizedLower()
-                    && user.IsTutor());
+                    && user.TutoringPosts.Any(),
+                cancellationToken);
 
         public async Task<bool> IsEligibleAsTutor(
             string username,
@@ -145,7 +148,7 @@ namespace Application.Services
             var city = await _locationService.FindCity(countryName, regionName, cityName);
 
             var tutors = await _userRepository.Query()
-                .Where(user => user.IsTutor())
+                .Where(user => user.TutoringPosts.Any())
                 .Where(tutor => tutor.CityId == city.Id)
                 .SortTutors(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
                 .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
@@ -165,7 +168,7 @@ namespace Application.Services
             var region = await _locationService.FindRegion(countryName, regionName);
 
             var tutors = await _userRepository.Query()
-                .Where(user => user.IsTutor())
+                .Where(user => user.TutoringPosts.Any())
                 .Where(tutor => tutor.City.RegionId == region.Id)
                 .SortTutors(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
                 .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
@@ -181,8 +184,9 @@ namespace Application.Services
             CancellationToken cancellationToken = default) =>
                 await _userRepository.Query()
                     .AnyAsync(user =>
-                        user.IsStudentOfTutor(tutorUsername.ToNormalizedLower())
-                        && user.Username == studentUsername.ToNormalizedLower(),
+                        user.TutoringAppointments.Any(appointment =>
+                            appointment.Tutor.Username == tutorUsername.ToNormalizedLower())
+                            && user.Username == studentUsername.ToNormalizedLower(),
                         cancellationToken);
 
         public async Task<bool> IsTutorOfStudentAsync(
@@ -191,7 +195,7 @@ namespace Application.Services
             CancellationToken cancellationToken = default) =>
                 await _userRepository.Query()
                     .AnyAsync(user =>
-                        user.IsTutor()
+                        user.TutoringPosts.Any()
                         && user.Username == tutorUsername.ToNormalizedLower()
                         && user.TutoringAppointments
                             .Any(appointments =>

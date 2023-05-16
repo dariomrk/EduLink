@@ -71,7 +71,7 @@ namespace Application.Services
                 IdentityActionResult.Authenticated,
                 new TokenResponseDto
                 {
-                    Jwt = GenerateUserJwt(
+                    BearerToken = GenerateUserJwt(
                         user.Id,
                         user.Username,
                         user.Email),
@@ -121,7 +121,7 @@ namespace Application.Services
                 created!.ToDto(),
                 new TokenResponseDto
                 {
-                    Jwt = GenerateUserJwt(
+                    BearerToken = GenerateUserJwt(
                         created!.Id,
                         created!.Username,
                         created!.Email),
@@ -142,7 +142,7 @@ namespace Application.Services
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new(ClaimTypes.Role, role),
-                new(ClaimTypes.NameIdentifier, username),
+                new(ClaimTypes.Name, username),
                 new(ClaimTypes.Email, email),
             };
 

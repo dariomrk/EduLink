@@ -2,6 +2,6 @@
 {
     public class TokenResponseDto
     {
-        public string Jwt { get; set; } = null!;
+        public string BearerToken { get; set; } = null!;
     }
 }

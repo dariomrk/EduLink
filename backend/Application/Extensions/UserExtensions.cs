@@ -7,13 +7,6 @@ namespace Application.Extensions
 {
     internal static class UserExtensions
     {
-        internal static bool IsTutor(this User user) =>
-            user.TutoringPosts.Any();
-
-        internal static bool IsStudentOfTutor(this User user, string tutorUsername) =>
-            user.TutoringAppointments
-                .Any(appointment => appointment.Tutor.Username == tutorUsername.ToNormalizedLower());
-
         internal static IQueryable<User> SortTutors(this IQueryable<User> tutors, SortRequestDto sortDto)
         {
             var sorted = sortDto.SortByProperty switch

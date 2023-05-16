@@ -1,10 +1,10 @@
-﻿using Application.Constants;
+﻿using Api.Extensions;
+using Application.Constants;
 using Application.Dtos.Common;
 using Application.Dtos.User;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Api.Controllers
 {
@@ -65,10 +65,18 @@ namespace Api.Controllers
             [FromQuery] PaginationRequestDto paginationOptions,
             CancellationToken cancellationToken)
         {
-            var nameId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var email = User.FindFirstValue(ClaimTypes.Email);
+            var username = User.GetUsername();
 
-            throw new NotImplementedException();
+            if (username is null)
+                return BadRequest();
+
+            var students = await _userService.GetStudentsAsync(
+                User.GetUsername()!,
+                paginationOptions,
+                sortOptions,
+                cancellationToken);
+
+            return Ok(students);
         }
     }
 }

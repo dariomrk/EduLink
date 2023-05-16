@@ -22,15 +22,11 @@ namespace Api.Controllers
             [FromBody] RegisterRequestDto registerRequest,
             CancellationToken cancellationToken)
         {
-            var (result, registeredUser, token) = await _identityService.RegisterAsync(registerRequest);
+            var (result, _, token) = await _identityService.RegisterAsync(registerRequest);
 
             if (result is not ServiceActionResult.Created)
                 return BadRequest();
-            return Ok(new
-            {
-                User = registeredUser,
-                Token = token
-            });
+            return Ok(token);
         }
     }
 }

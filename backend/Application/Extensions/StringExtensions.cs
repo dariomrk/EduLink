@@ -6,7 +6,6 @@
         {
             return input
                 .Trim()
-                .Normalize()
                 .ToLower();
         }
     }
