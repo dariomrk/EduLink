@@ -154,6 +154,7 @@ namespace Api
         public static WebApplication ConfigureMiddleware(this WebApplication app)
         {
             app.UseMiddleware<CustomExceptionHandler>();
+            app.UseMiddleware<ValidationExceptionHandler>();
 
             if (app.Environment.IsDevelopment())
             {
