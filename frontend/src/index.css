@@ -1,14 +1,7 @@
 @import "./fonts/fonts.css";
 
 body {
-    display: flex;
-    justify-content: center;
-    background-color: black;
     margin: 0;
     font-family: 'DM Sans';
     font-style: normal;
-}
-
-.title{
-    
 }
