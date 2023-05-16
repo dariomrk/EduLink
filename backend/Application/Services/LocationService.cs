@@ -28,6 +28,32 @@ namespace Application.Services
             _logger = logger;
         }
 
+        // TODO: Add pagination and sorting to GetAllFromCountryAsync
+        public async Task<ICollection<RegionResponseDto>> GetAllFromCountryAsync(
+            string countryName,
+            CancellationToken cancellationToken = default)
+        {
+            await FindCountry(countryName, cancellationToken);
+
+            var result = await _regionRepository.Query()
+                .Where(region => region.Country.Name == countryName.ToNormalizedLower())
+                .Select(region => new RegionResponseDto
+                {
+                    RegionName = region.Name,
+                    Cities = region.Cities
+                        .Select(city => new CityResponseDto
+                        {
+                            CityName = city.Name,
+                            ZipCode = city.ZipCode,
+                        })
+                        .ToList(),
+
+                })
+                .ToListAsync(cancellationToken);
+
+            return result;
+        }
+
         public async Task<CountryResponseDto> FindCountry(
             string countryName,
             CancellationToken cancellationToken)
@@ -39,7 +65,7 @@ namespace Application.Services
             return country?.ToDto() ?? throw new NotFoundException<Country>(countryName);
         }
 
-        public async Task<RegionResponseDto> FindRegion(
+        public async Task<RegionIdResponseDto> FindRegion(
             string countryName,
             string regionName,
             CancellationToken cancellationToken)
@@ -53,7 +79,7 @@ namespace Application.Services
             return region?.ToDto() ?? throw new NotFoundException<Region>(regionName);
         }
 
-        public async Task<CityResponseDto> FindCity(
+        public async Task<CityIdResponseDto> FindCity(
             string countryName,
             string regionName,
             string cityName,

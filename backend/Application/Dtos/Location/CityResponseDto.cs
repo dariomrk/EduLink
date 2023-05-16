@@ -2,6 +2,7 @@
 {
     public class CityResponseDto
     {
-        public int Id { get; set; }
+        public string CityName { get; set; } = null!;
+        public string ZipCode { get; set; } = null!;
     }
 }

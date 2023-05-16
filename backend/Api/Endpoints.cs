@@ -52,5 +52,12 @@
             public const string GetAllMessages = $"{ControllerBase}";
             public const string CreateMessage = $"{ControllerBase}";
         }
+
+        public static class Locations
+        {
+            private const string ControllerBase = $"{ApiBase}/locations";
+
+            public const string GetAllFromCountry = $"{ControllerBase}/{{country}}";
+        }
     }
 }
