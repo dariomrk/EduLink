@@ -61,7 +61,7 @@ namespace Application.Services
             var comparasionResult = _passwordService.ComparePassword(
                 loginDto.Password,
                 user.PasswordHash,
-                user.PasswordHash,
+                user.Salt,
                 _configuration.GetValue<int>("Security:PasswordHashIterations"));
 
             if (comparasionResult is false)

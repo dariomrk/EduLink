@@ -28,5 +28,17 @@ namespace Api.Controllers
                 return BadRequest();
             return Ok(token);
         }
+
+        [HttpPost(Endpoints.Identity.Login)]
+        public async Task<ActionResult<TokenResponseDto>> Login(
+            [FromBody] LoginRequestDto loginRequest,
+            CancellationToken cancellationToken)
+        {
+            var (result, token) = await _identityService.LoginAsync(loginRequest);
+
+            if (result is not IdentityActionResult.Authenticated)
+                return Unauthorized();
+            return Ok(token);
+        }
     }
 }
