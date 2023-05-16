@@ -44,5 +44,13 @@
             public const string ReviewAppointmentAsStudent = $"{ControllerBase}/{{id:long}}/review-student";
             public const string ReviewAppointmentAsTutor = $"{ControllerBase}/{{id:long}}/review-tutor";
         }
+
+        public static class Messages
+        {
+            private const string ControllerBase = $"{ApiBase}/messages";
+
+            public const string GetAllMessages = $"{ControllerBase}";
+            public const string CreateMessage = $"{ControllerBase}";
+        }
     }
 }
