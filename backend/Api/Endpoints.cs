@@ -22,5 +22,14 @@
             public const string Register = $"{ControllerBase}/register";
             public const string Login = $"{ControllerBase}/login";
         }
+
+        public static class Posts
+        {
+            private const string ControllerBase = $"{ApiBase}/posts";
+
+            public const string GetAllPosts = $"{ControllerBase}";
+            public const string GetPost = $"{ControllerBase}/{{id:int}}";
+            public const string CreatePost = $"{ControllerBase}";
+        }
     }
 }
