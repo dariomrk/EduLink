@@ -1,6 +1,6 @@
 ﻿namespace Application.Dtos.Appointment
 {
-    public class ResponseAppointmentDto
+    public class AppointmentResponseDto
     {
         public long PostId { get; set; }
         public long TutorId { get; set; }

@@ -65,13 +65,8 @@ namespace Api.Controllers
             [FromQuery] PaginationRequestDto paginationOptions,
             CancellationToken cancellationToken)
         {
-            var username = User.GetUsername();
-
-            if (username is null)
-                return BadRequest();
-
             var students = await _userService.GetStudentsAsync(
-                User.GetUsername()!,
+                User.GetUsername(),
                 paginationOptions,
                 sortOptions,
                 cancellationToken);

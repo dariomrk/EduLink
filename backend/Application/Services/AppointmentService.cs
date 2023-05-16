@@ -25,7 +25,7 @@ namespace Application.Services
             _createAppointmentRequestValidator = createAppointmentRequestValidator;
         }
 
-        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
+        public async Task<(ServiceActionResult Result, AppointmentResponseDto? Updated)> CancelAppointmentAsync(
             string username,
             long appointmentId)
         {
@@ -53,7 +53,7 @@ namespace Application.Services
             return (ServiceActionResult.Updated, updated!.ToDto());
         }
 
-        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(CreateAppointmentRequestDto createDto)
+        public async Task<(ServiceActionResult Result, AppointmentResponseDto? Created)> CreateAppointmentAsync(CreateAppointmentRequestDto createDto)
         {
             await _createAppointmentRequestValidator.ValidateAndThrowAsync(createDto);
 
@@ -67,7 +67,7 @@ namespace Application.Services
             return (ServiceActionResult.Created, created!.ToDto());
         }
 
-        public async Task<ResponseAppointmentDto> GetAppointmentAsync(
+        public async Task<AppointmentResponseDto> GetAppointmentAsync(
             string username,
             long id,
             CancellationToken cancellationToken = default)
@@ -82,7 +82,7 @@ namespace Application.Services
             return appointment?.ToDto() ?? throw new NotFoundException<Appointment>(id);
         }
 
-        public async Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
+        public async Task<ICollection<AppointmentResponseDto>> GetAppointmentsAsync(
             string username,
             SortRequestDto? sortOptions = null,
             PaginationRequestDto? paginationOptions = null,
@@ -100,7 +100,7 @@ namespace Application.Services
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
+        public async Task<ICollection<AppointmentResponseDto>> GetFutureAppointmentsAsync(
             string username,
             SortRequestDto? sortOptions = null,
             PaginationRequestDto? paginationOptions = null,
@@ -118,7 +118,7 @@ namespace Application.Services
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
+        public async Task<(ServiceActionResult Result, AppointmentResponseDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
             CreateReviewAsStudentRequestDto reviewDto)
         {
@@ -145,7 +145,7 @@ namespace Application.Services
             return (ServiceActionResult.Updated, updated!.ToDto());
         }
 
-        public async Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
+        public async Task<(ServiceActionResult Result, AppointmentResponseDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
             CreateReviewAsTutorRequestDto reviewDto)
         {

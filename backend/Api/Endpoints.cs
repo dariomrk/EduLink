@@ -28,8 +28,21 @@
             private const string ControllerBase = $"{ApiBase}/posts";
 
             public const string GetAllPosts = $"{ControllerBase}/{{country}}/{{region}}";
-            public const string GetPost = $"{ControllerBase}/{{id:int}}";
+            public const string GetPost = $"{ControllerBase}/{{id:long}}";
             public const string CreatePost = $"{ControllerBase}";
+        }
+
+        public static class Appointments
+        {
+            private const string ControllerBase = $"{ApiBase}/appointments";
+
+            public const string GetAllAppointments = $"{ControllerBase}";
+            public const string GetFutureAppointments = $"{ControllerBase}/future";
+            public const string GetAppointment = $"{ControllerBase}/{{id:long}}";
+            public const string CreateAppointment = $"{ControllerBase}";
+            public const string CancelAppointment = $"{ControllerBase}/{{id:long}}/cancel";
+            public const string ReviewAppointmentAsStudent = $"{ControllerBase}/{{id:long}}/review-student";
+            public const string ReviewAppointmentAsTutor = $"{ControllerBase}/{{id:long}}/review-tutor";
         }
     }
 }
