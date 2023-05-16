@@ -141,9 +141,9 @@ namespace Application.Services
             {
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Sub, userId.ToString()),
-                new(JwtRegisteredClaimNames.Email, email),
-                new(JwtRegisteredClaimNames.NameId, username),
                 new(ClaimTypes.Role, role),
+                new(ClaimTypes.NameIdentifier, username),
+                new(ClaimTypes.Email, email),
             };
 
             var tokenDescriptior = new SecurityTokenDescriptor
