@@ -26,13 +26,13 @@ namespace Application.Dtos.User
                             .Any()
                                 ? tutor.TutoringAppointments.Average(appointment => appointment.StudentsReview!.Stars)
                                 : null,
-                    // TODO: Fix total tutoring hours calculation
-                    //TotalTutoringHours = tutor.TutoringAppointments
-                    //        .Any(appointment =>
-                    //            appointment.StartAt.AddMinutes(appointment.DurationMinutes)
-                    //            < DateTime.UtcNow.Add(appointment.StartAt.Offset))
-                    //            ? tutor.TutoringAppointments.Sum(x => x.DurationMinutes) / 60
-                    //            : 0,
+                    TotalTutoringHours = tutor.TutoringAppointments
+                        .Where(appointment =>
+                            !appointment.IsCancelled
+                            && appointment.AppointmentTimeFrame.End < DateTime.UtcNow
+                                .Add(appointment.AppointmentTimeFrame.End.Offset))
+                        .Select(appointment => appointment.AppointmentTimeFrame)
+                        .Sum(timeFrame => (timeFrame.End - timeFrame.Start).Hours)
                 }
             });
     }
