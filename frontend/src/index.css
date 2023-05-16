@@ -1,7 +1,13 @@
-@import "./fonts/fonts.css";
+@import './fonts/fonts.css';
 
 body {
-    margin: 0;
-    font-family: 'DM Sans';
-    font-style: normal;
+  margin: 0;
+  font-family: 'DM Sans';
+  font-style: normal;
+}
+
+.infos {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
