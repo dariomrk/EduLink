@@ -132,9 +132,6 @@ namespace Application.Services
 
             var appointment = await _appointmentRepository.FindByIdAsync(appointmentId);
 
-            // TODO: Check whether it is possible to overwrite an existing review
-            // - `ReviewAppointmentAsStudentAsync`
-            // - `ReviewAppointmentAsTutorAsync`
             appointment!.StudentsReview = reviewDto.ToStudentsReview();
 
             var (result, updated) = await _appointmentRepository.UpdateAsync(appointment);
