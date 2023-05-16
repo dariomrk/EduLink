@@ -3,6 +3,7 @@ using System;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(EduLinkDbContext))]
-    partial class EduLinkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230515213129_RemoveRequiredStripeColumn")]
+    partial class RemoveRequiredStripeColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -493,7 +496,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("bytea");
 
-                    b.Property<long?>("ProfileImageId")
+                    b.Property<long>("ProfileImageId")
                         .HasColumnType("bigint");
 
                     b.Property<byte[]>("Salt")
@@ -691,7 +694,9 @@ namespace Data.Migrations
 
                     b.HasOne("Data.Models.File", "ProfileImage")
                         .WithOne("User")
-                        .HasForeignKey("Data.Models.User", "ProfileImageId");
+                        .HasForeignKey("Data.Models.User", "ProfileImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
 

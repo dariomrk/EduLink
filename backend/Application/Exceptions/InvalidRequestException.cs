@@ -3,7 +3,7 @@
     public class InvalidRequestException : InvalidOperationException
     {
         internal InvalidRequestException() { }
-        internal InvalidRequestException(string? message) : base(message) { }
+        public InvalidRequestException(string? message) : base(message) { }
         internal InvalidRequestException(string? message, Exception? innerException) : base(message, innerException) { }
     }
 

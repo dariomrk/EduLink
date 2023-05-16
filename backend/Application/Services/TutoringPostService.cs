@@ -74,14 +74,16 @@ namespace Application.Services
         }
 
         public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsAsync(
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
+            string countryName,
+            string regionName,
             PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var tutoringPosts = await _tutoringPostRepository.Query()
+                .Where(tutoringPost =>
+                    tutoringPost.Tutor.City.Region.Name == regionName.ToNormalizedLower()
+                    && tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower())
                 .Where(tutoringPost => tutoringPost.AvailableTimeFrames
                     .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
                 .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
@@ -93,14 +95,16 @@ namespace Application.Services
         }
 
         public async Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
+            string countryName,
+            string regionName,
             PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default)
         {
             var tutoringPosts = await _tutoringPostRepository.Query()
+                .Where(tutoringPost =>
+                    tutoringPost.Tutor.City.Region.Name == regionName.ToNormalizedLower()
+                    && tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower())
                 .Where(tutoringPost => tutoringPost.AvailableTimeFrames
                     .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
                 .Where(tutoringPost => tutoringPost.AvailableTimeFrames

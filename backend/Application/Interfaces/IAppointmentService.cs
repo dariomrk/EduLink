@@ -7,35 +7,35 @@ namespace Application.Interfaces
 {
     public interface IAppointmentService
     {
-        public Task<ICollection<ResponseAppointmentDto>> GetAppointmentsAsync(
+        public Task<ICollection<AppointmentResponseDto>> GetAppointmentsAsync(
             string username,
             SortRequestDto? sortRequest = null,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ICollection<ResponseAppointmentDto>> GetFutureAppointmentsAsync(
+        public Task<ICollection<AppointmentResponseDto>> GetFutureAppointmentsAsync(
             string username,
             SortRequestDto? sortRequest = null,
             PaginationRequestDto? paginationOptions = null,
             CancellationToken cancellationToken = default);
 
-        public Task<ResponseAppointmentDto> GetAppointmentAsync(
+        public Task<AppointmentResponseDto> GetAppointmentAsync(
             string username,
             long id,
             CancellationToken cancellationToken = default);
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Created)> CreateAppointmentAsync(
+        public Task<(ServiceActionResult Result, AppointmentResponseDto? Created)> CreateAppointmentAsync(
             CreateAppointmentRequestDto createDto);
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> CancelAppointmentAsync(
+        public Task<(ServiceActionResult Result, AppointmentResponseDto? Updated)> CancelAppointmentAsync(
             string username,
             long appointmentId);
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsStudentAsync(
+        public Task<(ServiceActionResult Result, AppointmentResponseDto? Updated)> ReviewAppointmentAsStudentAsync(
             long appointmentId,
             CreateReviewAsStudentRequestDto reviewDto);
 
-        public Task<(ServiceActionResult Result, ResponseAppointmentDto? Updated)> ReviewAppointmentAsTutorAsync(
+        public Task<(ServiceActionResult Result, AppointmentResponseDto? Updated)> ReviewAppointmentAsTutorAsync(
             long appointmentId,
             CreateReviewAsTutorRequestDto reviewDto);
 

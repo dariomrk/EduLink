@@ -1,3 +1,4 @@
+using Application.Constants;
 using Application.Dtos.Appointment;
 using Application.Dtos.Indentity;
 using Application.Dtos.Message;
@@ -10,8 +11,11 @@ using Data.Interfaces;
 using Data.Models;
 using Data.Repositories;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Api
@@ -113,6 +117,33 @@ namespace Api
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = builder.Configuration.GetValue<string>("Identity:Issuer")!,
+                        ValidAudience = builder.Configuration.GetValue<string>("Identity:Audience")!,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("Identity:TokenSecret")!)),
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Roles.User, policy =>
+                    policy.RequireRole(Roles.User));
+            });
+
             return builder;
         }
     }
@@ -128,6 +159,7 @@ namespace Api
             }
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
 

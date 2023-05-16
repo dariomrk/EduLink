@@ -14,8 +14,8 @@ namespace Data.Models
         public byte[] PasswordHash { get; set; } = null!;
         public byte[] Salt { get; set; } = null!;
         public DateTimeOffset CreatedAt { get; set; }
-        public long ProfileImageId { get; set; }
-        public File ProfileImage { get; set; } = null!;
+        public long? ProfileImageId { get; set; }
+        public File? ProfileImage { get; set; } = null!;
         public DateOnly DateOfBirth { get; set; }
         public bool IsEligibleAsTutor =>
             DateOnly
@@ -26,7 +26,7 @@ namespace Data.Models
         public long CityId { get; set; }
         public City City { get; set; } = null!;
         public string MobileNumber { get; set; } = null!;
-        public string StripeCustomerId { get; set; } = null!;
+        public string? StripeCustomerId { get; set; } = null!;
         public string? StripeAccountId { get; set; } = null!;
         /// <summary>
         /// <inheritdoc cref="City.Coordinates"/>
@@ -94,10 +94,6 @@ namespace Data.Models
 
             entity
                 .Property(x => x.MobileNumber)
-                .IsRequired();
-
-            entity
-                .Property(x => x.StripeCustomerId)
                 .IsRequired();
 
             return modelBuilder;

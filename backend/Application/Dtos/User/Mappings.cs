@@ -5,6 +5,7 @@ namespace Application.Dtos.User
     [Mapper]
     internal static partial class UserMappings
     {
+        [MapperIgnoreTarget(nameof(UserResponseDto.CityName))]
         internal static partial UserResponseDto ToDto(this Data.Models.User user);
 
         internal static partial IQueryable<UserResponseDto> ProjectToDto(this IQueryable<Data.Models.User> users);

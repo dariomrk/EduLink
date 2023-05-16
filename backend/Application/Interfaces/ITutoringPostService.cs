@@ -7,9 +7,8 @@ namespace Application.Interfaces
     public interface ITutoringPostService
     {
         public Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsAsync(
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
+            string countryName,
+            string regionName,
             PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);
@@ -22,9 +21,8 @@ namespace Application.Interfaces
            TutoringPostRequestDto post);
 
         public Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
-            string? countryName = null,
-            string? regionName = null,
-            string? cityName = null,
+            string countryName,
+            string regionName,
             PaginationRequestDto? paginationOptions = null,
             SortRequestDto? sortOptions = null,
             CancellationToken cancellationToken = default);

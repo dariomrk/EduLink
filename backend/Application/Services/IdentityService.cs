@@ -1,4 +1,5 @@
-﻿using Application.Dtos.Indentity;
+﻿using Application.Constants;
+using Application.Dtos.Indentity;
 using Application.Dtos.User;
 using Application.Enums;
 using Application.Exceptions;
@@ -60,7 +61,7 @@ namespace Application.Services
             var comparasionResult = _passwordService.ComparePassword(
                 loginDto.Password,
                 user.PasswordHash,
-                user.PasswordHash,
+                user.Salt,
                 _configuration.GetValue<int>("Security:PasswordHashIterations"));
 
             if (comparasionResult is false)
@@ -70,7 +71,7 @@ namespace Application.Services
                 IdentityActionResult.Authenticated,
                 new TokenResponseDto
                 {
-                    Jwt = GenerateUserJwt(
+                    BearerToken = GenerateUserJwt(
                         user.Id,
                         user.Username,
                         user.Email),
@@ -120,7 +121,7 @@ namespace Application.Services
                 created!.ToDto(),
                 new TokenResponseDto
                 {
-                    Jwt = GenerateUserJwt(
+                    BearerToken = GenerateUserJwt(
                         created!.Id,
                         created!.Username,
                         created!.Email),
@@ -130,7 +131,8 @@ namespace Application.Services
         public string GenerateUserJwt(
             long userId,
             string username,
-            string email)
+            string email,
+            string role = Roles.User)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Identity:TokenSecret")!);
@@ -139,17 +141,18 @@ namespace Application.Services
             {
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Sub, userId.ToString()),
-                new(JwtRegisteredClaimNames.Email, email),
-                new(JwtRegisteredClaimNames.NameId, username),
+                new(ClaimTypes.Role, role),
+                new(ClaimTypes.Name, username),
+                new(ClaimTypes.Email, email),
             };
 
             var tokenDescriptior = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(_configuration.GetValue<int>("Identity:JwtLifetimeMinutes")),
-                Issuer = _configuration.GetValue<string>(_configuration.GetValue<string>("Identity:Issuer")!),
-                Audience = _configuration.GetValue<string>(_configuration.GetValue<string>("Identity:Audience")!),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+                Issuer = _configuration.GetValue<string>("Identity:Issuer")!,
+                Audience = _configuration.GetValue<string>("Identity:Audience")!,
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptior);
