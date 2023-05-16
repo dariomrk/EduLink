@@ -1,3 +1,4 @@
+using Api.Middleware;
 using Application.Constants;
 using Application.Dtos.Appointment;
 using Application.Dtos.Indentity;
@@ -152,6 +153,9 @@ namespace Api
     {
         public static WebApplication ConfigureMiddleware(this WebApplication app)
         {
+            app.UseMiddleware<CustomExceptionHandler>();
+            app.UseMiddleware<ValidationExceptionHandler>();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
