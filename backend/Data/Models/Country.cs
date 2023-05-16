@@ -38,7 +38,7 @@ namespace Data.Models
                 {
                     Id = 1,
                     MobileNumberPrefix = "+385",
-                    Name = "Hrvatska",
+                    Name = "hrvatska",
                 }
             });
 
