@@ -2,6 +2,7 @@
 {
     public class RegionResponseDto
     {
-        public int Id { get; set; }
+        public string RegionName { get; set; } = null!;
+        public ICollection<CityResponseDto> Cities { get; set; } = new List<CityResponseDto>();
     }
 }
