@@ -7,19 +7,13 @@ function App () {
   return (
     <MantineProvider
       theme={{
+        fontFamily: 'DM Sans',
         colors: {
           purple: [
             Color.Primary,
             Color.Secondary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
             Color.Primary
-          ] // more shades
+          ]
         }
       }}
     ></MantineProvider>
