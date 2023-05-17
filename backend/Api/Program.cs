@@ -162,6 +162,12 @@ namespace Api
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(config =>
+            {
+                config.AllowAnyMethod();
+                config.AllowAnyOrigin();
+                config.AllowAnyHeader();
+            });
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
