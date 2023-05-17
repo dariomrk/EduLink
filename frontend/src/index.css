@@ -11,3 +11,14 @@ body {
   align-items: center;
   gap: 4px;
 }
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0px;
+}

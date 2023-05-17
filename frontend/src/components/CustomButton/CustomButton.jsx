@@ -1,10 +1,9 @@
 import { Button } from '@mantine/core'
 import React from 'react'
 
-export const CustomButton = (props) => {
+export const CustomButton = props => {
   return (
     <Button
-      color="purple"
       variant={props.variant}
       style={{
         width: props.width,
@@ -13,7 +12,9 @@ export const CustomButton = (props) => {
         fontWeight: 700,
         padding: '16px 0',
         overflowWrap: 'break-word'
-      }} radius="10px">
+      }}
+      radius="10px"
+    >
       {props.text}
     </Button>
   )

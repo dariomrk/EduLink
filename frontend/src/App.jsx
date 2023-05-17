@@ -2,6 +2,7 @@ import React from 'react'
 import './index.css'
 import { MantineProvider } from '@mantine/core'
 import { Color } from './style/colors.js'
+import Router from './router'
 
 function App () {
   return (
@@ -9,20 +10,23 @@ function App () {
       theme={{
         colors: {
           purple: [
-            Color.Primary,
-            Color.Secondary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary,
-            Color.Primary
-          ] // more shades
-        }
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            Color.Button, // font and outline, fill
+            Color.Primary, // hover of filled button
+            '-',
+            '-'
+          ]
+        },
+        primaryColor: 'purple'
       }}
-    ></MantineProvider>
+    >
+      <Router />
+    </MantineProvider>
   )
 }
 
