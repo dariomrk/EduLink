@@ -23,31 +23,32 @@ export const HomePage = () => {
         justify="flex-start"
         align="flex-start"
         direction="column"
+        w={{ base: '316px', sm: '482px', lg: '648px' }}
+        m="auto"
         style={{
           color: Color.Primary,
-          maxWidth: '850px',
-          margin: 'auto',
           padding: '24px'
         }}
       >
         <div className="title">Kategorije</div>
         <Flex
-          gap="md"
+          gap="16px"
           direction="row"
           wrap="wrap"
           justify="flex-start"
           align="flex-start"
           mb="48px"
+          w="100  "
+          // TODO: add cathegoryCards
         >
-          <CategoryCard // add actual data from api
+          <CategoryCard
             name="Matematika"
             numOfInstructor={3}
             link="/matematika"
           />
         </Flex>
-
         <div className="title">Top instruktori</div>
-        <ScrollArea // add actual data from api
+        <ScrollArea // TODO: add top instructors
           type="hover"
           scrollbarSize={8}
           style={{
@@ -63,6 +64,9 @@ export const HomePage = () => {
             direction="row"
             wrap="nowrap"
           >
+            <InstructorCard />;<InstructorCard />
+            <InstructorCard />
+            <InstructorCard />
             <InstructorCard />
             <InstructorCard />
             <InstructorCard />
@@ -88,7 +92,7 @@ export const HomePage = () => {
         <img
           src={HomePagePicture}
           style={{ margin: '30px auto', maxWidth: '100%' }}
-          alt="Picture of happy students."
+          alt="Picture of students."
         />
       </Flex>
     </>
