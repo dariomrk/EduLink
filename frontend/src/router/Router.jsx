@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Layout from '../layout'
 import HomePage from '../pages/HomePage'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<HomePage />} />
         <Route path="category/:categoryName" />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </>
   )
 )
