@@ -1,12 +1,13 @@
 import React from 'react'
 import {
-  createBrowserRouter, createRoutesFromElements, RouterProvider
+  createBrowserRouter, createRoutesFromElements, Route, RouterProvider
 } from 'react-router-dom'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      {/* // TODO: NotFoundPage <Route path="*" element={<NotFoundPage />} /> */}
+      <Route path="*" element={<NotFoundPage/>}/>
     </>
   )
 )

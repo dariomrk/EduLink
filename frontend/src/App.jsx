@@ -2,6 +2,7 @@ import React from 'react'
 import './index.css'
 import { MantineProvider } from '@mantine/core'
 import { Color } from './style/colors.js'
+import Router from './router'
 
 function App () {
   return (
@@ -22,7 +23,9 @@ function App () {
           ] // more shades
         }
       }}
-    ></MantineProvider>
+    >
+      <Router/>
+    </MantineProvider>
   )
 }
 
