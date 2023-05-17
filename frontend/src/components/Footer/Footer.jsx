@@ -6,6 +6,7 @@ import { ReactComponent as Instagram } from '../../img/Instagram.svg'
 import { ReactComponent as Youtube } from '../../img/Youtube.svg'
 import { ReactComponent as LinkedIn } from '../../img/Linkedin.svg'
 import { Color } from '../../style/colors'
+import { Link } from 'react-router-dom'
 
 export const Footer = () => {
   return (
@@ -16,28 +17,27 @@ export const Footer = () => {
       align="center"
       direction="column"
       wrap="wrap"
+      p="40px 10px 24px 10px"
       style={{
         width: '100%',
         color: Color.White,
         boxSizing: 'border-box',
-        padding: '40px 10px 24px 10px',
         lineHeight: '23.5px',
         textAlign: 'center'
-      }}>
-
+      }}
+    >
       <Flex
         gap="md"
         justify="center"
         align="center"
         direction="column"
         wrap="wrap"
-        style={{ marginBottom: '24px' }}>
-
+        mb="24px"
+      >
         <Logo />
-        <a>O nama</a>
-        <a>FAQ</a>
-        <a>Kontakt i pomoć</a>
-
+        <Link to="about">O nama</Link>
+        <Link to="faq">FAQ</Link>
+        <Link to="help">Kontakt i pomoć</Link>
       </Flex>
 
       <Flex
@@ -46,15 +46,20 @@ export const Footer = () => {
         align="center"
         direction="column"
         wrap="wrap"
-        style={{ marginBottom: '32px' }}>
-
-        <a style={{ fontWeight: 700, fontSize: '20px' }}> {/* <Link> insted of <a> */}
+        mb="32px"
+      >
+        <Link
+          to="usefulLinks"
+          style={{
+            fontWeight: 700,
+            fontSize: '20px'
+          }}
+        >
           Korisni linkovi
-        </a>
-        <a>Načini plaćanja</a>
-        <a>Politika privatnosti</a>
-        <a>Uvijeti i pravila korištenja</a>
-
+        </Link>
+        <Link to="paymentMethods">Načini plaćanja</Link>
+        <Link to="privacyPolicy">Politika privatnosti</Link>
+        <Link to="termsAndCoonditions">Uvijeti i pravila korištenja</Link>
       </Flex>
 
       <Flex
@@ -63,13 +68,12 @@ export const Footer = () => {
         align="center"
         direction="row"
         wrap="wrap"
-        style={{ marginBottom: '8px' }}>
-
+        mb="8px"
+      >
         <Facebook />
         <Instagram />
         <LinkedIn />
         <Youtube />
-
       </Flex>
 
       <span>Copyright © 2023 Edulink</span>
