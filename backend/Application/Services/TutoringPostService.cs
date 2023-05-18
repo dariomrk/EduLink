@@ -94,6 +94,30 @@ namespace Application.Services
             return tutoringPosts;
         }
 
+        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromSubjectAsync(
+            string countryName,
+            string regionName,
+            string subjectName,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
+            CancellationToken cancellationToken = default)
+        {
+            var tutoringPosts = await _tutoringPostRepository.Query()
+                .Where(tutoringPost =>
+                    tutoringPost.Tutor.City.Region.Name == regionName.ToNormalizedLower()
+                    && tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower()
+                    && tutoringPost.Fields.Any()
+                    && tutoringPost.Fields.FirstOrDefault()!.Field.Subject.Name == subjectName.ToNormalizedLower())
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
+                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return tutoringPosts;
+        }
+
         public async Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
             string countryName,
             string regionName,

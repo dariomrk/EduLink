@@ -27,9 +27,30 @@ namespace Api.Controllers
             [FromQuery] PaginationRequestDto paginationOptions,
             CancellationToken cancellationToken)
         {
-            var posts = _postService.GetTutoringPostsAsync(
+            var posts = await _postService.GetTutoringPostsAsync(
                 countryName,
                 regionName,
+                paginationOptions,
+                sortOptions,
+                cancellationToken);
+
+            return Ok(posts);
+        }
+
+        [AllowAnonymous]
+        [HttpGet(Endpoints.Posts.GetAllPostsFromSubject)]
+        public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPosts(
+            [FromRoute] string countryName,
+            [FromRoute] string regionName,
+            [FromRoute] string subjectName,
+            [FromQuery] SortRequestDto sortOptions,
+            [FromQuery] PaginationRequestDto paginationOptions,
+            CancellationToken cancellationToken)
+        {
+            var posts = await _postService.GetTutoringPostsFromSubjectAsync(
+                countryName,
+                regionName,
+                subjectName,
                 paginationOptions,
                 sortOptions,
                 cancellationToken);
@@ -43,7 +64,7 @@ namespace Api.Controllers
             [FromRoute] int id,
             CancellationToken cancellationToken)
         {
-            var post = _postService.GetTutoringPostAsync(
+            var post = await _postService.GetTutoringPostAsync(
                 id,
                 cancellationToken);
 

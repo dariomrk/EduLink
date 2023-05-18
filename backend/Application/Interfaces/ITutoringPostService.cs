@@ -32,5 +32,6 @@ namespace Application.Interfaces
             CancellationToken cancellationToken = default);
 
         internal Task<bool> IsPartOfPostAsync(long appointmentId, long postId, CancellationToken cancellationToken = default);
+        Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromSubjectAsync(string countryName, string regionName, string subjectName, PaginationRequestDto? paginationOptions = null, SortRequestDto? sortOptions = null, CancellationToken cancellationToken = default);
     }
 }
