@@ -28,7 +28,6 @@ namespace Application.Services
             _logger = logger;
         }
 
-        // TODO: Add pagination and sorting to GetAllFromCountryAsync
         public async Task<ICollection<RegionResponseDto>> GetAllFromCountryAsync(
             string countryName,
             CancellationToken cancellationToken = default)
