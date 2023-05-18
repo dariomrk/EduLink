@@ -32,7 +32,7 @@ namespace Application.Extensions
                         .Distance(new Point(sortDto.Longitude!.Value, sortDto.Longitude!.Value)
                         {
                             SRID = 4326
-                        })), // TODO: Add error handling for NetTopologySuite Distance method
+                        })),
 
                 SortByProperty.Date => tutoringPosts.OrderBy(tutoringPost =>
                     tutoringPost.AvailableTimeFrames.OrderBy(timeFrame => timeFrame.Start)),

@@ -147,7 +147,9 @@ namespace Application.Services
         {
             var city = await _locationService.FindCity(countryName, regionName, cityName);
 
-            var tutors = await _userRepository.Query()
+            ICollection<UserResponseDto> tutors;
+
+            tutors = await _userRepository.Query()
                 .Where(user => user.TutoringPosts.Any())
                 .Where(tutor => tutor.CityId == city.Id)
                 .SortTutors(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
