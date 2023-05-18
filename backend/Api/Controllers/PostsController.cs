@@ -19,15 +19,32 @@ namespace Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet(Endpoints.Posts.GetAllPosts)]
-        public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPosts(
+        [HttpGet(Endpoints.Posts.GetAllPostsFromCountry)]
+        public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPostsFromCountry(
+            [FromRoute] string countryName,
+            [FromQuery] SortRequestDto sortOptions,
+            [FromQuery] PaginationRequestDto paginationOptions,
+            CancellationToken cancellationToken)
+        {
+            var posts = await _postService.GetTutoringPostsFromCountryAsync(
+                countryName,
+                paginationOptions,
+                sortOptions,
+                cancellationToken);
+
+            return Ok(posts);
+        }
+
+        [AllowAnonymous]
+        [HttpGet(Endpoints.Posts.GetAllPostsFromRegion)]
+        public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPostsFromRegion(
             [FromRoute] string countryName,
             [FromRoute] string regionName,
             [FromQuery] SortRequestDto sortOptions,
             [FromQuery] PaginationRequestDto paginationOptions,
             CancellationToken cancellationToken)
         {
-            var posts = await _postService.GetTutoringPostsAsync(
+            var posts = await _postService.GetTutoringPostsFromRegionAsync(
                 countryName,
                 regionName,
                 paginationOptions,

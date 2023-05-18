@@ -6,7 +6,7 @@ namespace Application.Interfaces
 {
     public interface ITutoringPostService
     {
-        public Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsAsync(
+        public Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromRegionAsync(
             string countryName,
             string regionName,
             PaginationRequestDto? paginationOptions = null,
@@ -33,5 +33,6 @@ namespace Application.Interfaces
 
         internal Task<bool> IsPartOfPostAsync(long appointmentId, long postId, CancellationToken cancellationToken = default);
         Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromSubjectAsync(string countryName, string regionName, string subjectName, PaginationRequestDto? paginationOptions = null, SortRequestDto? sortOptions = null, CancellationToken cancellationToken = default);
+        Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromCountryAsync(string countryName, PaginationRequestDto? paginationOptions = null, SortRequestDto? sortOptions = null, CancellationToken cancellationToken = default);
     }
 }

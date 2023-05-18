@@ -73,7 +73,26 @@ namespace Application.Services
             return tutoringPost ?? throw new NotFoundException<Data.Models.TutoringPost>(id);
         }
 
-        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsAsync(
+        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromCountryAsync(
+            string countryName,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
+            CancellationToken cancellationToken = default)
+        {
+            var tutoringPosts = await _tutoringPostRepository.Query()
+                .Where(tutoringPost =>
+                    tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower())
+                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
+                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
+                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
+                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return tutoringPosts;
+        }
+
+        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromRegionAsync(
             string countryName,
             string regionName,
             PaginationRequestDto? paginationOptions = null,

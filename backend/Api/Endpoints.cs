@@ -27,7 +27,8 @@
         {
             private const string ControllerBase = $"{ApiBase}/posts";
 
-            public const string GetAllPosts = $"{ControllerBase}/{{country}}/{{region}}";
+            public const string GetAllPostsFromCountry = $"{ControllerBase}/{{country}}";
+            public const string GetAllPostsFromRegion = $"{ControllerBase}/{{country}}/{{region}}";
             public const string GetAllPostsFromSubject = $"{ControllerBase}/{{country}}/{{region}}/{{subject}}";
             public const string GetPost = $"{ControllerBase}/{{id:long}}";
             public const string CreatePost = $"{ControllerBase}";
