@@ -1,7 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import PageTitle from '../../components/PageTitle'
-import OfferCard from '../../components/OfferCard'
 import { Flex } from '@mantine/core'
 import Sort from '../../components/Sort'
 import Filter from '../../components/Filter'
