@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom'
 
 export const CustomButton = props => {
   return (
-    <Link to={props.link} style={{ width: '100%' }}>
+    <Link to={props.link} style={{ width: props.width }}>
       <Button
+        onClick={props.disable ? event => event.preventDefault() : null}
+        data-disabled={props.disable ? true : null}
+        sx={
+          props.disable
+            ? { '&[data-disabled]': { pointerEvents: 'all' } }
+            : null
+        }
         variant={props.variant}
         style={{
-          width: props.width,
+          width: '100%',
           height: 'auto',
           fontSize: '16px',
           fontWeight: 700,
