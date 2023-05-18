@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Layout from '../layout'
 import HomePage from '../pages/HomePage'
+import CategoryPage from '../pages/CategoryPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import RegisterPage from '../pages/RegisterPage'
 import LogInPage from '../pages/LogInPage'
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LogInPage />} />
+        <Route path="category/:categoryName/" element={<CategoryPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </>
