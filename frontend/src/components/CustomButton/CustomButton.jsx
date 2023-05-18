@@ -6,7 +6,11 @@ export const CustomButton = props => {
   return (
     <Link to={props.link} style={{ width: props.width }}>
       <Button
-        onClick={props.disable ? event => event.preventDefault() : null}
+        onClick={
+          props.disable
+            ? event => event.preventDefault()
+            : () => props.onClick()
+        }
         data-disabled={props.disable ? true : null}
         sx={
           props.disable
