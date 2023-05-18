@@ -9,6 +9,7 @@ import Layout from '../layout'
 import HomePage from '../pages/HomePage'
 import NotFoundPage from '../pages/NotFoundPage'
 import RegisterPage from '../pages/RegisterPage'
+import LogInPage from '../pages/LogInPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LogInPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </>
