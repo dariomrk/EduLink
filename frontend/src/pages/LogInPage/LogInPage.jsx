@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TextInput, Flex, PasswordInput } from '@mantine/core'
 import CustomButton from '../../components/CustomButton'
-import { Color } from '../../style/colors'
 import { PageTitle } from '../../components/PageTitle/PageTitle'
 
 export const LogInPage = () => {
@@ -44,7 +43,6 @@ export const LogInPage = () => {
           style={{
             textDecoration: 'underline',
             textAlign: 'right',
-            color: Color.Button
           }}
         >
           Ne sjećaš se lozinke?
@@ -58,7 +56,6 @@ export const LogInPage = () => {
         <p
           style={{
             textAlign: 'center',
-            color: Color.Button
           }}
         >
           Imaš račun?

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { DateInput } from '@mantine/dates'
 import { TextInput, Flex, PasswordInput } from '@mantine/core'
 import CustomButton from '../../components/CustomButton'
-import { Color } from '../../style/colors'
 import { ReactComponent as Calender } from '../../img/calender.svg'
 import PageTitle from '../../components/PageTitle'
 
@@ -122,8 +121,7 @@ export const RegisterPage = () => {
 
           <p
             style={{
-              textAlign: 'center',
-              color: Color.Button
+              textAlign: 'center'
             }}
           >
             Imaš račun?

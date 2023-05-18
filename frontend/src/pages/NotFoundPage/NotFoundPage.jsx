@@ -1,7 +1,6 @@
 import React from 'react'
 import { ReactComponent as Wrong } from '../../img/wrong.svg'
 import CustomButton from '../../components/CustomButton'
-import { Color } from '../../style/colors'
 import { Flex } from '@mantine/core'
 
 export const NotFoundPage = () => {
@@ -14,7 +13,6 @@ export const NotFoundPage = () => {
       wrap="wrap"
       p="30px"
       style={{
-        color: Color.Primary,
         width: '100%',
         maxWidth: '600px',
         boxSizing: 'border-box',
@@ -30,7 +28,6 @@ export const NotFoundPage = () => {
         p=" 30px 30px 0 30px"
         w="100%"
         style={{
-          color: Color.Primary,
           margin: 'auto',
           boxSizing: 'border-box'
         }}

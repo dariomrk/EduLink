@@ -1,11 +1,17 @@
 import React from 'react'
-import { Color } from '../../style/colors'
+import { Colors } from '../../style/colors'
 import CategoryCard from '../../components/CategoryCard'
 import HomePagePicture from '../../img/HomePagePicture.png'
 import CustomButton from '../../components/CustomButton'
 import { Flex, ScrollArea } from '@mantine/core'
 import PageTitle from '../../components/PageTitle'
 import InstructorCard from '../../components/InstructorCard'
+import { ReactComponent as Math } from '../../img/category/math.svg'
+import { ReactComponent as Physics } from '../../img/category/physics.svg'
+import { ReactComponent as Programming } from '../../img/category/programming.svg'
+import { ReactComponent as Design } from '../../img/category/design.svg'
+import { ReactComponent as Marketing } from '../../img/category/marketing.svg'
+import { ReactComponent as Language } from '../../img/category/language.svg'
 
 export const HomePage = () => {
   return (
@@ -23,11 +29,11 @@ export const HomePage = () => {
         justify="flex-start"
         align="flex-start"
         direction="column"
-        w={{ base: '316px', sm: '482px', lg: '648px' }}
+        p="50px 0"
+        w={{ base: '328px', sm: '500px', lg: '1016px' }}
         m="auto"
         style={{
-          color: Color.Primary,
-          padding: '24px'
+          boxSizing: 'border-box'
         }}
       >
         <div className="title">Kategorije</div>
@@ -44,7 +50,29 @@ export const HomePage = () => {
           <CategoryCard
             name="Matematika"
             numOfInstructor={3}
-            link="/matematika"
+            svg={<Math> /</Math>}
+          />
+
+          <CategoryCard name="Fizika" numOfInstructor={3} svg={<Physics />} />
+
+          <CategoryCard
+            name="Programiranje"
+            numOfInstructor={3}
+            svg={<Programming />}
+          />
+
+          <CategoryCard name="Dizajn" numOfInstructor={3} svg={<Design />} />
+
+          <CategoryCard
+            name="Marketing"
+            numOfInstructor={3}
+            svg={<Marketing />}
+          />
+
+          <CategoryCard
+            name="Strani jezici"
+            numOfInstructor={3}
+            svg={<Language />}
           />
         </Flex>
         <div className="title">Top instruktori</div>
@@ -82,7 +110,7 @@ export const HomePage = () => {
           Učenje je lakše uz EduLink!
         </div>
         <CustomButton text="Saznaj više o nama" width="100%" />
-        <p style={{ textAlign: 'center' }}>
+        <p style={{ textAlign: 'center', color: Colors.Text }}>
           Naša platforma povezuje korisnike s iskusnim mentorima koji su
           posvećeni pružanju pomoći u postizanju uspjeha. Bez obzira tražite li
           personaliziranu instrukciju iz određenog područja, pripremu za ispite,
