@@ -2,6 +2,7 @@
 using Application.Enums;
 using Application.Exceptions;
 using Data.Models;
+using NetTopologySuite.Geometries;
 
 namespace Application.Extensions
 {
@@ -20,11 +21,20 @@ namespace Application.Extensions
 
                 SortByProperty.Name => tutors.OrderBy(tutor => tutor.FirstName),
 
-                SortByProperty.Distance => throw new NotImplementedException(), // TODO: Implement sorting by distance from the user in SortTutors
+                SortByProperty.Distance => tutors.OrderBy(tutor =>
+                    tutor.Coordinates != null
+                    ? tutor.Coordinates.Distance(new Point(sortDto.Longitude!.Value, sortDto.Latitude!.Value)
+                    {
+                        SRID = 4326
+                    })
+                    : tutor.City.Coordinates.Distance(new Point(sortDto.Longitude!.Value, sortDto.Longitude!.Value)
+                    {
+                        SRID = 4326
+                    })),
 
-                SortByProperty.Date => throw new InvalidRequestException<User>(nameof(SortByProperty), nameof(SortByProperty.Date)),
+                SortByProperty.Date => throw new NotSupportedRequestException<User>(nameof(SortByProperty), nameof(SortByProperty.Date)),
 
-                _ => throw new NotSupportedRequestException<User>(nameof(SortTutors), null),
+                _ => throw new InvalidRequestException<User>(nameof(SortTutors), null),
             };
 
             return sorted.SortOrder(sortDto.SortOrder);
