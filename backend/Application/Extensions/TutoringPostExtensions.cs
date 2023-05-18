@@ -1,6 +1,8 @@
 ﻿using Application.Dtos.Common;
 using Application.Enums;
 using Application.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
 
 namespace Application.Extensions
 {
@@ -19,7 +21,18 @@ namespace Application.Extensions
 
                 SortByProperty.Name => tutoringPosts.OrderBy(tutoringPost => tutoringPost.Tutor.FirstName),
 
-                SortByProperty.Distance => throw new NotImplementedException(), // TODO: Implement sorting by distance from the user in SortTutoringPosts
+                SortByProperty.Distance => tutoringPosts.OrderBy(tutoringPost =>
+                    tutoringPost.Tutor.Coordinates != null
+                    ? tutoringPost.Tutor.Coordinates
+                        .Distance(new Point(sortDto.Longitude!.Value, sortDto.Latitude!.Value)
+                        {
+                            SRID = 4326
+                        })
+                    : tutoringPost.Tutor.City.Coordinates
+                        .Distance(new Point(sortDto.Longitude!.Value, sortDto.Longitude!.Value)
+                        {
+                            SRID = 4326
+                        })),
 
                 SortByProperty.Date => tutoringPosts.OrderBy(tutoringPost =>
                     tutoringPost.AvailableTimeFrames.OrderBy(timeFrame => timeFrame.Start)),
