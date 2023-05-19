@@ -3,5 +3,6 @@ export const Colors = Object.freeze({
   Subtitle: '#434343',
   WhiteBg: '#F9F9FF',
   Background: '#283044',
-  Text: '#888686'
+  Text: '#888686',
+  Purple: '#5D5A88'
 })

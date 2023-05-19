@@ -10,7 +10,7 @@ export const TutorInfo = props => {
         maxWidth: '100%',
         overflowWrap: 'break-word',
         wrap: 'wrap',
-        gap: '8px',
+        gap: '8px'
       }}
     >
       <div

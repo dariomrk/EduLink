@@ -1,20 +1,21 @@
 import React from 'react'
 import { Image, Flex } from '@mantine/core'
-import TutorInfo from '../../components/TutorInfo'
+import { ReactComponent as Pin } from '../../img/pin.svg'
+import { ReactComponent as Verify } from '../../img/verify.svg'
 import { Colors } from '../../style/colors'
+
 export const ProfilePage = () => {
   return (
     <Flex
-      gap="24px"
+      gap="md"
       justify="flex-start"
       align="flex-start"
-      direction="flex-start"
+      direction="column"
       wrap="wrap"
-      p="24px"
-      w="100%"
-      style={{ maxWidth: '500px' }}
+      w="600px"
+      p="50px"
+      style={{ maxWidth: '100%' }}
       m="auto"
-
     >
       <Flex
         gap="md"
@@ -23,6 +24,7 @@ export const ProfilePage = () => {
         direction="row"
         wrap="wrap"
       >
+        <Image style={{ width: '70px', height: '70px' }} />
         <Flex
           gap="md"
           justify="flex-start"
@@ -45,15 +47,40 @@ export const ProfilePage = () => {
         </Flex>
       </Flex>
 
-      <TutorInfo />
-      <div className="infoWrapper">
-        <div className="infoTitle">Područje</div>
-        <div className="infoText">Matematika</div>
+      <div
+        style={{
+          fontSize: '20px',
+          fontWeight: 700,
+          lineHeight: '27px',
+          color: Colors.Purple
+        }}
+      >
+        ana
       </div>
 
-      <div className="infoWrapper">
-        <div className="infoTitle">O meni</div>
-        <div className="infoText">
+      <div
+        style={{
+          lineHeight: '20px',
+          fontSize: '14px',
+          gap: '4px',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <div className="infos">
+          <Pin /> Split, splitsko dalmatinska
+        </div>
+
+        <div className="infos">
+          {/* isVerified */}
+          <Verify />
+          Verficiran profil
+        </div>
+      </div>
+
+      <div className="profileWrapper">
+        <div className="profileTitle">O meni</div>
+        <div className="profileSubtitle">
           Volim [interes/aktivnost], te u slobodno vrijeme najčešće provodim
           vrijeme na [hobi/aktivnost]. Trenutno radim u [zanimanje/industrija],
           no stalno tražim nove načine kako bih se razvijao u tom području i
@@ -63,43 +90,40 @@ export const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="infoWrapper">
-        <div className="infoTitle">Recenzije (numberOfReviews)</div>
-        <div className="infoText">
+      <div className="profileWrapper">
+        <div className="profileTitle">Recenzije (3)</div>
+        <div className="profileSubtitle">
           <Flex
-            p="24px 0"
-            gap="8px"
+            gap="16px"
             justify="flex-start"
-            align="flex-start"
+            align="center"
             direction="row"
-            w="100%"
+            wrap="wrap"
           >
-            <Image
-              style={{ width: '80px', height: '80px' }}
-              src="https://picsum.photos/80/80"
-            />
+            <Image style={{ width: '70px', height: '70px' }} />
             <div>
               <div
                 style={{
+                  fontSize: '16px',
                   fontWeight: '500',
-                  color: Colors.Title
+                  color: Colors.Subtitle
                 }}
               >
-                Ana123
+                Ana
               </div>
-              <div>
-                Ivana odlično prilagodi tempo objašnjavanja i lako se dogovoriti
-                s njom. Ispit položen tako da hvala na pomoći!
+              <div
+                style={{
+                  fontSize: '14px',
+                  fontWeight: '400',
+                  color: Colors.Subtitle
+                }}
+              >
+                sve 5
               </div>
             </div>
           </Flex>
         </div>
       </div>
-
-          <TutorInfo />
-          
-        </Flex>
-      </Flex>
     </Flex>
   )
 }

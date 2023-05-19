@@ -5,10 +5,13 @@ import { Flex } from '@mantine/core'
 import Sort from '../../components/Sort'
 import Filter from '../../components/Filter'
 import OfferCard from '../../components/OfferCard'
+import { getAllFieldsFromSubject } from '../../services/subjectsServices'
 
 export const CategoryPage = () => {
   const { categoryName } = useParams()
   const numOfInstructor = 0 // get from db
+  const fields = getAllFieldsFromSubject(categoryName)
+  console.log(fields)
 
   return (
     <div>
@@ -38,9 +41,16 @@ export const CategoryPage = () => {
           <Filter />
         </Flex>
 
-        {/* {...(() => (
-          <OfferCard />
-        ))} */}
+        <OfferCard
+          post={{
+            tags: ['1', '2', '3'],
+            price: 100
+          }}
+          user={{
+            name: 'ante',
+            img: '...' // rating, ...
+          }}
+        />
       </Flex>
     </div>
   )

@@ -44,14 +44,21 @@ export const HomePage = () => {
           align="flex-start"
           mb="48px"
           w="100  "
+          // TODO: add cathegoryCards
         >
           <CategoryCard
+            link="matematika"
             name="Matematika"
             numOfInstructor={3}
             svg={<Math> /</Math>}
           />
 
-          <CategoryCard name="Fizika" numOfInstructor={3} svg={<Physics />} />
+          <CategoryCard
+            name="fizika"
+            link="matematika"
+            numOfInstructor={3}
+            svg={<Physics />}
+          />
 
           <CategoryCard
             name="Programiranje"
@@ -90,9 +97,7 @@ export const HomePage = () => {
             direction="row"
             wrap="nowrap"
           >
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
+            <InstructorCard />;<InstructorCard />
             <InstructorCard />
             <InstructorCard />
             <InstructorCard />

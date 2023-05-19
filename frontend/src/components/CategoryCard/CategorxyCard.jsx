@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export const CategoryCard = props => {
   return (
-    <Link to={'category/' + props.name}>
+    <Link to={'category/' + props.link}>
       <Card
         shadow="sm"
         padding="16px"

@@ -32,7 +32,6 @@ a {
   line-height: 20px;
   letter-spacing: 0em;
   margin: 2px 0;
-  color: #888686;
 }
 
 .infoTitle {
@@ -49,40 +48,14 @@ a {
   margin: 0;
 }
 
-.search {
-  position: absolute;
-  width: 50px;
-  left: 11px;
-  top: 11px;
-  bottom: 11px;
-  border: none;
-  outline: none;
-  border-color: transparent;
-}
-
-.search:focus-within {
-  width: 500px;
-  right: 45px;
-  overflow: hidden;
-  transition: width 1.5s;
-  font-size: 16px;
-  display: block;
-}
-
-.profile {
-  width: 70px;
-  overflow-wrap: break-word;
-  text-align: center;
-}
-
-.profileTItle {
-  color: #273043;
+.profileTitle {
   font-size: 20px;
   font-weight: 700;
+  color: #5d5a88;
 }
 
 .profileSubtitle {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
-  color: #888686;
+  color: #8d8ba7;
 }
