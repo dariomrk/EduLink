@@ -32,6 +32,7 @@ a {
   line-height: 20px;
   letter-spacing: 0em;
   margin: 2px 0;
+  color: #888686;
 }
 
 .infoTitle {
@@ -66,4 +67,22 @@ a {
   transition: width 1.5s;
   font-size: 16px;
   display: block;
+}
+
+.profile {
+  width: 70px;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.profileTItle {
+  color: #273043;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.profileSubtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: #888686;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Image, Flex, Button } from '@mantine/core'
 import TutorInfo from '../TutorInfo'
+import { Link } from 'react-router-dom'
 
 export const InstructorCard = props => {
   return (
@@ -25,7 +26,7 @@ export const InstructorCard = props => {
           isVerified={true}
         />
         <Button width="100%" variant="outline">
-          Prikaži više
+          <Link to={'users/' + props.id}> Prikaži više</Link>
         </Button>
       </Flex>
     </Card>

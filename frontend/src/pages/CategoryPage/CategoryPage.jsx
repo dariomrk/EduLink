@@ -9,7 +9,17 @@ import OfferCard from '../../components/OfferCard'
 export const CategoryPage = () => {
   const { categoryName } = useParams()
   const numOfInstructor = 0 // get from db
+  const data = ['ana', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+  const post = [
+    {
+      id: '58',
+      tags: ['tag1', 'tag2', 'tag3']
+    },
 
+    {
+      tags: ['tag1', 'tag2', 'tag3']
+    }
+  ]
   return (
     <div>
       <PageTitle
@@ -38,16 +48,9 @@ export const CategoryPage = () => {
           <Filter />
         </Flex>
 
-        <OfferCard
-          post={{
-            tags: ['1', '2', '3'],
-            price: 100
-          }}
-          user={{
-            name: 'ante',
-            img: '...' // rating, ...
-          }}
-        />
+        {post.map((x, index) => (
+          <OfferCard post={x} user={{ name: data[0] }} key={index} />
+        ))}
       </Flex>
     </div>
   )

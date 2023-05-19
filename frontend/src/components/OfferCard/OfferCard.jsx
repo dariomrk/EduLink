@@ -66,9 +66,9 @@ export const OfferCard = props => {
               direction="row"
               wrap="nowrap"
             >
-              {props.post.tags.map(tag => {
-                return <Tag tag={tag} key={tag}></Tag>
-              })}
+              {props.post.tags.map(tag => (
+                <Tag tag={tag} key={tag} />
+              ))}
             </Flex>
           </ScrollArea>
         </div>
@@ -90,7 +90,7 @@ export const OfferCard = props => {
             Cijena:
             <div>{props.post.price} €/h</div>
           </div>
-          <Button width="70%" variant="filled">
+          <Button w="70%" variant="filled">
             <Link to={'/posts/' + props.post.id}>Zakaži</Link>
           </Button>
         </Flex>
