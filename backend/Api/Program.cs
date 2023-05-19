@@ -85,6 +85,7 @@ namespace Api
             services.AddScoped<ITimeFrameService, TimeFrameService>();
             services.AddScoped<ITutoringPostService, TutoringPostService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISubjectService, SubjectService>();
             // services go here
             #endregion
 

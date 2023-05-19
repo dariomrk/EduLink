@@ -14,6 +14,7 @@ export const ProfilePage = () => {
       w="100%"
       style={{ maxWidth: '500px' }}
       m="auto"
+
     >
       <Flex
         gap="md"
@@ -29,7 +30,6 @@ export const ProfilePage = () => {
           direction="row"
           wrap="wrap"
         >
-          <Image style={{ width: '80px', height: '80px' }} />
           <div className="profile">
             <div className="profileTItle">4,3</div>
             <div className="profileSubtitle">proječna ocjena</div>
@@ -95,6 +95,11 @@ export const ProfilePage = () => {
           </Flex>
         </div>
       </div>
+
+          <TutorInfo />
+          
+        </Flex>
+      </Flex>
     </Flex>
   )
 }

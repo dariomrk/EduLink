@@ -27,9 +27,7 @@
         {
             private const string ControllerBase = $"{ApiBase}/posts";
 
-            public const string GetAllPostsFromCountry = $"{ControllerBase}/{{country}}";
-            public const string GetAllPostsFromRegion = $"{ControllerBase}/{{country}}/{{region}}";
-            public const string GetAllPostsFromSubject = $"{ControllerBase}/{{country}}/{{region}}/{{subject}}";
+            public const string GetAllPosts = $"{ControllerBase}";
             public const string GetPost = $"{ControllerBase}/{{id:long}}";
             public const string CreatePost = $"{ControllerBase}";
         }
@@ -60,6 +58,14 @@
             private const string ControllerBase = $"{ApiBase}/locations";
 
             public const string GetAllFromCountry = $"{ControllerBase}/{{country}}";
+        }
+
+        public static class Subjects
+        {
+            private const string ControllerBase = $"{ApiBase}/subjects";
+
+            public const string GetAllSubjects = $"{ControllerBase}";
+            public const string GetFieldsFromSubject = $"{ControllerBase}/{{subjectName}}";
         }
     }
 }

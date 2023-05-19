@@ -24,7 +24,9 @@ const router = createBrowserRouter(
         <Route path="/login" element={<LogInPage />} />
         <Route path="/messages" element={<MessagesPage />} />
         <Route path="/posts/:postId" element={<PostPage />} />
-        <Route path="/users/:userId" element={<ProfilePage />} />
+
+        <Route path="/profile/:profilsId" element={<ProfilePage />} />
+
         <Route path="category/:categoryName/" element={<CategoryPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />

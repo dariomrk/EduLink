@@ -90,7 +90,7 @@ export const OfferCard = props => {
             Cijena:
             <div>{props.post.price} €/h</div>
           </div>
-          <Button w="70%" variant="filled">
+          <Button width="70%" variant="filled">
             <Link to={'/posts/' + props.post.id}>Zakaži</Link>
           </Button>
         </Flex>

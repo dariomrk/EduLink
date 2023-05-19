@@ -4,6 +4,7 @@ import PageTitle from '../../components/PageTitle'
 import { Flex } from '@mantine/core'
 import Sort from '../../components/Sort'
 import Filter from '../../components/Filter'
+import OfferCard from '../../components/OfferCard'
 
 export const CategoryPage = () => {
   const { categoryName } = useParams()
