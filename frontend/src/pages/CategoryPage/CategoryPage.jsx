@@ -4,22 +4,11 @@ import PageTitle from '../../components/PageTitle'
 import { Flex } from '@mantine/core'
 import Sort from '../../components/Sort'
 import Filter from '../../components/Filter'
-import OfferCard from '../../components/OfferCard'
 
 export const CategoryPage = () => {
   const { categoryName } = useParams()
   const numOfInstructor = 0 // get from db
-  const data = ['ana', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-  const post = [
-    {
-      id: '58',
-      tags: ['tag1', 'tag2', 'tag3']
-    },
 
-    {
-      tags: ['tag1', 'tag2', 'tag3']
-    }
-  ]
   return (
     <div>
       <PageTitle
@@ -48,9 +37,9 @@ export const CategoryPage = () => {
           <Filter />
         </Flex>
 
-        {post.map((x, index) => (
-          <OfferCard post={x} user={{ name: data[0] }} key={index} />
-        ))}
+        {/* {...(() => (
+          <OfferCard />
+        ))} */}
       </Flex>
     </div>
   )
