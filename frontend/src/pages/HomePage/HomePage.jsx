@@ -44,15 +44,20 @@ export const HomePage = () => {
           align="flex-start"
           mb="48px"
           w="100  "
-          // TODO: add cathegoryCards
         >
           <CategoryCard
             name="Matematika"
+            link="matematika"
             numOfInstructor={3}
             svg={<Math> /</Math>}
           />
 
-          <CategoryCard name="Fizika" numOfInstructor={3} svg={<Physics />} />
+          <CategoryCard
+            name="Fizika"
+            link="fizika"
+            numOfInstructor={3}
+            svg={<Physics />}
+          />
 
           <CategoryCard
             name="Programiranje"
