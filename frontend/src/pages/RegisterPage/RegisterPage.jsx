@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DateInput } from '@mantine/dates'
-import { TextInput, Flex, PasswordInput } from '@mantine/core'
-import CustomButton from '../../components/CustomButton'
+import { TextInput, Flex, PasswordInput, Button } from '@mantine/core'
 import { ReactComponent as Calender } from '../../img/calender.svg'
 import PageTitle from '../../components/PageTitle'
 
 export const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [name, setName] = useState('')
+  const [city, setCity] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -27,14 +26,9 @@ export const RegisterPage = () => {
         w="100%"
       >
         <TextInput
-          label="Ime"
-          value={firstName}
-          onChange={event => setFirstName(event.currentTarget.value)}
-        />
-        <TextInput
-          label="Prezime"
-          value={lastName}
-          onChange={event => setLastName(event.currentTarget.value)}
+          label="Ime i prezime"
+          value={name}
+          onChange={event => setName(event.currentTarget.value)}
         />
         <DateInput
           icon={<Calender />}
@@ -44,10 +38,13 @@ export const RegisterPage = () => {
           label="Date input"
           placeholder="Date input"
         />
-        <CustomButton
-          text="Dalje"
-          onClick={() => setActiveStep(activeStep + 1)}
+
+        <TextInput
+          label="Grad"
+          value={city}
+          onChange={event => setCity(event.currentTarget.value)}
         />
+        <Button onClick={() => setActiveStep(activeStep + 1)}>Dalje</Button>
       </Flex>
     )
   }
@@ -89,16 +86,12 @@ export const RegisterPage = () => {
           stayle={{ gap: '24px' }}
           w="100%"
         >
-          <CustomButton
-            text="Natrag"
-            onClick={() => setActiveStep(activeStep - 1)}
-            width="50%"
-          />
-          <CustomButton
-            text="Dalje"
-            onClick={() => setActiveStep(activeStep + 1)}
-            width="50%"
-          />
+          <Button onClick={() => setActiveStep(activeStep - 1)} width="50%">
+            Natrag
+          </Button>
+          <Button onClick={() => setActiveStep(activeStep + 1)} width="50%">
+            Dalje
+          </Button>
         </Flex>
       </Flex>
     )

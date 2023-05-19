@@ -1,6 +1,5 @@
 import React from 'react'
-import { Card, Image, Flex } from '@mantine/core'
-import CustomButton from '../CustomButton'
+import { Card, Image, Flex, Button } from '@mantine/core'
 import TutorInfo from '../TutorInfo'
 
 export const InstructorCard = props => {
@@ -25,7 +24,9 @@ export const InstructorCard = props => {
           distance={props.distance}
           isVerified={true}
         />
-        <CustomButton width="100%" variant="outline" text="Prikaži više" />
+        <Button width="100%" variant="outline">
+          Prikaži više
+        </Button>
       </Flex>
     </Card>
   )

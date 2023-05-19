@@ -1,12 +1,14 @@
 @import './fonts/fonts.css';
 
 body {
+  background-color: #ffffff;
   margin: 0;
   font-family: 'DM Sans';
   font-style: normal;
 }
 
 .infos {
+  color: darkgray;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -22,4 +24,46 @@ a {
   font-weight: 700;
   line-height: 32px;
   letter-spacing: 0px;
+}
+
+.infoText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  margin: 2px 0;
+}
+
+.infoTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  margin: 0px;
+  margin: 2px 0;
+}
+
+.infoWrapper {
+  width: 100%;
+  margin: 0;
+}
+
+.search {
+  position: absolute;
+  width: 50px;
+  left: 11px;
+  top: 11px;
+  bottom: 11px;
+  border: none;
+  outline: none;
+  border-color: transparent;
+}
+
+.search:focus-within {
+  width: 500px;
+  right: 45px;
+  overflow: hidden;
+  transition: width 1.5s;
+  font-size: 16px;
+  display: block;
 }

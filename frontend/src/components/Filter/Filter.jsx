@@ -8,7 +8,6 @@ import {
   Container
 } from '@mantine/core'
 import React from 'react'
-import CustomButton from '../CustomButton'
 
 export const Filter = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -36,12 +35,18 @@ export const Filter = () => {
             mb="16px"
           />
 
-          <CustomButton text="Primjeni filtere" link="" width="100%" />
+          <Button> Primjeni filtere</Button>
         </Container>
       </Drawer>
 
       <Group position="center">
-        <Button onClick={open} h="36px" variant="outline" color="black" ml="10px">
+        <Button
+          p="10px"
+          onClick={open}
+          variant="outline"
+          color="black"
+          ml="10px"
+        >
           Filteri
         </Button>
       </Group>

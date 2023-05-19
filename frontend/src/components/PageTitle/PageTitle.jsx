@@ -1,11 +1,11 @@
 import React from 'react'
-import { Color } from '../../style/colors'
 
 export const PageTitle = props => {
   return (
     <div
       style={{
-        backgroundColor: Color.Primary,
+        background:
+          'linear-gradient(87.91deg, #273043 3.54%, rgba(0, 69, 215, 0.55) 239.42%)',
         color: 'white',
         textAlign: 'center',
         padding: props.p,

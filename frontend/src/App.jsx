@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 import { MantineProvider } from '@mantine/core'
 import Router from './router'
-import { Color } from './style/colors'
+import { Colors } from './style/colors'
 
 function App () {
   return (
@@ -12,15 +12,35 @@ function App () {
           Button: {
             styles: (theme, params, { variant }) => ({
               root: {
-                height: '2.625rem',
-                padding: '0 1.875rem',
-                backgroundColor: variant === 'filled' ? Color.Button : 'white',
-                color: variant === 'filled' ? 'white' : Color.Button,
-                border: `1px solid ${Color.Button}`,
+                width: '100%',
+                height: 'auto',
+                fontSize: '16px',
+                fontWeight: 700,
+                padding: '16px 0',
+                overflowWrap: 'break-word',
+                background:
+                  variant === 'filled'
+                    ? 'linear-gradient(87.91deg, #9E3DFF 3.54%, #D2A6FF 239.42%)'
+                    : '#FFFFFF',
+                color: variant === 'filled' ? 'white' : Colors.Background,
+                borderColor: variant === 'filled' ? 'white' : Colors.Text,
                 '&:hover': {
-                  backgroundColor:
-                    variant === 'filled' ? Color.Primary : Color.Secondary
+                  backgroundColor: '#E4E4E4'
                 }
+              }
+            })
+          },
+          Checkbox: {
+            styles: () => ({
+              root: {
+                border: '1px solid #E4E4E4',
+                boxSizing: 'border-box',
+                padding: '15px',
+                width: '100%',
+                borderRadius: '10px',
+                fontSize: '16px',
+                fontWeight: '700',
+                color: Colors.Title
               }
             })
           },

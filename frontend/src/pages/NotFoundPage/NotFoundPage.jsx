@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactComponent as Wrong } from '../../img/wrong.svg'
-import CustomButton from '../../components/CustomButton'
-import { Flex } from '@mantine/core'
+import { Flex, Button } from '@mantine/core'
+import { Link } from 'react-router-dom'
 
 export const NotFoundPage = () => {
   return (
@@ -58,12 +58,9 @@ export const NotFoundPage = () => {
         dostupna. Možda je premještena, obrisana ili ste jednostavno unijeli
         pogrešan URL.
       </p>
-      <CustomButton
-        variant="filled"
-        width="100%"
-        text="Vrati me na početnu"
-        link="/"
-      />
+      <Button variant="filled" width="100%">
+        <Link to="/">Vrati me na početnu</Link>
+      </Button>
     </Flex>
   )
 }
