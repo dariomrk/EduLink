@@ -3,6 +3,6 @@
     public class SubjectResponseDto
     {
         public string SubjectName { get; set; } = null!;
-        public ICollection<string> Fields = new List<string>();
+        public ICollection<string> Fields { get; set; } = new List<string>();
     }
 }
