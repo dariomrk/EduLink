@@ -61,5 +61,13 @@
 
             public const string GetAllFromCountry = $"{ControllerBase}/{{country}}";
         }
+
+        public static class Subjects
+        {
+            private const string ControllerBase = $"{ApiBase}/subjects";
+
+            public const string GetAllSubjects = $"{ControllerBase}";
+            public const string GetFieldsFromSubject = $"{ControllerBase}/{{subjectName}}";
+        }
     }
 }
