@@ -38,16 +38,9 @@ export const CategoryPage = () => {
           <Filter />
         </Flex>
 
-        <OfferCard
-          post={{
-            tags: ['1', '2', '3'],
-            price: 100
-          }}
-          user={{
-            name: 'ante',
-            img: '...' // rating, ...
-          }}
-        />
+        {/* {...(() => (
+          <OfferCard />
+        ))} */}
       </Flex>
     </div>
   )

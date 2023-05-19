@@ -66,9 +66,9 @@ export const OfferCard = props => {
               direction="row"
               wrap="nowrap"
             >
-              {props.post.tags.map(tag => {
-                return <Tag tag={tag} key={tag}></Tag>
-              })}
+              {props.post.tags.map(tag => (
+                <Tag tag={tag} key={tag} />
+              ))}
             </Flex>
           </ScrollArea>
         </div>

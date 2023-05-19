@@ -44,7 +44,6 @@ export const HomePage = () => {
           align="flex-start"
           mb="48px"
           w="100  "
-          // TODO: add cathegoryCards
         >
           <CategoryCard
             name="Matematika"
@@ -91,7 +90,9 @@ export const HomePage = () => {
             direction="row"
             wrap="nowrap"
           >
-            <InstructorCard />;<InstructorCard />
+            <InstructorCard />
+            <InstructorCard />
+            <InstructorCard />
             <InstructorCard />
             <InstructorCard />
             <InstructorCard />
