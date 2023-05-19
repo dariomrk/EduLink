@@ -1,8 +1,8 @@
-import { Flex, Image, ScrollArea, Card } from '@mantine/core'
+import { Flex, Image, ScrollArea, Card, Button } from '@mantine/core'
 import Tag from '../Tag/index'
 import React from 'react'
-import { CustomButton } from '../CustomButton/CustomButton.jsx'
 import { TutorInfo } from '../TutorInfo/TutorInfo.jsx'
+import { Link } from 'react-router-dom'
 
 export const OfferCard = props => {
   return (
@@ -26,9 +26,9 @@ export const OfferCard = props => {
           style={{ width: '100%' }}
         >
           <Image
-            src={'data:image/png;base64,' + props.img}
-            width="114"
-            height="81"
+            src={'data:image/png;base64,' + props.user.img}
+            width="100"
+            height="100"
             radius="10px"
             alt="Profile picture of tutor"
           />
@@ -40,10 +40,10 @@ export const OfferCard = props => {
             }}
           >
             <TutorInfo
-              name={props.name}
-              stars={props.stars}
-              review={props.review}
-              distance={props.distance}
+              name={props.user.name}
+              stars={props.user.stars}
+              review={props.user.review}
+              distance={props.user.distance}
             />
           </div>
         </Flex>
@@ -66,7 +66,7 @@ export const OfferCard = props => {
               direction="row"
               wrap="nowrap"
             >
-              {props.tags.map(tag => {
+              {props.post.tags.map(tag => {
                 return <Tag tag={tag} key={tag}></Tag>
               })}
             </Flex>
@@ -88,9 +88,11 @@ export const OfferCard = props => {
             }}
           >
             Cijena:
-            <div>{props.price} €/h</div>
+            <div>{props.post.price} €/h</div>
           </div>
-          <CustomButton width="70%" text="Zakaži" variant="filled" />
+          <Button width="70%" variant="filled">
+            <Link to={'/posts/' + props.post.id}>Zakaži</Link>
+          </Button>
         </Flex>
       </Flex>
     </Card>

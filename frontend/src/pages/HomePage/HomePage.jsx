@@ -2,8 +2,7 @@ import React from 'react'
 import { Colors } from '../../style/colors'
 import CategoryCard from '../../components/CategoryCard'
 import HomePagePicture from '../../img/HomePagePicture.png'
-import CustomButton from '../../components/CustomButton'
-import { Flex, ScrollArea } from '@mantine/core'
+import { Flex, ScrollArea, Button } from '@mantine/core'
 import PageTitle from '../../components/PageTitle'
 import InstructorCard from '../../components/InstructorCard'
 import { ReactComponent as Math } from '../../img/category/math.svg'
@@ -109,7 +108,7 @@ export const HomePage = () => {
         >
           Učenje je lakše uz EduLink!
         </div>
-        <CustomButton text="Saznaj više o nama" width="100%" />
+        <Button width="100%"> Saznaj više o nama</Button>
         <p style={{ textAlign: 'center', color: Colors.Text }}>
           Naša platforma povezuje korisnike s iskusnim mentorima koji su
           posvećeni pružanju pomoći u postizanju uspjeha. Bez obzira tražite li

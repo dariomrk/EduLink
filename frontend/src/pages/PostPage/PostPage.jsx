@@ -1,10 +1,99 @@
-import React from 'react'
-import { Flex, Image } from '@mantine/core'
+import React, { useState } from 'react'
+import {
+  Flex,
+  Image,
+  Checkbox,
+  Drawer,
+  Group,
+  Textarea,
+  Button
+} from '@mantine/core'
 import TutorInfo from '../../components/TutorInfo'
-import CustomButton from '../../components/CustomButton'
-import Tag from '../../components/Tag'
+import { useDisclosure } from '@mantine/hooks'
+import { Colors } from '../../style/colors'
+import { useParams } from 'react-router-dom'
 
 export const PostPage = () => {
+  const { postId } = useParams()
+  console.log(postId)
+  const [activeStep, setActiveStep] = useState(0)
+  const [opened, { open, close }] = useDisclosure(false)
+
+  const firstStep = () => {
+    return (
+      <Drawer
+        opened={opened}
+        onClose={close}
+        title={
+          <div
+            style={{
+              fontSize: '32px',
+              fontWeight: '700',
+              color: Colors.Title
+            }}
+          >
+            Odaberi temu
+          </div>
+        }
+      >
+        <Checkbox.Group
+          withAsterisk
+          style={{ width: '100%', boxSizing: 'border-box' }}
+        >
+          <Group mt="xs">
+            <Checkbox value="react" label="React" />
+            <Checkbox value="svelte" label="Svelte" />
+            <Checkbox value="ng" label="Angular" />
+            <Checkbox value="vue" label="Vue" />
+          </Group>
+        </Checkbox.Group>
+
+        <Textarea
+          mt="50px"
+          placeholder="Ovdje možete dodati svoju napomenu"
+          h="100px"
+          withAsterisk
+        />
+        <Button onClick={() => setActiveStep(activeStep + 1)}>Dalje</Button>
+      </Drawer>
+    )
+  }
+
+  const secondStep = () => {
+    return (
+      <Drawer
+        opened={opened}
+        onClose={close}
+        title={
+          <div
+            style={{
+              fontSize: '32px',
+              fontWeight: '700'
+            }}
+          >
+            Odaberi svoj termin
+          </div>
+        }
+      >
+        <Checkbox.Group
+          withAsterisk
+          style={{ width: '100%', boxSizing: 'border-box' }}
+        >
+          <Group mt="xs">
+            <Checkbox value="react" label="React" />
+            <Checkbox value="svelte" label="Svelte" />
+            <Checkbox value="ng" label="Angular" />
+            <Checkbox value="vue" label="Vue" />
+          </Group>
+        </Checkbox.Group>
+
+        <Button text="Dalje" onClick={() => setActiveStep(activeStep + 1)}>
+          Button
+        </Button>
+      </Drawer>
+    )
+  }
+
   return (
     <div>
       <Flex
@@ -17,12 +106,13 @@ export const PostPage = () => {
         w={{ base: '100%', md: '500px', lg: '1000px' }}
         m="auto"
         style={{
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          color: Colors.Title
         }}
       >
         <Image
           src={
-            'data:image/png;base64,' /* + users.img */
+            'data:image/png;base64,' /* + users.filter(u => u.id === post.Id)[0].img */
           }
           style={{ width: '100px', height: '100px' }}
           alt="Profile picture"
@@ -51,36 +141,35 @@ export const PostPage = () => {
               direction="row"
               wrap="wrap"
             >
-              {/* {post.tags.map(tag => { */}
-              <Tag tag="a"></Tag>
-              {/*               })}
-               */}{' '}
+              {/* offefr pages */}
             </Flex>
           </div>
         </div>
         <div className="infoWrapper">
           <div className="infoText">Napomena</div>
-          <div className="infoTitle">--</div>
+          <div className="infoTitle">{''}</div>
         </div>
 
         <div className="infoWrapper">
           <div className="infoText">Cijena</div>
-          <div className="infoTitle">3.20€/h</div>
+          <div className="infoTitle">{''}</div>
         </div>
 
         <div className="infoWrapper">
           <div className="infoText">Dostupnost</div>
-          <div className="infoTitle">Popodnevni termini</div>
+          <div className="infoTitle">{''}</div>
         </div>
 
-        <CustomButton
-          text="Rezerviraj termin"
+        <Button
           onClick={() => {
-            handleClick() 
+            open()
           }}
-          width="100%"
-          disable={false} // TODO: check is user is logged in
-        />
+          width="100%" // ovisi o logijnu jel diabled
+        >
+          Rezerviraj termin
+        </Button>
+
+        {activeStep === 0 ? firstStep() : secondStep()}
       </Flex>
     </div>
   )

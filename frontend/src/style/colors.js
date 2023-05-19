@@ -1,7 +1,7 @@
-export const Color = Object.freeze({
-  Primary: '#9795B5',
-  Secondary: '#F1EFFE',
-  Button: '#8D8BA7',
-  Title: '#5D5A88',
-  White: '#FFFFFF'
+export const Colors = Object.freeze({
+  Title: '#273043',
+  Subtitle: '#434343',
+  WhiteBg: '#F9F9FF',
+  Background: '#283044',
+  Text: '#888686'
 })

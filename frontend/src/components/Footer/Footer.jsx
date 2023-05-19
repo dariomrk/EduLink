@@ -1,17 +1,17 @@
 import React from 'react'
 import { Flex } from '@mantine/core'
-import { ReactComponent as Logo } from '../../img/logo.svg'
-import { ReactComponent as Facebook } from '../../img/Facebook.svg'
-import { ReactComponent as Instagram } from '../../img/Instagram.svg'
-import { ReactComponent as Youtube } from '../../img/Youtube.svg'
-import { ReactComponent as LinkedIn } from '../../img/Linkedin.svg'
-import { Color } from '../../style/colors'
+import { ReactComponent as Logo } from '../../img/footer/logo.svg'
+import { ReactComponent as Facebook } from '../../img/footer/Facebook.svg'
+import { ReactComponent as Instagram } from '../../img/footer/Instagram.svg'
+import { ReactComponent as Youtube } from '../../img/footer/Youtube.svg'
+import { ReactComponent as LinkedIn } from '../../img/footer/Linkedin.svg'
+import { Colors } from '../../style/colors'
 import { Link } from 'react-router-dom'
 
 export const Footer = () => {
   return (
     <Flex
-      bg={Color.Primary}
+      bg={Colors.Background}
       gap="md"
       justify="center"
       align="center"
@@ -20,7 +20,7 @@ export const Footer = () => {
       p="40px 10px 24px 10px"
       style={{
         width: '100%',
-        color: Color.White,
+        color: '#FFFFFF',
         boxSizing: 'border-box',
         lineHeight: '23.5px',
         textAlign: 'center'

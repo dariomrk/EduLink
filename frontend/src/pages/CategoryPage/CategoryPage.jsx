@@ -4,6 +4,7 @@ import PageTitle from '../../components/PageTitle'
 import { Flex } from '@mantine/core'
 import Sort from '../../components/Sort'
 import Filter from '../../components/Filter'
+import OfferCard from '../../components/OfferCard'
 
 export const CategoryPage = () => {
   const { categoryName } = useParams()
@@ -32,20 +33,21 @@ export const CategoryPage = () => {
         wrap="wrap"
         style={{ margin: 'auto' }}
       >
-        <Flex w="100%">
+        <Flex align="center" w="100%">
           <Sort />
           <Filter />
         </Flex>
 
-        {/*         {data.map((item, index) => {
-          return (
-            <OfferCard
-              post={item}
-              user={users.filter(u => u.id === item.user)[0]}
-              key={index}
-            />
-          )
-        })} */}
+        <OfferCard
+          post={{
+            tags: ['1', '2', '3'],
+            price: 100
+          }}
+          user={{
+            name: 'ante',
+            img: '...' // rating, ...
+          }}
+        />
       </Flex>
     </div>
   )

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { TextInput, Flex, PasswordInput } from '@mantine/core'
-import CustomButton from '../../components/CustomButton'
+import { TextInput, Flex, PasswordInput, Button } from '@mantine/core'
 import { PageTitle } from '../../components/PageTitle/PageTitle'
 
 export const LogInPage = () => {
@@ -31,31 +30,29 @@ export const LogInPage = () => {
               : (setUsername(event.currentTarget.value), setEmail(''))
           }
         />
-
         <PasswordInput
           value={password}
           label="Lozinka"
           onChange={event => setPassword(event.currentTarget.value)}
         />
-
         <Link
           to="/help"
           style={{
             textDecoration: 'underline',
-            textAlign: 'right',
+            textAlign: 'right'
           }}
         >
           Ne sjećaš se lozinke?
         </Link>
-
-        <CustomButton
-          text="Prijavi se"
+        <Button
           // onClick={() => }
           width="100%"
-        />
+        >
+          Prijavi se
+        </Button>{' '}
         <p
           style={{
-            textAlign: 'center',
+            textAlign: 'center'
           }}
         >
           Imaš račun?

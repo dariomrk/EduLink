@@ -1,44 +1,41 @@
 import React from 'react'
 import { Card, Flex } from '@mantine/core'
-import { Color } from '../../style/colors'
+import { Colors } from '../../style/colors'
 import { Link } from 'react-router-dom'
 
 export const CategoryCard = props => {
   return (
-    <Link to={'category' + props.link} style={{ textDecoration: 'none' }}>
+    <Link to={'category/' + props.name}>
       <Card
         shadow="sm"
         padding="16px"
         withBorder
         radius="10px"
-        w="150px"
+        w="156px"
+        h="156px"
         style={{
-          backgroundColor: Color.CategoryCardPrimary,
-          borderColor: Color.CategoryCardBorder,
+          backgroundColor: Colors.WhiteBg,
           textAlign: 'center'
         }}
       >
         <Flex w="100%" gap="8px" align="center" direction="column">
-          <div
-            style={{
-              backgroundColor: props.backgroundColor,
-              width: '70px',
-              height: '70px'
-            }}
-          >
-            {props.svgContent}
-          </div>
+          {props.svg}
 
           <div
             style={{
               fontSize: '16px',
               fontWeight: 700,
-              color: Color.Title
+              color: Colors.Title
             }}
           >
             {props.name}
-
-            <div style={{ fontSize: '14px', fontWeight: 400 }}>
+            <div
+              style={{
+                fontSize: '14px',
+                fontWeight: 400,
+                color: Colors.Subtitle
+              }}
+            >
               {props.numOfInstructor}
               {props.numOfInstructor === 1 ? ' instruktor' : ' instruktora'}
             </div>
