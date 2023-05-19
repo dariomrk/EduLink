@@ -73,93 +73,6 @@ namespace Application.Services
             return tutoringPost ?? throw new NotFoundException<Data.Models.TutoringPost>(id);
         }
 
-        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromCountryAsync(
-            string countryName,
-            PaginationRequestDto? paginationOptions = null,
-            SortRequestDto? sortOptions = null,
-            CancellationToken cancellationToken = default)
-        {
-            var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost =>
-                    tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower())
-                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
-                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
-                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
-                .ProjectToDto()
-                .ToListAsync(cancellationToken);
-
-            return tutoringPosts;
-        }
-
-        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromRegionAsync(
-            string countryName,
-            string regionName,
-            PaginationRequestDto? paginationOptions = null,
-            SortRequestDto? sortOptions = null,
-            CancellationToken cancellationToken = default)
-        {
-            var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost =>
-                    tutoringPost.Tutor.City.Region.Name == regionName.ToNormalizedLower()
-                    && tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower())
-                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
-                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
-                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
-                .ProjectToDto()
-                .ToListAsync(cancellationToken);
-
-            return tutoringPosts;
-        }
-
-        public async Task<ICollection<TutoringPostResponseDto>> GetTutoringPostsFromSubjectAsync(
-            string countryName,
-            string regionName,
-            string subjectName,
-            PaginationRequestDto? paginationOptions = null,
-            SortRequestDto? sortOptions = null,
-            CancellationToken cancellationToken = default)
-        {
-            var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost =>
-                    tutoringPost.Tutor.City.Region.Name == regionName.ToNormalizedLower()
-                    && tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower()
-                    && tutoringPost.Fields.Any()
-                    && tutoringPost.Fields.FirstOrDefault()!.Field.Subject.Name == subjectName.ToNormalizedLower())
-                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
-                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
-                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
-                .ProjectToDto()
-                .ToListAsync(cancellationToken);
-
-            return tutoringPosts;
-        }
-
-        public async Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
-            string countryName,
-            string regionName,
-            PaginationRequestDto? paginationOptions = null,
-            SortRequestDto? sortOptions = null,
-            CancellationToken cancellationToken = default)
-        {
-            var tutoringPosts = await _tutoringPostRepository.Query()
-                .Where(tutoringPost =>
-                    tutoringPost.Tutor.City.Region.Name == regionName.ToNormalizedLower()
-                    && tutoringPost.Tutor.City.Region.Country.Name == countryName.ToNormalizedLower())
-                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
-                    .Any(timeFrame => timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
-                .Where(tutoringPost => tutoringPost.AvailableTimeFrames
-                    .Any(timeFrame => timeFrame.TakenByStudent == null))
-                .SortTutoringPosts(sortOptions ?? new SortRequestDto { SortByProperty = SortByProperty.Rating, SortOrder = SortOrder.Descending })
-                .Paginate(paginationOptions ?? new PaginationRequestDto { Skip = 0, Take = 25 })
-                .ProjectToDto()
-                .ToListAsync(cancellationToken);
-
-            return tutoringPosts;
-        }
-
         public async Task<bool> TutoringPostExistsAsync(
             long tutoringPost,
             CancellationToken cancellationToken = default)
@@ -180,6 +93,38 @@ namespace Application.Services
                     && tutoringPost.Appointments.Any(appointment =>
                         appointment.Id == appointmentId),
                     cancellationToken);
+        }
+
+        public async Task<ICollection<TutoringPostResponseDto>> GetAvailableTutoringPostsAsync(
+            string? regionName,
+            string? subjectName,
+            PaginationRequestDto? paginationOptions = null,
+            SortRequestDto? sortOptions = null,
+            CancellationToken cancellationToken = default)
+        {
+            var posts = await _tutoringPostRepository.Query()
+                .Where(post =>
+                    (regionName == null
+                    || post.Tutor.City.Region.Name == regionName.ToNormalizedLower())
+                    && (subjectName == null
+                    || post.Fields.FirstOrDefault()!.Field.Subject.Name == subjectName.ToNormalizedLower()))
+                .Where(post => post.AvailableTimeFrames
+                    .Any(timeFrame =>
+                        timeFrame.Start > DateTime.UtcNow.Add(timeFrame.Start.Offset)))
+                .SortTutoringPosts(sortOptions ?? new SortRequestDto
+                {
+                    SortByProperty = SortByProperty.Date,
+                    SortOrder = SortOrder.Descending,
+                })
+                .Paginate(paginationOptions ?? new PaginationRequestDto
+                {
+                    Skip = 0,
+                    Take = 25
+                })
+                .ProjectToDto()
+                .ToListAsync(cancellationToken);
+
+            return posts;
         }
     }
 }

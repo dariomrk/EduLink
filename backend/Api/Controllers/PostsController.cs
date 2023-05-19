@@ -19,53 +19,16 @@ namespace Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet(Endpoints.Posts.GetAllPostsFromCountry)]
-        public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPostsFromCountry(
-            [FromRoute] string countryName,
-            [FromQuery] SortRequestDto sortOptions,
-            [FromQuery] PaginationRequestDto paginationOptions,
-            CancellationToken cancellationToken)
-        {
-            var posts = await _postService.GetTutoringPostsFromCountryAsync(
-                countryName,
-                paginationOptions,
-                sortOptions,
-                cancellationToken);
-
-            return Ok(posts);
-        }
-
-        [AllowAnonymous]
-        [HttpGet(Endpoints.Posts.GetAllPostsFromRegion)]
-        public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPostsFromRegion(
-            [FromRoute] string countryName,
-            [FromRoute] string regionName,
-            [FromQuery] SortRequestDto sortOptions,
-            [FromQuery] PaginationRequestDto paginationOptions,
-            CancellationToken cancellationToken)
-        {
-            var posts = await _postService.GetTutoringPostsFromRegionAsync(
-                countryName,
-                regionName,
-                paginationOptions,
-                sortOptions,
-                cancellationToken);
-
-            return Ok(posts);
-        }
-
-        [AllowAnonymous]
-        [HttpGet(Endpoints.Posts.GetAllPostsFromSubject)]
+        [HttpGet(Endpoints.Posts.GetAllPosts)]
         public async Task<ActionResult<ICollection<TutoringPostResponseDto>>> GetAllPosts(
-            [FromRoute] string countryName,
-            [FromRoute] string regionName,
-            [FromRoute] string subjectName,
-            [FromQuery] SortRequestDto sortOptions,
-            [FromQuery] PaginationRequestDto paginationOptions,
+            [FromQuery] string? regionName,
+            [FromQuery] string? subjectName,
+            [FromQuery] PaginationRequestDto? paginationOptions,
+            [FromQuery] SortRequestDto? sortOptions,
             CancellationToken cancellationToken)
         {
-            var posts = await _postService.GetTutoringPostsFromSubjectAsync(
-                countryName,
+            // removed country query param
+            var posts = await _postService.GetAvailableTutoringPostsAsync(
                 regionName,
                 subjectName,
                 paginationOptions,
