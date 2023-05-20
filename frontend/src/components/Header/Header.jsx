@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex } from '@mantine/core'
-import { ReactComponent as Logo } from '../../img/logo.svg'
+import { ReactComponent as Logo } from '../../img/header/logo.svg'
+import DropdownMenu from '../DropdownMenu'
 export const Header = () => {
   return (
     <Flex
@@ -28,7 +29,9 @@ export const Header = () => {
           display: 'flex',
           justifyContent: 'flex-end'
         }}
-      ></div>
+      >
+        <DropdownMenu />
+      </div>
     </Flex>
   )
 }

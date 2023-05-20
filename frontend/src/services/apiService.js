@@ -25,6 +25,7 @@ export const tryRegister = async (userData) => {
       setBearerToken(response.data.bearerToken)
       return true
     }
+    console.log(response)
     return false
   } catch (error) {
     console.error(error)

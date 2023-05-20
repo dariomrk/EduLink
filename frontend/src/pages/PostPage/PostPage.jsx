@@ -12,12 +12,19 @@ import TutorInfo from '../../components/TutorInfo'
 import { useDisclosure } from '@mantine/hooks'
 import { Colors } from '../../style/colors'
 import { useParams } from 'react-router-dom'
+import Tag from '../../components/Tag'
+import { posts, users } from '../../data'
 
 export const PostPage = () => {
   const { postId } = useParams()
-  console.log(postId)
+  const post = posts[postId]
+  const user = users[post.userId]
   const [activeStep, setActiveStep] = useState(0)
   const [opened, { open, close }] = useDisclosure(false)
+
+  function handleClick () {
+    // check if everything is ok, add to database
+  }
 
   const firstStep = () => {
     return (
@@ -40,12 +47,7 @@ export const PostPage = () => {
           withAsterisk
           style={{ width: '100%', boxSizing: 'border-box' }}
         >
-          <Group mt="xs">
-            <Checkbox value="react" label="React" />
-            <Checkbox value="svelte" label="Svelte" />
-            <Checkbox value="ng" label="Angular" />
-            <Checkbox value="vue" label="Vue" />
-          </Group>
+          <Group mt="xs">{/* tags */}</Group>
         </Checkbox.Group>
 
         <Textarea
@@ -79,15 +81,10 @@ export const PostPage = () => {
           withAsterisk
           style={{ width: '100%', boxSizing: 'border-box' }}
         >
-          <Group mt="xs">
-            <Checkbox value="react" label="React" />
-            <Checkbox value="svelte" label="Svelte" />
-            <Checkbox value="ng" label="Angular" />
-            <Checkbox value="vue" label="Vue" />
-          </Group>
+          <Group mt="xs"></Group>
         </Checkbox.Group>
 
-        <Button text="Dalje" onClick={() => setActiveStep(activeStep + 1)}>
+        <Button text="Dalje" onClick={() => handleClick}>
           Button
         </Button>
       </Drawer>
@@ -112,7 +109,8 @@ export const PostPage = () => {
       >
         <Image
           src={
-            'data:image/png;base64,' /* + users.filter(u => u.id === post.Id)[0].img */
+            'data:image/png;base64,' +
+            user.img /* + users.filter(u => u.id === post.Id)[0].img */
           }
           style={{ width: '100px', height: '100px' }}
           alt="Profile picture"
@@ -122,7 +120,7 @@ export const PostPage = () => {
             event.onerror = null
           }}
         />
-        <TutorInfo user={{ name: '' }} />
+        <TutorInfo user={user} />
 
         <div className="infoWrapper">
           <div className="infoText">Područje</div>
@@ -141,30 +139,32 @@ export const PostPage = () => {
               direction="row"
               wrap="wrap"
             >
-              {/* offefr pages */}
+              {post.tags.map((tag, index) => (
+                <Tag tag={tag} key={index} />
+              ))}
             </Flex>
           </div>
         </div>
         <div className="infoWrapper">
           <div className="infoText">Napomena</div>
-          <div className="infoTitle">{''}</div>
+          <div className="infoTitle">{post.desc}</div>
         </div>
 
         <div className="infoWrapper">
           <div className="infoText">Cijena</div>
-          <div className="infoTitle">{''}</div>
+          <div className="infoTitle">{post.price} €/h</div>
         </div>
 
         <div className="infoWrapper">
           <div className="infoText">Dostupnost</div>
-          <div className="infoTitle">{''}</div>
+          <div className="infoTitle">--</div>
         </div>
 
         <Button
           onClick={() => {
             open()
           }}
-          width="100%" // ovisi o logijnu jel diabled
+          width="100%"
         >
           Rezerviraj termin
         </Button>

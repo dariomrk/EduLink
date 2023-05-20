@@ -8,7 +8,6 @@ export const LogInPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  console.log(username, email)
   return (
     <>
       <PageTitle p="84px 10px" title="Prijava" />

@@ -1,20 +1,27 @@
 import React from 'react'
 import { Image, Flex } from '@mantine/core'
-import TutorInfo from '../../components/TutorInfo'
+import { ReactComponent as Pin } from '../../img/pin.svg'
+import { ReactComponent as Verify } from '../../img/verify.svg'
 import { Colors } from '../../style/colors'
+import { useParams } from 'react-router-dom'
+
+import { users } from '../../data'
+
 export const ProfilePage = () => {
+  const { profileId } = useParams()
+  const user = users[Number(profileId)]
+
   return (
     <Flex
-      gap="24px"
+      gap="md"
       justify="flex-start"
       align="flex-start"
-      direction="flex-start"
+      direction="column"
       wrap="wrap"
-      p="24px"
-      w="100%"
-      style={{ maxWidth: '500px' }}
+      w="600px"
+      p="50px"
+      style={{ maxWidth: '100%', boxSizing: 'border-box' }}
       m="auto"
-
     >
       <Flex
         gap="md"
@@ -23,6 +30,10 @@ export const ProfilePage = () => {
         direction="row"
         wrap="wrap"
       >
+        <Image
+          style={{ width: '70px', height: '70px' }}
+          src={'data:image/png;base64,' + user.img}
+        />
         <Flex
           gap="md"
           justify="flex-start"
@@ -31,29 +42,54 @@ export const ProfilePage = () => {
           wrap="wrap"
         >
           <div className="profile">
-            <div className="profileTItle">4,3</div>
+            <div className="profileTItle">{user.rating}</div>
             <div className="profileSubtitle">proječna ocjena</div>
           </div>
           <div className="profile">
-            <div className="profileTItle">4,3</div>
+            <div className="profileTItle">{user.hoursTaught}</div>
             <div className="profileSubtitle">odrađenih sati</div>
           </div>
           <div className="profile">
-            <div className="profileTItle">4,3</div>
+            <div className="profileTItle">{user.regularStudents}</div>
             <div className="profileSubtitle">stalnih studenata</div>
           </div>
         </Flex>
       </Flex>
 
-      <TutorInfo />
-      <div className="infoWrapper">
-        <div className="infoTitle">Područje</div>
-        <div className="infoText">Matematika</div>
+      <div
+        style={{
+          fontSize: '20px',
+          fontWeight: 700,
+          lineHeight: '27px',
+          color: Colors.Purple
+        }}
+      >
+        {user.name}
       </div>
 
-      <div className="infoWrapper">
-        <div className="infoTitle">O meni</div>
-        <div className="infoText">
+      <div
+        style={{
+          lineHeight: '20px',
+          fontSize: '14px',
+          gap: '4px',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <div className="infos">
+          <Pin /> Split, splitsko dalmatinska
+        </div>
+
+        <div className="infos">
+          {/* isVerified */}
+          <Verify />
+          Verficiran profil
+        </div>
+      </div>
+
+      <div className="profileWrapper">
+        <div className="profileTitle">O meni</div>
+        <div className="profileSubtitle" style={{ overflowWrap: 'break-word' }}>
           Volim [interes/aktivnost], te u slobodno vrijeme najčešće provodim
           vrijeme na [hobi/aktivnost]. Trenutno radim u [zanimanje/industrija],
           no stalno tražim nove načine kako bih se razvijao u tom području i
@@ -63,43 +99,20 @@ export const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="infoWrapper">
-        <div className="infoTitle">Recenzije (numberOfReviews)</div>
-        <div className="infoText">
+      <div className="profileWrapper">
+        <div className="profileTitle">Recenzije ({user.reviews.length})</div>
+        <div className="profileSubtitle">
           <Flex
-            p="24px 0"
-            gap="8px"
+            gap="16px"
             justify="flex-start"
-            align="flex-start"
+            align="center"
             direction="row"
-            w="100%"
+            wrap="wrap"
           >
-            <Image
-              style={{ width: '80px', height: '80px' }}
-              src="https://picsum.photos/80/80"
-            />
-            <div>
-              <div
-                style={{
-                  fontWeight: '500',
-                  color: Colors.Title
-                }}
-              >
-                Ana123
-              </div>
-              <div>
-                Ivana odlično prilagodi tempo objašnjavanja i lako se dogovoriti
-                s njom. Ispit položen tako da hvala na pomoći!
-              </div>
-            </div>
+            {/* reviwews */}
           </Flex>
         </div>
       </div>
-
-          <TutorInfo />
-          
-        </Flex>
-      </Flex>
     </Flex>
   )
 }

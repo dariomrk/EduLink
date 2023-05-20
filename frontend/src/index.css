@@ -71,6 +71,7 @@ a {
 
 .profile {
   width: 70px;
+  box-sizing: border-box;
   overflow-wrap: break-word;
   text-align: center;
 }
