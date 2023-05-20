@@ -25,7 +25,8 @@ export const CategoryCard = props => {
             style={{
               fontSize: '16px',
               fontWeight: 700,
-              color: Colors.Title
+              color: Colors.Title,
+              textTransform: 'capitalize'
             }}
           >
             {props.name}
@@ -37,7 +38,9 @@ export const CategoryCard = props => {
               }}
             >
               {props.numOfInstructor}
-              {props.numOfInstructor === 1 ? ' instruktor' : ' instruktora'}
+              {props.numOfInstructor >= 2 && props.numOfInstructor <= 4
+                ? ' instrukcije'
+                : ' instruktora'}
             </div>
           </div>
         </Flex>

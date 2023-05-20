@@ -5,6 +5,7 @@ import { TutorInfo } from '../TutorInfo/TutorInfo.jsx'
 import { Link } from 'react-router-dom'
 
 export const OfferCard = props => {
+  console.log(props.post.tags)
   return (
     <Card shadow="sm" padding="lg" radius="10px" withBorder w="340px" p="16px">
       <Flex
@@ -39,11 +40,7 @@ export const OfferCard = props => {
               wrap: 'wrap'
             }}
           >
-            <TutorInfo
-              name={props.user.name}
-              stars={props.user.stars}
-              review={props.user.review}
-              distance={props.user.distance}
+            <TutorInfo user={props.user}
             />
           </div>
         </Flex>
@@ -55,7 +52,7 @@ export const OfferCard = props => {
             scrollbarSize={8}
             style={{
               marginTop: '8px',
-              width: '320px'
+              width: '308px'
             }}
             offsetScrollbars
           >
@@ -90,8 +87,10 @@ export const OfferCard = props => {
             Cijena:
             <div>{props.post.price} €/h</div>
           </div>
-          <Button width="70%" variant="filled">
-            <Link to={'/posts/' + props.post.id}>Zakaži</Link>
+          <Button style={{ width: '70%' }} variant="filled">
+            <Link width="100%" to={`/posts/${props.post.id}`}>
+              Zakaži
+            </Link>
           </Button>
         </Flex>
       </Flex>

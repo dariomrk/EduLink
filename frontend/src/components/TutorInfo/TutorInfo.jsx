@@ -2,6 +2,7 @@ import React from 'react'
 import { ReactComponent as Distance } from '../../img/distance.svg'
 import { ReactComponent as Star } from '../../img/star.svg'
 import { ReactComponent as Verify } from '../../img/verify.svg'
+import { Link } from 'react-router-dom'
 
 export const TutorInfo = props => {
   return (
@@ -10,18 +11,20 @@ export const TutorInfo = props => {
         maxWidth: '100%',
         overflowWrap: 'break-word',
         wrap: 'wrap',
-        gap: '8px',
+        gap: '8px'
       }}
     >
-      <div
-        style={{
-          fontSize: '20px',
-          fontWeight: 700,
-          lineHeight: '27px'
-        }}
-      >
-        {props.name}
-      </div>
+      <Link to={'/profile/' + props.user.id}>
+        <div
+          style={{
+            fontSize: '20px',
+            fontWeight: 700,
+            lineHeight: '27px'
+          }}
+        >
+          {props.user.name}
+        </div>
+      </Link>
 
       <div
         style={{
@@ -33,17 +36,17 @@ export const TutorInfo = props => {
         }}
       >
         <div className="infos">
-          <Distance /> {props.distance} km od tebe
+          <Distance /> {props.user.distance} km od tebe
         </div>
 
         <div className="infos">
-          <Star /> {props.stars}
+          <Star /> {props.user.stars}
           <a style={{ textDecoration: 'underline' }}>
-            Recenzije ({props.review})
+            Recenzije ({props.user.reviews.length})
           </a>
         </div>
 
-        {props.isVerified
+        {props.user.isVerified
           ? (
           <div className="infos">
             <Verify />

@@ -4,6 +4,7 @@ import { DateInput } from '@mantine/dates'
 import { TextInput, Flex, PasswordInput, Button } from '@mantine/core'
 import { ReactComponent as Calender } from '../../img/calender.svg'
 import PageTitle from '../../components/PageTitle'
+import { tryRegister } from '../../services/apiService'
 
 export const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0)
@@ -14,6 +15,24 @@ export const RegisterPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  async function onSubmit (event) {
+    if (name && city && birthDate && username && email && password) {
+      const obj = {
+        email,
+        username,
+        password,
+        firstName: name,
+        lastName: name,
+        dateOfBirth: birthDate.toISOString().split('T')[0],
+        cityName: city,
+        regionName: 'Splitsko-Dalmatinska',
+        countryName: 'Hrvatska',
+        mobileNumber: '0000000000'
+      }
+      const responce = await tryRegister(obj)
+      console.log(responce)
+    }
+  }
   const firstStep = () => {
     return (
       <Flex
@@ -89,7 +108,7 @@ export const RegisterPage = () => {
           <Button onClick={() => setActiveStep(activeStep - 1)} width="50%">
             Natrag
           </Button>
-          <Button onClick={() => setActiveStep(activeStep + 1)} width="50%">
+          <Button onClick={() => onSubmit()} width="50%">
             Dalje
           </Button>
         </Flex>

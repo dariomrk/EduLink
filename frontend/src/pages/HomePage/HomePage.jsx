@@ -1,16 +1,16 @@
 import React from 'react'
-import { Colors } from '../../style/colors'
-import CategoryCard from '../../components/CategoryCard'
-import HomePagePicture from '../../img/HomePagePicture.png'
+import { Link } from 'react-router-dom'
 import { Flex, ScrollArea, Button } from '@mantine/core'
-import PageTitle from '../../components/PageTitle'
-import InstructorCard from '../../components/InstructorCard'
-import { ReactComponent as Math } from '../../img/category/math.svg'
-import { ReactComponent as Physics } from '../../img/category/physics.svg'
 import { ReactComponent as Programming } from '../../img/category/programming.svg'
-import { ReactComponent as Design } from '../../img/category/design.svg'
 import { ReactComponent as Marketing } from '../../img/category/marketing.svg'
 import { ReactComponent as Language } from '../../img/category/language.svg'
+import { ReactComponent as Physics } from '../../img/category/physics.svg'
+import { ReactComponent as Design } from '../../img/category/design.svg'
+import { ReactComponent as Math } from '../../img/category/math.svg'
+import HomePagePicture from '../../img/HomePagePicture.png'
+import CategoryCard from '../../components/CategoryCard'
+import PageTitle from '../../components/PageTitle'
+import { Colors } from '../../style/colors'
 
 export const HomePage = () => {
   return (
@@ -67,11 +67,7 @@ export const HomePage = () => {
             svg={<Marketing />}
           />
 
-          <CategoryCard
-            name="Strani jezici"
-            numOfInstructor={3}
-            svg={<Language />}
-          />
+          <CategoryCard name="Jezici" numOfInstructor={3} svg={<Language />} />
         </Flex>
         <div className="title">Top instruktori</div>
         <ScrollArea // TODO: add top instructors
@@ -89,18 +85,7 @@ export const HomePage = () => {
             align="flex-start"
             direction="row"
             wrap="nowrap"
-          >
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-            <InstructorCard />
-          </Flex>
+          ></Flex>
         </ScrollArea>
 
         <div
@@ -109,7 +94,9 @@ export const HomePage = () => {
         >
           Učenje je lakše uz EduLink!
         </div>
-        <Button width="100%"> Saznaj više o nama</Button>
+        <Link to="/" style={{ width: '100%' }}>
+          <Button width="100%"> Saznaj više o nama</Button>
+        </Link>
         <p style={{ textAlign: 'center', color: Colors.Text }}>
           Naša platforma povezuje korisnike s iskusnim mentorima koji su
           posvećeni pružanju pomoći u postizanju uspjeha. Bez obzira tražite li

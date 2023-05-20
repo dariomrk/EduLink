@@ -6,20 +6,39 @@ import Sort from '../../components/Sort'
 import Filter from '../../components/Filter'
 import OfferCard from '../../components/OfferCard'
 
+import { posts, users } from '../../data'
+
 export const CategoryPage = () => {
   const { categoryName } = useParams()
-  const numOfInstructor = 0 // get from db
+  const numOfInstructor = posts.length
+  console.log(posts)
 
+  /*
+  const [posts, setPosts] = useState()
+  const numOfInstructor = posts.length
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await getAllPostsFromSubject(categoryName)
+        setTags(result.fields)
+      } catch (err) {
+        console.log(err)
+      }
+    })()
+  }),
+  []  */
   return (
     <div>
       <PageTitle
         padding="125px 20px 170px"
         title={categoryName}
-        subtitle={
-          numOfInstructor === 1
-            ? numOfInstructor + ' instruktor'
-            : numOfInstructor + ' instruktora'
-        }
+        subtitle={`
+          ${numOfInstructor} ${
+          numOfInstructor >= 2 && numOfInstructor <= 4
+            ? ' instrukcije'
+            : ' instrukcija'
+        }`}
         p="57px 20px"
       />
 
@@ -38,9 +57,9 @@ export const CategoryPage = () => {
           <Filter />
         </Flex>
 
-        {/* {...(() => (
-          <OfferCard />
-        ))} */}
+        {posts.map((post, index) => (
+          <OfferCard post={post} user={users[post.userId]} key={index} />
+        ))}
       </Flex>
     </div>
   )
