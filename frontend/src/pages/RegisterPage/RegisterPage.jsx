@@ -30,6 +30,7 @@ export const RegisterPage = () => {
         mobileNumber: '0000000000'
       }
       const responce = await tryRegister(obj)
+      console.log(responce)
     }
   }
   const firstStep = () => {

@@ -4,7 +4,7 @@ layout science the problems with connecting to backend happened */
 export const users = [
   {
     id: 0,
-    name: 'ante antic',
+    name: 'Ante Dobronić',
     img:
       'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
     reviews: [],
